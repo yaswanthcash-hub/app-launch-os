@@ -1,11 +1,11 @@
 {
-  "name": "@app-launch-os/experiments",
+  "name": "@applaunchos/experiments",
   "version": "0.3.0",
   "description": "Flags-first A/B experimentation and Sample Ratio Mismatch (SRM) validation for React Native & Expo",
   "main": "src/index.ts",
   "types": "src/index.ts",
   "scripts": {
-    "test": "echo \"Tests passed\" && exit 0"
+    "test": "vitest run tests"
   },
   "keywords": [
     "react-native",

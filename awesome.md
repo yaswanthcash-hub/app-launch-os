@@ -146,7 +146,7 @@ The inventory follows the allowlist-oriented approach in `IMPLEMENTATION_PLAN.md
 
 | # | Project | Purpose | License | Adoption |
 |---:|---|---|---|---|
-| 91 | [OWASP MASVS](https://github.com/OWASP/owasp-masvs) | Mobile security verification standard | CC BY-SA 4.0 | Core |
+| 91 | [OWASP MAS / MASTG](https://github.com/OWASP/owasp-masvs) | Mobile security verification standard | CC BY-SA 4.0 | Core |
 | 92 | [OWASP MASTG](https://github.com/OWASP/owasp-mastg) | Mobile security testing guide | CC BY-SA 4.0 | Core |
 | 93 | [osv-scanner](https://github.com/google/osv-scanner) | Vulnerability scanning | Apache-2.0 | Tier 1 |
 | 94 | [Semgrep](https://github.com/semgrep/semgrep) | Static analysis | LGPL-2.1 | Tier 2 |

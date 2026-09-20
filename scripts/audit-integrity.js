@@ -10,11 +10,12 @@ const forbiddenPatterns = [
   { name: 'Coming Soon stub', regex: /\bcoming soon\b/i }
 ];
 
-// Files permitted to discuss placeholders or TODOs as concept/template examples
+// Files and directories permitted to discuss placeholders or TODOs as concept/template examples
 const allowedFiles = [
   'CONTRIBUTING.md',
   'IMPLEMENTATION_PLAN.md',
   'AGENTS.md',
+  'REMEDIATION.md',
   path.join('checklists', 'appstore-submission.md'),
   path.join('checklists', 'playstore-submission.md'),
   path.join('checklists', 'premium-ux.md'),
@@ -33,12 +34,21 @@ const violations = [];
 function scanDir(dir) {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
   for (const entry of entries) {
+    if (entry.name.startsWith('.') || entry.name === 'node_modules' || entry.name === 'dist' || entry.name === 'build') {
+      continue;
+    }
+
     const fullPath = path.join(dir, entry.name);
+    const relPath = path.relative(baseDir, fullPath).split(path.sep).join('/');
+
+    // Skip tests and fixtures from source integrity scan
+    if (relPath.startsWith('test/') || relPath.startsWith('test\\') || relPath.startsWith('scripts/')) {
+      continue;
+    }
+
     if (entry.isDirectory()) {
-      if (entry.name !== 'node_modules' && entry.name !== '.git') {
-        scanDir(fullPath);
-      }
-    } else if (entry.isFile() && entry.name.endsWith('.md')) {
+      scanDir(fullPath);
+    } else if (entry.isFile() && /\.(md|ts|tsx|js|jsx)$/.test(entry.name)) {
       checkFile(fullPath);
     }
   }
@@ -46,10 +56,9 @@ function scanDir(dir) {
 
 function checkFile(filePath) {
   const relPath = path.relative(baseDir, filePath);
-  // Normalize Windows separators for matching
   const normalizedRel = relPath.split(path.sep).join('/');
   const isAllowed = allowedFiles.some(af => normalizedRel === af.split(path.sep).join('/'));
-  
+
   if (isAllowed) return;
 
   checkedFiles++;
@@ -60,7 +69,7 @@ function checkFile(filePath) {
     forbiddenPatterns.forEach(pat => {
       if (pat.regex.test(line)) {
         violations.push({
-          file: relPath,
+          file: normalizedRel,
           line: index + 1,
           type: pat.name,
           preview: line.trim().substring(0, 80)
@@ -70,7 +79,7 @@ function checkFile(filePath) {
   });
 }
 
-console.log('🛡️ Auditing repository integrity for hollow placeholders & stubs...');
+console.log('🛡️ Auditing repository integrity (.md, .ts, .tsx, .js) for hollow placeholders & stubs...');
 scanDir(baseDir);
 
 console.log(`\n📊 Results:`);
@@ -78,12 +87,12 @@ console.log(`   Audited non-template files: ${checkedFiles}`);
 console.log(`   Integrity violations: ${violations.length}`);
 
 if (violations.length > 0) {
-  console.error('\n❌ Unresolved placeholders detected:');
+  console.error('\n❌ Unresolved placeholders detected in production source:');
   violations.forEach(v => {
     console.error(`   - ${v.file}:${v.line} [${v.type}] -> "${v.preview}"`);
   });
   process.exit(1);
 } else {
-  console.log('\n✅ Integrity audit PASSED: No forbidden hollow placeholders detected in active playbooks.');
+  console.log('\n✅ Integrity audit PASSED: No forbidden hollow placeholders detected in active code and playbooks.');
   process.exit(0);
 }

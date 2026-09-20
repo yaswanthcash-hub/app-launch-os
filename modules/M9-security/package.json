@@ -1,11 +1,11 @@
 {
-  "name": "@app-launch-os/security",
+  "name": "@applaunchos/security",
   "version": "0.4.0",
-  "description": "OWASP MASVS baseline security helpers, hardware biometric authentication, and Keychain storage",
+  "description": "Mobile application security baseline helpers, hardware biometric authentication, and Keychain storage",
   "main": "src/index.ts",
   "types": "src/index.ts",
   "scripts": {
-    "test": "echo \"Tests passed\" && exit 0"
+    "test": "vitest run tests"
   },
   "keywords": [
     "react-native",

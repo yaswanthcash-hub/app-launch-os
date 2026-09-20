@@ -32,7 +32,7 @@ npx expo install expo-sharing expo-store-review
 ```tsx
 import React from 'react';
 import { TouchableOpacity, Text } from 'react-native';
-import { useSmartReviewPrompt } from '@app-launch-os/growth';
+import { useSmartReviewPrompt } from '@applaunchos/growth';
 
 export function CompleteTaskButton() {
   const { registerPositiveAction } = useSmartReviewPrompt({
@@ -60,7 +60,7 @@ export function CompleteTaskButton() {
 
 ```tsx
 import React from 'react';
-import { ShareCard, buildReferralUrl } from '@app-launch-os/growth';
+import { ShareCard, buildReferralUrl } from '@applaunchos/growth';
 
 export function InviteFriendsScreen() {
   const { shareUrl } = buildReferralUrl('https://myapp.com', 'ALEX99', 'invite_screen');

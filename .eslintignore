@@ -1,0 +1,8 @@
+node_modules/
+dist/
+build/
+starters/
+modules/
+test/fixtures/
+scripts/
+coverage/

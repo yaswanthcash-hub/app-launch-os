@@ -11,7 +11,7 @@
 
 ## Store Submission & Policy Checklists
 - [checklists/appstore-submission.md](checklists/appstore-submission.md): Apple App Review Guideline verification (Guideline 2.1, 5.1.1, 3.1.1).
-- [checklists/playstore-submission.md](checklists/playstore-submission.md): Google Play 20-tester rule, API 35, Data Safety form.
+- [checklists/playstore-submission.md](checklists/playstore-submission.md): Google Play 20-tester rule, API 36, Data Safety form.
 - [policies/apple-review-essentials.md](policies/apple-review-essentials.md): Deep-dive Apple App Review guidance (<90d verified).
 - [policies/play-policy-essentials.md](policies/play-policy-essentials.md): Deep-dive Google Play policy guidance (<90d verified).
 - [policies/privacy-compliance.md](policies/privacy-compliance.md): Apple Privacy Manifests, GDPR, CCPA, and SDK symbol matching.

@@ -11,7 +11,7 @@ launchos test
 # Pre-flight check for Apple App Store 2026 traps
 launchos compliance apple
 
-# Pre-flight check for Google Play Store 2026 traps (20-testers, API 35)
+# Pre-flight check for Google Play Store 2026 traps (20-testers, API 36)
 launchos compliance google
 
 # Audit relative links

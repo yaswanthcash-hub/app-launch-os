@@ -72,9 +72,9 @@ const googleRules = [
     fatal: true
   },
   {
-    id: "GOOGLE-SDK-35",
-    title: "Target SDK 35+ (Android 15 Requirements)",
-    description: "New apps and updates must target API level 35 or higher and adhere to edge-to-edge layout requirements.",
+    id: "GOOGLE-SDK-36",
+    title: "Target SDK 36+ (Android 16 Requirements)",
+    description: "New apps and updates must target API level 36 or higher and adhere to edge-to-edge layout requirements.",
     fatal: true
   },
   {

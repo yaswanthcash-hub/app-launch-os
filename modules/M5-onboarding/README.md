@@ -31,7 +31,7 @@ npx expo install expo-haptics
 
 ```tsx
 import React, { useState } from 'react';
-import { PermissionPrimer } from '@app-launch-os/onboarding';
+import { PermissionPrimer } from '@applaunchos/onboarding';
 import * as Notifications from 'expo-notifications';
 
 export function NotificationOptIn() {
@@ -70,7 +70,7 @@ export function NotificationOptIn() {
 
 ```tsx
 import React from 'react';
-import { OnboardingCarousel } from '@app-launch-os/onboarding';
+import { OnboardingCarousel } from '@applaunchos/onboarding';
 import { useRouter } from 'expo-router';
 
 export function OnboardingScreen() {

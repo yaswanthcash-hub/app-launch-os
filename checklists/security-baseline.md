@@ -1,8 +1,8 @@
-# App Launch OS — OWASP MASVS v2.1 Security Baseline Checklist
+# App Launch OS — MASVS v2.1 Security Baseline Checklist
 
-> **Verification Date**: 2026-09-20
-> **Standard**: OWASP Mobile Application Security Verification Standard (MASVS) v2.1.0
-> **Source**: [OWASP MASVS GitHub](https://github.com/OWASP/owasp-masvs) | [MASTG](https://github.com/OWASP/owasp-mastg)
+> Comprehensive security, data privacy, and cryptographic compliance checklist for iOS and Android mobile apps based on MASVS v2.1.
+>
+> **Source**: [OWASP MAS GitHub](https://github.com/OWASP/owasp-masvs) | [MASTG](https://github.com/OWASP/owasp-mastg)
 > **License**: CC BY-SA 4.0 (MASVS/MASTG content)
 
 ---
@@ -297,7 +297,7 @@
 
 | ID | Reference | URL |
 |----|-----------|-----|
-| MASVS | OWASP MASVS v2.1.0 | https://github.com/OWASP/owasp-masvs/releases/tag/v2.1.0 |
+| MASVS | MASVS v2.1.0 (OWASP MAS) | https://github.com/OWASP/owasp-masvs/releases/tag/v2.1.0 |
 | MASTG | OWASP MASTG v1.6.0 | https://github.com/OWASP/owasp-mastg |
 | MSTG | Mobile Security Testing Guide | https://mas.owasp.org/MASTG/ |
 | MASVS-CONTROLS | MASVS Verified Controls (24) | https://mas.owasp.org/MASVS/ |

@@ -1,0 +1,16 @@
+{
+  "expo": {
+    "name": "comment-only-app",
+    "slug": "comment-only-app",
+    "version": "1.0.0",
+    "jsEngine": "hermes",
+    "newArchEnabled": true,
+    "android": {
+      "targetSdkVersion": 36,
+      "compileSdkVersion": 36
+    },
+    "ios": {
+      "supportsTablet": true
+    }
+  }
+}

@@ -3,7 +3,7 @@
  * Audits mobile applications for Hermes JS engine, New Architecture, UI-thread worklets, and crash monitoring.
  */
 
-function auditPerformance({ projectDir, pkg, appConfig, files, readFile }) {
+function auditPerformance({ pkg, appConfig, files, readFile }) {
   const results = [];
   const deps = { ...(pkg.dependencies || {}), ...(pkg.devDependencies || {}) };
   const expoConfig = appConfig?.expo || appConfig || {};
@@ -50,7 +50,7 @@ function auditPerformance({ projectDir, pkg, appConfig, files, readFile }) {
       newArchPassed = true;
       newArchDetails = `Expo SDK ${semverMajor} enables the New Architecture by default.`;
     } else {
-      newArchDetails = 'New Architecture not enabled. Upgrade to Expo SDK 52+ for synchronous C++ Fabric rendering.';
+      newArchDetails = 'New Architecture not enabled. Upgrade to Expo SDK 54+ for synchronous C++ Fabric rendering.';
     }
   } else {
     newArchDetails = 'New Architecture status could not be verified.';

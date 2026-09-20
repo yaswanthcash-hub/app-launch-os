@@ -38,8 +38,8 @@
         "backgroundColor": "#0F172A"
       },
       "package": "com.applaunchos.starter",
-      "compileSdkVersion": 35,
-      "targetSdkVersion": 35
+      "compileSdkVersion": 36,
+      "targetSdkVersion": 36
     },
     "plugins": [
       "expo-router",

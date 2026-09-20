@@ -26,9 +26,11 @@
     "production": {
       "autoIncrement": true,
       "ios": {
+        "image": "latest",
         "enterpriseProvisioning": false
       },
       "android": {
+        "image": "latest",
         "buildType": "app-bundle"
       },
       "env": {

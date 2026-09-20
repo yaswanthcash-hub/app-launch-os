@@ -64,19 +64,19 @@ When a user or developer triggers one of the following commands or intents, exec
 
 | Command | What It Does (Autonomous Execution Pipeline) & Authoritative Source |
 | :--- | :--- |
-| **`/applaunchos`** | Loops `modify → verify → keep/discard` across latency ($\le 1200\text{ms}$), bundle size ($\le 15\text{MB}$), and contrast ([AGENTS.md](AGENTS.md)). |
+| **`/applaunchos`** | Loops `modify → verify → keep/discard` across latency (<= 1200ms), bundle size (<= 15MB), and contrast ([AGENTS.md](AGENTS.md)). |
 | **`/applaunchos:plan`** | Interactive interview & `implementation_plan.md` generation before modifying code ([AGENTS.md](AGENTS.md)). |
-| **`/applaunchos:compliance`** | Pre-flight audit for Apple 2026 (no-SMS demo, PrivacyInfo) and Google Play (20 testers, API 35) ([Audit](scripts/compliance-check.js)). |
-| **`/applaunchos:design`** | Scaffolds 3-tier UI/UX tokens + Golden Concentricity: $R_{\text{inner}} = \max(0, R_{\text{outer}} - P)$ ([M4](modules/M4-design-system/README.md)). |
+| **`/applaunchos:compliance`** | Pre-flight audit for Apple 2026 (no-SMS demo, PrivacyInfo) and Google Play (20 testers, API 36) ([Audit](scripts/compliance-check.js)). |
+| **`/applaunchos:design`** | Scaffolds 3-tier UI/UX tokens + Golden Concentricity: `R_inner = Math.max(0, R_outer - padding)` ([M4](modules/M4-design-system/README.md)). |
 | **`/applaunchos:ux`** | Injects 5-state tactile haptics, Reanimated 3 worklets (60/120 FPS), and Moti skeletons ([M17](modules/M17-premium-ux/README.md)). |
 | **`/applaunchos:paywall`** | StoreKit 2 paywall with upfront terms, restore button, and billing toggle ([M8](modules/M8-paywall/README.md) & [Paywall](findings/paywall.md)). |
 | **`/applaunchos:onboarding`** | Soft permission priming (Push/ATT) before native dialogs + gesture carousel ([M5](modules/M5-onboarding/README.md)). |
 | **`/applaunchos:growth`** | Crockford referral codes, deep links (AASA/AssetLinks), and smart rating prompts ([M7](modules/M7-growth/README.md)). |
-| **`/applaunchos:experiments`** | Offline FNV-1a feature flags and Chi-Square Sample Ratio Mismatch check ($p < 0.01$) ([M6](modules/M6-experiments/README.md)). |
-| **`/applaunchos:security`** | OWASP MASVS L1 audit, biometric auth hook, and hardware Keychain storage ([M9](modules/M9-security/README.md)). |
+| **`/applaunchos:experiments`** | Offline FNV-1a feature flags and Chi-Square Sample Ratio Mismatch check (p < 0.01) ([M6](modules/M6-experiments/README.md)). |
+| **`/applaunchos:security`** | Mobile security audit baseline, biometric auth hook, and hardware Keychain storage ([M9](modules/M9-security/README.md)). |
 | **`/applaunchos:aso`** | Validates store metadata character limits (30/30/100/80) and scores keyword density ([M11](modules/M11-aso/README.md)). |
-| **`/applaunchos:audit`** | Master pre-flight runner: 560+ link checks, freshness (<90d), and store compliance (`npm test`). |
-| **`/applaunchos:ship`** | 8-phase launch readiness gate: Lint $\to$ Compliance $\to$ Tests $\to$ EAS Build $\to$ Submission ([M10](modules/M10-release/README.md)). |
+| **`/applaunchos:audit`** | Master pre-flight runner: link checks, freshness (<90d), and store compliance (`npm run audit:all`). |
+| **`/applaunchos:ship`** | 8-phase launch readiness gate: Lint -> Compliance -> Tests -> EAS Build -> Submission ([M10](modules/M10-release/README.md)). |
 | **`/applaunchos:pack`** | Token-compresses repository specifications and ADRs into an LLM context payload ([M13](modules/M13-ai-kit/README.md)). |
 | **`/applaunchos:policybot`** | Scrapes official Apple and Google developer changelogs for breaking store policy shifts ([M16](modules/M16-policybot/README.md)). |
 | **`/applaunchos:regression`** | Benchmarks cold start latency, memory leaks, and dropped animation frames ([QA](checklists/qa-prelaunch.md)). |
@@ -99,7 +99,7 @@ Loop: inspect baseline profile -> formulate hypothesis -> modify code -> verify 
 
 ### Prompt 2: Pre-Submission Store Compliance Audit (`/applaunchos:compliance`)
 ```text
-Act as a Principal Mobile Release Engineer running /applaunchos:compliance. Read checklists/appstore-submission.md, checklists/playstore-submission.md, and policies/apple-review-essentials.md from App Launch OS. Audit my mobile repository for fatal 2026 store rejection traps (Demo account SMS OTP block, PrivacyInfo.xcprivacy SDK symbol mismatch, StoreKit 2 restore button, in-app account deletion, Android API 35 + 16 KB page size). List any violations and generate code fixes.
+Act as a Principal Mobile Release Engineer running /applaunchos:compliance. Read checklists/appstore-submission.md, checklists/playstore-submission.md, and policies/apple-review-essentials.md from App Launch OS. Audit my mobile repository for fatal 2026 store rejection traps (Demo account SMS OTP block, PrivacyInfo.xcprivacy SDK symbol mismatch, StoreKit 2 restore button, in-app account deletion, Android API 36 + 16 KB page size). List any violations and generate code fixes.
 ```
 
 ### Prompt 3: Design Token & Corner Concentricity Scaffold (`/applaunchos:design` + `/applaunchos:ux`)
@@ -122,7 +122,8 @@ Act as an A/B Testing Engineer running /applaunchos:experiments. Read modules/M6
 ## 🛠️ CLI Execution for Agents
 
 When running terminal actions in this repo:
-- Run `npm test` to execute the full link, freshness, integrity, and compliance audit.
+- Run `npm test` to execute the unit test suite (Vitest).
+- Run `npm run audit:all` to execute the full link, freshness, integrity, and compliance audit.
 - Run `npm run compliance:apple` to inspect Apple 2026 submission rules.
 - Run `npm run compliance:google` to inspect Google Play 2026 submission rules.
 - Run `node scripts/audit-links.js` to verify all markdown links.

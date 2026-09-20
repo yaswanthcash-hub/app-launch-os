@@ -32,7 +32,7 @@ All sources below were checked on **2026-09-20**:
 - [Apple App Tracking Transparency](https://developer.apple.com/documentation/apptrackingtransparency)
 - [Google Play User Data policy](https://support.google.com/googleplay/android-developer/answer/10144311?hl=en)
 - [Google Play Data safety guidance](https://support.google.com/googleplay/android-developer/answer/10787469?hl=en)
-- [OWASP MASVS Privacy](https://mas.owasp.org/MASVS/12-MASVS-PRIVACY/)
+- [OWASP MAS Privacy](https://mas.owasp.org/MASVS/12-MASVS-PRIVACY/)
 
 ## Core principles
 

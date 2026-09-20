@@ -129,7 +129,7 @@ This document serves as the canonical blueprint for **App Launch OS**. It is str
 ### 2I. Security & Compliance Tools
 | # | Project / Tool | Purpose | License | Tier | Status / Ecosystem (2026) |
 |---|---|---|---|---|---|
-| 40 | [OWASP MASVS / MASTG](https://github.com/OWASP/owasp-masvs) | Mobile Security Verification Standard | CC BY-SA 4.0 | Core | v2.1.0 standard, 8 security domains, 24 verified controls |
+| 40 | [OWASP MAS / MASTG](https://github.com/OWASP/owasp-masvs) | Mobile Security Verification Standard | CC BY-SA 4.0 | Core | v2.1.0 standard, 8 security domains, 24 verified controls |
 | 41 | [osv-scanner](https://github.com/google/osv-scanner) | Vulnerability Scanner | Apache-2.0 | Tier 1 | Google-maintained scanner powered by OSV.dev |
 | 42 | [Semgrep](https://github.com/semgrep/semgrep) | Static Analysis (SAST) | LGPL-2.1 | Tier 2 | Containerized CI scanner for security patterns (never linked) |
 | 43 | [MobSF](https://github.com/MobSF/Mobile-Security-Framework-MobSF) | Mobile Security Framework | GPL-3.0 | Tier 2 | Standalone Docker scanner for APK/IPA compliance (never linked) |
@@ -283,7 +283,7 @@ app-launch-os/
 │   ├── appstore-submission.md         # Apple App Store submission checklist (P0)
 │   ├── playstore-submission.md        # Google Play Store submission checklist (P0)
 │   ├── premium-ux.md                  # 50+ item UX/interaction polish checklist (P0)
-│   ├── security-baseline.md           # OWASP MASVS v2.1 compliance checklist
+│   ├── security-baseline.md           # MASVS v2.1 compliance checklist
 │   ├── accessibility.md               # Dynamic Type, VoiceOver/TalkBack, contrast, targets
 │   ├── launch-day.md                  # Day-of-launch countdown & rollout runbook
 │   └── qa-prelaunch.md                # Device matrix, offline testing, network edge cases
@@ -395,7 +395,7 @@ app-launch-os/
 
 ### Phase 4: v0.4 — Security Baseline, Release Automation & ASO (Weeks 7-8)
 - Deliverables:
-  - `modules/M9-security/`: Automated OWASP MASVS compliance check scripts and Keychain helpers.
+  - `modules/M9-security/`: Automated mobile security compliance check scripts and Keychain helpers.
   - `modules/M10-release/`: EAS Build/Submit profiles and Fastlane lanes.
   - `modules/M11-aso/`: Store scraper scripts and keyword optimization playbooks.
 

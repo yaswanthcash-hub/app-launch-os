@@ -1,11 +1,11 @@
 # M9: Mobile Security Baseline Kit
 
-> **OWASP MASVS baseline security helpers, hardware biometric authentication, and Keychain storage.**
+> **Mobile application security baseline helpers, hardware biometric authentication, and Keychain storage.**
 > Part of [App Launch OS](../../README.md).
 
 ---
 
-## 🛡️ OWASP MASVS Baseline Protection
+## 🛡️ Mobile Security Baseline Protection (MASVS)
 
 Storing API tokens or session credentials in plain `AsyncStorage` is a catastrophic security vulnerability on mobile:
 - **Android**: `AsyncStorage` writes unencrypted SQLite databases into sandbox storage accessible to rooted devices and backup exploits.
@@ -32,7 +32,7 @@ npx expo install expo-secure-store expo-local-authentication
 ### 1. Store and Retrieve Sensitive Tokens Securely
 
 ```ts
-import { secureStorage } from '@app-launch-os/security';
+import { secureStorage } from '@applaunchos/security';
 
 // Store user auth token safely
 await secureStorage.setItem('auth_token', 'eyJhbGciOiJIUzI1Ni...');
@@ -49,7 +49,7 @@ await secureStorage.purgeSession(['auth_token', 'refresh_token', 'user_profile']
 ```tsx
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { useBiometrics } from '@app-launch-os/security';
+import { useBiometrics } from '@applaunchos/security';
 
 export function SecuritySettings() {
   const { isHardwareAvailable, isEnrolled, supportedTypes, authenticate } = useBiometrics();

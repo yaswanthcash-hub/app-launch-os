@@ -2,12 +2,14 @@
 
 Welcome to the `modules/` directory.
 
-## What is this folder for?
+App Launch OS modules are **copy-paste source components and architecture blueprints** (similar to shadcn/ui in the web ecosystem). 
 
-App Launch OS is being built in phases:
+## Why Copy-Paste Source Instead of Heavy npm Dependencies?
+- **Zero Dependency Lock-in:** Mobile apps often suffer from peer dependency conflicts across Expo SDK versions and React Native releases. Copy-paste modules give you full control over your code.
+- **NativeWind & Theming Customization:** You can style paywalls, onboarding screens, and cards directly using your app's own design tokens and CSS/Tailwind classes.
+- **Direct Logic Tailoring:** Integrate directly with your specific auth system, analytics provider, or API endpoints without restrictive abstraction wrappers.
 
-1. **Phase 1 (v0.1 — Current Release):** Docs-first foundation. All 8 checklists, 6 research digests, 4 policy guides, 6 legal templates, and 9 Architecture Decision Records (ADRs) are complete and live.
-2. **Phase 2+ (Upcoming v0.2–v1.0 Releases):** Standalone, composable code packages that you can install into your React Native or Expo app.
+Each module includes full TypeScript types, unit tests, and reference implementations. You can either copy the source code directly into your app's `src/` directory or reference them as monorepo packages.
 
 ## Modules Status
 
@@ -23,7 +25,7 @@ App Launch OS is being built in phases:
 | **M11: ASO Workflows** | **Available ✅** | Metadata limits validator CLI & keyword density | [M11-aso](M11-aso/README.md) | [Findings](../findings/aso.md) |
 | **M12: Deep Linking & SEO** | **Available ✅** | Universal Links, App Links & schema validator | [M12-seo](M12-seo/README.md) | [Findings](../findings/seo.md) |
 | **M13: AI Tooling** | **Available ✅** | Agent context packing CLI for LLMs | [M13-ai-kit](M13-ai-kit/README.md) | [AGENTS.md](../AGENTS.md) |
-| **M14: Reference Starter** | **Available ✅** | Full Expo SDK 52+ / RN 0.76+ boilerplate app | [starters/expo-ts](../starters/expo-ts/README.md) | [PRD](../docs/prd.md) |
+| **M14: Reference Starter** | **Available ✅** | Full Expo SDK 54+ / RN 0.78+ boilerplate app | [starters/expo-ts](../starters/expo-ts/README.md) | [PRD](../docs/prd.md) |
 | **M15: CLI** | **Available ✅** | Pre-flight store compliance & audit CLI | [M15-cli](M15-cli/README.md) | [Checklist](../checklists/repo-integrity-prelaunch.md) |
 | **M16: Policy Watcher** | **Available ✅** | Automated store policy change detector | [M16-policybot](M16-policybot/README.md) | [PRD](../docs/prd.md) |
 | **M17: Premium UX** | **Available ✅** | Haptics hook, concentric cards, skeletons, glass | [M17-premium-ux](M17-premium-ux/README.md) | [ADR-009](../decisions/009-premium-ux.md) |

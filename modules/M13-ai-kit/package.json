@@ -1,5 +1,5 @@
 {
-  "name": "@app-launch-os/ai-kit",
+  "name": "@applaunchos/ai-kit",
   "version": "0.5.0",
   "description": "Codebase context packing tool and agent prompt generators for AI coding assistants",
   "bin": {

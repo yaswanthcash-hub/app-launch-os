@@ -1,7 +1,18 @@
 {
   "name": "app-launch-os",
-  "version": "0.1.0",
-  "description": "The open-source operating system for launching premium mobile apps.",
+  "version": "0.2.0",
+  "description": "Deterministic store compliance linter and pre-flight checklists for React Native & Expo apps.",
+  "keywords": [
+    "react-native",
+    "expo",
+    "app-store",
+    "google-play",
+    "mobile",
+    "cli",
+    "linter",
+    "app-store-review",
+    "compliance"
+  ],
   "private": true,
   "license": "MIT",
   "repository": {
@@ -23,7 +34,9 @@
     "launchos": "node bin/cli.js",
     "launchos:audit": "node bin/cli.js audit",
     "launchos:fix": "node bin/cli.js fix",
-    "test": "node scripts/audit-all.js",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "audit:all": "node scripts/audit-all.js",
     "test:all": "node scripts/audit-all.js",
     "audit:links": "node scripts/audit-links.js",
     "audit:freshness": "node scripts/check-freshness.js",
@@ -35,12 +48,22 @@
     "context:pack": "node modules/M13-ai-kit/bin/pack-context.js",
     "deeplinks:validate": "node modules/M12-seo/scripts/validate-deeplinks.js",
     "policy:check": "node modules/M16-policybot/bin/check-policies.js",
+    "policy:verify": "node scripts/policy-verify.js",
     "changelog:generate": "node modules/M10-release/scripts/generate-changelog.js",
     "lint": "markdownlint-cli2 \"**/*.md\" --config .markdownlint-cli2.jsonc",
     "test:lint": "markdownlint-cli2 \"**/*.md\" --config .markdownlint-cli2.jsonc"
   },
   "devDependencies": {
-    "markdownlint-cli2": "^0.13.0"
+    "@babel/parser": "^7.29.9",
+    "@babel/traverse": "^8.0.6",
+    "@types/node": "^26.6.2",
+    "@typescript-eslint/eslint-plugin": "^8.70.0",
+    "@typescript-eslint/parser": "^8.70.0",
+    "eslint": "^8.57.1",
+    "markdownlint-cli2": "^0.13.0",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.0",
+    "vitest": "^5.0.1"
   },
   "engines": {
     "node": ">=20.0.0"

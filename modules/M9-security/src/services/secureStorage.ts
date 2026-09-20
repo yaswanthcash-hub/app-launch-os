@@ -4,7 +4,7 @@ import * as SecureStore from 'expo-secure-store';
 /**
  * Enterprise Secure Storage Service
  * Stores secrets in iOS Keychain and Android Keystore.
- * Satisfies OWASP MASVS MSTG-STORAGE-1 (No credentials in plaintext AsyncStorage).
+ * Satisfies MASVS MSTG-STORAGE-1 (No credentials in plaintext AsyncStorage).
  */
 export const secureStorage = {
   /**

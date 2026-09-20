@@ -31,7 +31,7 @@ All sources below were checked on **2026-09-20**:
 - [OpenTelemetry mobile semantic conventions](https://opentelemetry.io/docs/specs/semconv/mobile/)
 - [Google Play Data safety guidance](https://support.google.com/googleplay/android-developer/answer/10787469?hl=en)
 - [Apple Privacy Manifest Files](https://developer.apple.com/documentation/bundleresources/privacy-manifest-files)
-- [OWASP MASVS Privacy](https://mas.owasp.org/MASVS/12-MASVS-PRIVACY/)
+- [OWASP MAS Privacy](https://mas.owasp.org/MASVS/12-MASVS-PRIVACY/)
 
 ## Taxonomy principles
 

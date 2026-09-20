@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "broken-expo-app",
+    "slug": "broken-expo-app",
+    "version": "1.0.0",
+    "android": {
+      "targetSdkVersion": 33
+    }
+  }
+}

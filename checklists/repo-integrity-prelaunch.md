@@ -18,7 +18,7 @@
 
 - [x] **Relative Link Audit**: Every markdown link pointing to a file or directory in the repository resolves to an existing file on disk.
 - [x] **Anchor Link Audit**: Internal section jumps (`#header-id`) match exact markdown header slugs.
-- [x] **External Link Health**: Primary documentation references (Apple Review Guidelines, Google Play Policy Center, OWASP MASVS, RevenueCat SOSA) resolve without HTTP 404/410 errors.
+- [x] **External Link Health**: Primary documentation references (Apple Review Guidelines, Google Play Policy Center, MASVS (OWASP MAS), RevenueCat SOSA) resolve without HTTP 404/410 errors.
 - [x] **Automated CI Check**: The `check_links.py` validation script is wired into CI to block broken relative paths on pull requests.
 
 ---

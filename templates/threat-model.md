@@ -28,7 +28,7 @@ All sources below were checked on **2026-09-20**:
 
 - [OWASP Mobile Application Security Verification Standard (MASVS)](https://mas.owasp.org/MASVS/)
 - [OWASP Mobile Application Security Testing Guide (MASTG)](https://mas.owasp.org/MASTG/)
-- [OWASP MASVS Privacy](https://mas.owasp.org/MASVS/12-MASVS-PRIVACY/)
+- [OWASP MAS Privacy](https://mas.owasp.org/MASVS/12-MASVS-PRIVACY/)
 - [OWASP Threat Modeling Project](https://owasp.org/www-project-threat-modeling/)
 - [Apple App Review Guidelines — Data Security](https://developer.apple.com/app-store/review/guidelines/#data-security)
 - [Google Play User Data policy](https://support.google.com/googleplay/android-developer/answer/10144311?hl=en)
@@ -258,7 +258,7 @@ Use a simple, documented method and apply it consistently:
 Reference links were checked on **2026-09-20** and are starting points, not a
 substitute for current security testing or legal review:
 
-- [OWASP MASVS](https://mas.owasp.org/MASVS/)
+- [OWASP MAS (MASVS)](https://mas.owasp.org/MASVS/)
 - [OWASP MASTG](https://mas.owasp.org/MASTG/)
 - [OWASP Threat Modeling Project](https://owasp.org/www-project-threat-modeling/)
 - [Google Play User Data policy](https://support.google.com/googleplay/android-developer/answer/10144311?hl=en)

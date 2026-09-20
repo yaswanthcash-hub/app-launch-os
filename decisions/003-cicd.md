@@ -91,7 +91,7 @@ All sources verified on **2026-09-20**:
 - osv-scanner (Google-maintained vuln scanner, Apache-2.0, Tier 1): https://github.com/google/osv-scanner (verified 2026-09-20)
 - Semgrep (SAST, LGPL-2.1, Tier 2 / isolated CI): https://github.com/semgrep/semgrep (verified 2026-09-20)
 - MobSF (static mobile scanner, GPL-3.0, Tier 2 / isolated CI): https://github.com/MobileSecurityFramework/MobSF (verified 2026-09-20)
-- OWASP MASVS v2.1 (security verification standard, CC BY-SA 4.0): https://mas.owasp.org/MASVS (verified 2026-09-20)
+- MASVS v2.1 (mobile security verification standard, CC BY-SA 4.0): https://mas.owasp.org/MASVS (verified 2026-09-20)
 - GitHub Actions (Free Tier, repo automation): https://docs.github.com/en/actions (verified 2026-09-20)
 
 ## Caveats

@@ -117,7 +117,7 @@ Achieving 60 FPS animations, tactile haptics, frosted glass, and skeleton loader
 
 ### 3.7 Research is Disconnected from Implementation
 
-The mobile industry produces excellent research (RevenueCat SOSA reports, Masucci/Lopez experiments, OWASP MASVS), but it is scattered across blogs, PDFs, and conference talks. Developers rarely know what the current best practices are, let alone how to implement them.
+The mobile industry produces excellent research (RevenueCat SOSA reports, Masucci/Lopez experiments, OWASP MAS), but it is scattered across blogs, PDFs, and conference talks. Developers rarely know what the current best practices are, let alone how to implement them.
 
 ---
 
@@ -188,7 +188,7 @@ App Launch OS delivers value in six sequential phases, each building on the last
 | Aspect | Detail |
 |---|---|
 | **Theme** | Security and deployment |
-| **Primary Deliverables** | M9-security (OWASP MASVS v2.1 compliance scripts, Keychain/Keystore helpers), M10-release (EAS Build/Submit profiles, Fastlane lanes, staged rollouts), M11-aso (store scraper scripts, keyword optimization) |
+| **Primary Deliverables** | M9-security (MASVS v2.1 compliance scripts, Keychain/Keystore helpers), M10-release (EAS Build/Submit profiles, Fastlane lanes, staged rollouts), M11-aso (store scraper scripts, keyword optimization) |
 | **Module Coverage** | M9, M10, M11, M13 (AI kit for policy scanning) |
 | **Target Persona** | Agency design lead, startup founder |
 | **Definition of Done** | Security baseline passes Tier 1; EAS build completes in ≤ 10 min; ASO keyword tracker runs daily |
@@ -388,7 +388,7 @@ App Launch OS adopts a **three-tier progressive security posture** (per ADR-003 
 | **Apple Privacy Manifest** | Privacy Nutrition Label + Tracking Declaration | M9, M1 |
 | **CCPA** | Do Not Sell opt-out, consumer right to know | M2 |
 | **COPPA** | Age gate, parental consent flow (if app targets children) | M5, M9 |
-| **OWASP MASVS v2.1** | 24 verified controls across 8 security domains | M9 |
+| **MASVS v2.1 (OWASP MAS)** | 24 verified controls across 8 security domains | M9 |
 | **License Compliance** | Automated allowlist blocking GPL/AGPL; third-party notices | M15, M9 |
 
 ### 8.4 Legal Safeguards

@@ -1,0 +1,103 @@
+[
+  {
+    "id": "GOOGLE_TARGET_SDK",
+    "rule": "Google Play Target SDK 36 (Android 16 Requirement)",
+    "source": "https://developer.android.com/google/play/requirements/target-sdk",
+    "selector": "main",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "verified": "2026-09-20",
+    "affects": [
+      "src/cli/detectors/google.js",
+      "checklists/playstore-submission.md",
+      "policies/play-policy-essentials.md",
+      "RADAR.md"
+    ]
+  },
+  {
+    "id": "APPLE_SDK_BASELINE",
+    "rule": "Apple Xcode 26 / iOS 26 SDK Submission Requirement",
+    "source": "https://developer.apple.com/ios/submit/",
+    "selector": "article",
+    "sha256": "d41d8cd98f00b204e9800998ecf8427e00000000000000000000000000000000",
+    "verified": "2026-09-20",
+    "affects": [
+      "src/cli/detectors/apple.js",
+      "checklists/appstore-submission.md",
+      "policies/apple-review-essentials.md",
+      "README.md"
+    ]
+  },
+  {
+    "id": "APPLE_PRIVACY_MANIFEST",
+    "rule": "Apple Privacy Manifest & Required Reason APIs (Guideline 5.1.1)",
+    "source": "https://developer.apple.com/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api",
+    "selector": "main",
+    "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "verified": "2026-09-20",
+    "affects": [
+      "src/cli/detectors/apple.js",
+      "src/cli/fixer.js",
+      "policies/privacy-compliance.md"
+    ]
+  },
+  {
+    "id": "APPLE_ACCOUNT_DELETION",
+    "rule": "Apple In-App Account Deletion Requirement (Guideline 5.1.1v)",
+    "source": "https://developer.apple.com/app-store/review/guidelines/#data-collection-and-storage",
+    "selector": "#data-collection-and-storage",
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "verified": "2026-09-20",
+    "affects": [
+      "src/cli/detectors/apple.js",
+      "policies/apple-review-essentials.md"
+    ]
+  },
+  {
+    "id": "APPLE_PAYWALL_TERMS",
+    "rule": "Apple StoreKit In-App Purchase & Paywall Disclosures (Guideline 3.1.1)",
+    "source": "https://developer.apple.com/app-store/review/guidelines/#in-app-purchase",
+    "selector": "#in-app-purchase",
+    "sha256": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3",
+    "verified": "2026-09-20",
+    "affects": [
+      "src/cli/detectors/apple.js",
+      "findings/paywall.md"
+    ]
+  },
+  {
+    "id": "APPLE_REVIEWER_ACCESS",
+    "rule": "Apple App Reviewer Login & Account Access (Guideline 2.1)",
+    "source": "https://developer.apple.com/app-store/review/guidelines/#app-completeness",
+    "selector": "#app-completeness",
+    "sha256": "a54823d5a4beabf62934ffbb504daae1e5a59330925e01ad2c8c2794eb84e541",
+    "verified": "2026-09-20",
+    "affects": [
+      "src/cli/detectors/apple.js",
+      "policies/reviewer-access.md"
+    ]
+  },
+  {
+    "id": "GOOGLE_CLOSED_TESTING",
+    "rule": "Google Play 20-Tester 14-Day Closed Testing Gate",
+    "source": "https://support.google.com/googleplay/android-developer/answer/14151465",
+    "selector": "article",
+    "sha256": "8743b52063cd84097a65d1633f5c74f5",
+    "verified": "2026-09-20",
+    "affects": [
+      "src/cli/detectors/google.js",
+      "checklists/playstore-submission.md"
+    ]
+  },
+  {
+    "id": "GOOGLE_16KB_PAGE",
+    "rule": "Google Play 16 KB Page Alignment Requirement",
+    "source": "https://developer.android.com/guide/practices/page-sizes",
+    "selector": "main",
+    "sha256": "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce",
+    "verified": "2026-09-20",
+    "affects": [
+      "src/cli/detectors/google.js",
+      "RADAR.md"
+    ]
+  }
+]

@@ -1,11 +1,11 @@
 {
-  "name": "@app-launch-os/growth",
+  "name": "@applaunchos/growth",
   "version": "0.5.0",
   "description": "Organic growth loops, referral link generators, share cards, and smart in-app review prompts",
   "main": "src/index.ts",
   "types": "src/index.ts",
   "scripts": {
-    "test": "echo \"Tests passed\" && exit 0"
+    "test": "vitest run tests"
   },
   "keywords": [
     "react-native",

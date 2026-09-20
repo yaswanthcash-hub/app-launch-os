@@ -1,0 +1,60 @@
+name: Policy Drift Detection
+
+on:
+  schedule:
+    # Run weekly on Monday at 08:00 UTC
+    - cron: "0 8 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  check-policy-drift:
+    name: Verify official store policy integrity
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Verify policy provenance & SHA-256 integrity
+        id: verify
+        run: |
+          node scripts/policy-verify.js > verify_output.log 2>&1 || (
+            echo "VERIFY_FAILED=true" >> $GITHUB_ENV
+            cat verify_output.log
+            exit 1
+          )
+
+      - name: Open Policy Drift GitHub Issue on Failure
+        if: failure() && env.VERIFY_FAILED == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Policy drift detected! Opening alert issue..."
+          ISSUE_BODY=$(cat <<EOF
+          ## 🚨 Store Policy Drift Detected
+
+          Official Apple or Google developer documentation has diverged from our tracked SHA-256 provenance baselines in \`policies/sources.json\`.
+
+          ### Verification Log:
+          \`\`\`
+          $(cat verify_output.log)
+          \`\`\`
+
+          ### Action Required:
+          1. Inspect the official documentation links listed above.
+          2. Update corresponding CLI detectors, checklists, and documentation.
+          3. Re-verify hashes with \`node scripts/policy-verify.js\`.
+          EOF
+          )
+          gh issue create \
+            --title "🚨 [Policy Drift Alert] Official store policy shift detected" \
+            --body "$ISSUE_BODY" \
+            --label "policy-drift,breaking-change" || true

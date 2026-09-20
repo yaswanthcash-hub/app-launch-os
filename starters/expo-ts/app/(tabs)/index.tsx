@@ -26,7 +26,7 @@ export default function HomeScreen() {
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
       <Text style={styles.title}>Welcome to App Launch OS</Text>
       <Text style={styles.subtitle}>
-        Expo SDK 52+ starter with 60 FPS Reanimated motion, tactile haptics, and corner concentricity.
+        Expo SDK 54+ starter with 60 FPS Reanimated motion, tactile haptics, and corner concentricity.
       </Text>
 
       {/* Concentric Card Showcase */}

@@ -1,5 +1,5 @@
 {
-  "name": "@app-launch-os/release",
+  "name": "@applaunchos/release",
   "version": "0.4.0",
   "description": "Production EAS Build configurations, Fastlane deployment lanes, and automated App Store changelog generators",
   "scripts": {

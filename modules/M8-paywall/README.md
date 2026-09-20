@@ -30,7 +30,7 @@ npx expo install expo-haptics
 
 ```tsx
 import React from 'react';
-import { PaywallView, usePaywall } from '@app-launch-os/paywall';
+import { PaywallView, usePaywall } from '@applaunchos/paywall';
 import { useRouter } from 'expo-router';
 
 const PLANS = [

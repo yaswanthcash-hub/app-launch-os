@@ -1,5 +1,5 @@
 {
-  "name": "@app-launch-os/aso",
+  "name": "@applaunchos/aso",
   "version": "0.4.0",
   "description": "App Store Optimization (ASO) metadata validator and keyword density analyzer",
   "bin": {

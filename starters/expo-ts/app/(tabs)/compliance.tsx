@@ -7,7 +7,7 @@ const preflightRules = [
   {
     id: 'APPLE-2.1',
     title: 'Reviewer Demo Account (Zero SMS 2FA)',
-    desc: 'Reviewers cannot receive SMS OTPs. Hardcode reviewer test account.',
+    desc: 'Reviewers cannot receive SMS OTPs. Configure server-side test account in App Store Connect.',
   },
   {
     id: 'APPLE-5.1.1',
@@ -25,8 +25,8 @@ const preflightRules = [
     desc: '20 testers enrolled for 14 continuous days on closed track.',
   },
   {
-    id: 'GOOGLE-API35',
-    title: 'Target SDK 35 (Android 15)',
+    id: 'GOOGLE-API36',
+    title: 'Target SDK 36 (Android 16)',
     desc: 'Edge-to-edge layout & 16 KB native library memory alignment.',
   },
 ];

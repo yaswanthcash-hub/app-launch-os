@@ -35,7 +35,7 @@ npm install @app-launch-os/experiments
 
 ```tsx
 import React from 'react';
-import { ExperimentProvider } from '@app-launch-os/experiments';
+import { ExperimentProvider } from '@applaunchos/experiments';
 
 const flags = {
   enable_biometric_login: true,
@@ -73,7 +73,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 ```tsx
 import React from 'react';
 import { View, Text } from 'react-native';
-import { useFeatureFlag, useExperiment } from '@app-launch-os/experiments';
+import { useFeatureFlag, useExperiment } from '@applaunchos/experiments';
 
 export function CheckoutScreen() {
   const isBiometricEnabled = useFeatureFlag('enable_biometric_login', false);
@@ -91,7 +91,7 @@ export function CheckoutScreen() {
 ### 3. Detect Sample Ratio Mismatch (SRM)
 
 ```ts
-import { checkSampleRatioMismatch } from '@app-launch-os/experiments';
+import { checkSampleRatioMismatch } from '@applaunchos/experiments';
 
 // After collecting 10,000 users with a 50/50 split target:
 const result = checkSampleRatioMismatch([4820, 5180], [0.5, 0.5]);

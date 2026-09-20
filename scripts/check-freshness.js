@@ -1,76 +1,75 @@
+#!/usr/bin/env node
+/**
+ * App Launch OS — Policy Freshness Checker
+ * Reads policies/sources.json and ensures all official policy sources have been
+ * verified within the last 90 days.
+ */
+
 const fs = require('fs');
 const path = require('path');
 
-const baseDir = path.resolve(__dirname, '..');
 const MAX_DAYS = 90;
 const today = new Date();
 today.setUTCHours(0, 0, 0, 0);
 
-const targetDirs = ['policies', 'checklists', 'findings'];
-const staleFiles = [];
+const sourcesPath = path.resolve(__dirname, '../policies/sources.json');
+
+if (!fs.existsSync(sourcesPath)) {
+  console.error(`❌ Error: ${sourcesPath} does not exist.`);
+  process.exit(1);
+}
+
+const sources = JSON.parse(fs.readFileSync(sourcesPath, 'utf8'));
+const staleRules = [];
 const missingDates = [];
-let auditedFiles = 0;
 
-function checkDir(dirName) {
-  const dirPath = path.join(baseDir, dirName);
-  if (!fs.existsSync(dirPath)) return;
+console.log(`⏱️ Auditing policy freshness from policies/sources.json (threshold: ${MAX_DAYS} days)...\n`);
 
-  const entries = fs.readdirSync(dirPath);
-  for (const entry of entries) {
-    if (!entry.endsWith('.md')) continue;
-    auditedFiles++;
-    const fullPath = path.join(dirPath, entry);
-    const content = fs.readFileSync(fullPath, 'utf8');
+for (const entry of sources) {
+  if (!entry.verified) {
+    missingDates.push(entry.id);
+    continue;
+  }
 
-    // Matches:
-    // - **Last verified:** 2026-09-20
-    // **Verification date:** 2026-09-20
-    // Last verified: 2026-09-20
-    // *Last updated: 2026-09-20*
-    const dateMatch = content.match(/(?:Last\s+verified|Last\s+updated|Last\s+reviewed|Verification\s+date)[\s\S]{0,20}?(\d{4}-\d{2}-\d{2})/i);
-    const relPath = path.join(dirName, entry);
+  const parsedDate = new Date(entry.verified);
+  if (isNaN(parsedDate.getTime())) {
+    missingDates.push(`${entry.id} (Invalid date: ${entry.verified})`);
+    continue;
+  }
 
-    if (!dateMatch) {
-      missingDates.push(relPath);
-    } else {
-      const parsedDate = new Date(dateMatch[1]);
-      if (isNaN(parsedDate.getTime())) {
-        missingDates.push(`${relPath} (Invalid date: ${dateMatch[1]})`);
-      } else {
-        const diffDays = Math.floor((today - parsedDate) / (1000 * 60 * 60 * 24));
-        if (diffDays > MAX_DAYS) {
-          staleFiles.push({ file: relPath, date: dateMatch[1], diffDays });
-        }
-      }
-    }
+  const diffDays = Math.floor((today - parsedDate) / (1000 * 60 * 60 * 24));
+  if (diffDays > MAX_DAYS) {
+    staleRules.push({
+      id: entry.id,
+      rule: entry.rule,
+      verified: entry.verified,
+      diffDays,
+    });
+  } else {
+    console.log(`  ✓ [${entry.id}] verified ${diffDays} day(s) ago (${entry.verified})`);
   }
 }
 
-console.log(`⏱️ Auditing policy and checklist freshness (threshold: ${MAX_DAYS} days)...`);
-targetDirs.forEach(checkDir);
-
 console.log(`\n📊 Results:`);
-console.log(`   Audited files: ${auditedFiles}`);
-console.log(`   Stale files (> ${MAX_DAYS} days): ${staleFiles.length}`);
-console.log(`   Missing/invalid date stamp: ${missingDates.length}`);
+console.log(`   Audited policy rules: ${sources.length}`);
+console.log(`   Stale rules (> ${MAX_DAYS} days): ${staleRules.length}`);
+console.log(`   Missing/invalid dates: ${missingDates.length}`);
 
-let failed = false;
-
-if (staleFiles.length > 0) {
-  failed = true;
-  console.error('\n⚠️ Stale files requiring review:');
-  staleFiles.forEach(f => console.error(`   - ${f.file}: Last verified on ${f.date} (${f.diffDays} days ago)`));
-}
-
-if (missingDates.length > 0) {
-  failed = true;
-  console.error('\n❌ Files missing explicit "Last verified: YYYY-MM-DD" stamp:');
-  missingDates.forEach(f => console.error(`   - ${f}`));
-}
-
-if (!failed) {
-  console.log(`\n✅ Freshness audit PASSED: All ${auditedFiles} files verified within the last ${MAX_DAYS} days.`);
-  process.exit(0);
-} else {
+if (staleRules.length > 0 || missingDates.length > 0) {
+  if (staleRules.length > 0) {
+    console.error(`\n❌ Stale Policy Sources Detected:`);
+    for (const r of staleRules) {
+      console.error(`   - ${r.id}: ${r.rule} was last verified on ${r.verified} (${r.diffDays} days ago)`);
+    }
+  }
+  if (missingDates.length > 0) {
+    console.error(`\n❌ Missing or Invalid Verification Dates:`);
+    for (const m of missingDates) {
+      console.error(`   - ${m}`);
+    }
+  }
+  console.error(`\nRun "node scripts/policy-verify.js" to re-verify policy hashes and update timestamps.\n`);
   process.exit(1);
 }
+
+console.log(`\n✔ All policy sources verified fresh (< ${MAX_DAYS} days).\n`);

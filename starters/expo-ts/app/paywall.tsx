@@ -103,12 +103,24 @@ export default function PaywallScreen() {
       </Text>
 
       {/* Restore Purchases Action */}
-      <Pressable style={styles.restoreBtn} onPress={handleRestore} disabled={restoring}>
+      <Pressable
+        style={styles.restoreBtn}
+        onPress={handleRestore}
+        disabled={restoring}
+        accessibilityLabel="Restore Purchases"
+      >
         <RefreshCw color="#818CF8" size={16} />
         <Text style={styles.restoreText}>
           {restoring ? 'Contacting App Store...' : 'Restore Purchases'}
         </Text>
       </Pressable>
+
+      {/* Upfront Legal Links per Guideline 3.1.1 */}
+      <View style={styles.footerRow}>
+        <Text style={styles.footerLink}>Terms of Service</Text>
+        <Text style={styles.footerDot}>•</Text>
+        <Text style={styles.footerLink}>Privacy Policy</Text>
+      </View>
     </ScrollView>
   );
 }
@@ -232,5 +244,22 @@ const styles = StyleSheet.create({
     color: '#818CF8',
     fontSize: 14,
     fontWeight: '500',
+  },
+  footerRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+    marginTop: 4,
+    paddingBottom: 24,
+  },
+  footerLink: {
+    color: '#94A3B8',
+    fontSize: 12,
+    textDecorationLine: 'underline',
+  },
+  footerDot: {
+    color: '#64748B',
+    fontSize: 12,
   },
 });

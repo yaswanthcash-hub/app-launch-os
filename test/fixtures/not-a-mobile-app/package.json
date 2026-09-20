@@ -1,0 +1,10 @@
+{
+  "name": "standard-backend-service",
+  "version": "1.0.0",
+  "description": "Standard Node.js server with no mobile components",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.19.2",
+    "lodash": "^4.17.21"
+  }
+}

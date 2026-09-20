@@ -1,6 +1,6 @@
 /**
  * App Launch OS — Master Project Auditor
- * Discovers project files and runs all compliance, UX, and performance detectors.
+ * Discovers project files and runs all compliance, UX, performance, and security detectors.
  */
 
 const fs = require('fs');
@@ -9,6 +9,7 @@ const { auditApple } = require('./detectors/apple');
 const { auditGoogle } = require('./detectors/google');
 const { auditUx } = require('./detectors/ux');
 const { auditPerformance } = require('./detectors/performance');
+const { auditSecurity } = require('./detectors/security');
 const { computeScore } = require('./scorer');
 const { renderReport } = require('./reporter');
 
@@ -41,7 +42,7 @@ function getAllFiles(dir, fileList = [], maxFiles = 300) {
         fileList.push(fullPath);
       }
     }
-  } catch (e) {
+  } catch (_e) {
     // Ignore permissions or access errors
   }
 
@@ -54,7 +55,9 @@ function runAudit(projectDir, options = {}) {
   if (fs.existsSync(pkgPath)) {
     try {
       pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
-    } catch (e) {}
+    } catch (_e) {
+      // Ignore invalid JSON
+    }
   }
 
   const appJsonPath = path.join(projectDir, 'app.json');
@@ -62,7 +65,24 @@ function runAudit(projectDir, options = {}) {
   if (fs.existsSync(appJsonPath)) {
     try {
       appConfig = JSON.parse(fs.readFileSync(appJsonPath, 'utf8'));
-    } catch (e) {}
+    } catch (_e) {
+      // Ignore invalid JSON
+    }
+  }
+
+  // Phase 1.6: Project-type guard
+  const hasExpoDep = Boolean(pkg.dependencies?.expo || pkg.devDependencies?.expo);
+  const hasRnDep = Boolean(pkg.dependencies?.['react-native'] || pkg.devDependencies?.['react-native']);
+  const hasAppJson = fs.existsSync(appJsonPath);
+  const hasAndroidDir = fs.existsSync(path.join(projectDir, 'android'));
+  const hasIosDir = fs.existsSync(path.join(projectDir, 'ios'));
+
+  if (!hasExpoDep && !hasRnDep && !hasAppJson && !hasAndroidDir && !hasIosDir) {
+    throw new Error(
+      `No mobile project detected in "${projectDir}".\n` +
+      `Project must contain an Expo/React Native dependency, an app.json configuration, or an android/ios directory.\n` +
+      `Use --dir <path> to specify the mobile app root directory.`
+    );
   }
 
   const allFiles = getAllFiles(projectDir, [], 350);
@@ -77,7 +97,7 @@ function runAudit(projectDir, options = {}) {
       const content = fs.readFileSync(fullPath, 'utf8');
       fileCache.set(relPath, content);
       return content;
-    } catch (e) {
+    } catch (_e) {
       return '';
     }
   }
@@ -94,12 +114,14 @@ function runAudit(projectDir, options = {}) {
   const googleResults = auditGoogle(ctx);
   const uxResults = auditUx(ctx);
   const perfResults = auditPerformance(ctx);
+  const secResults = auditSecurity(ctx);
 
   const allResults = [
     ...appleResults,
     ...googleResults,
     ...uxResults,
-    ...perfResults
+    ...perfResults,
+    ...secResults,
   ];
 
   const scoreData = computeScore(allResults);

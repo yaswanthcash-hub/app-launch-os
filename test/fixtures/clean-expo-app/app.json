@@ -1,0 +1,16 @@
+{
+  "expo": {
+    "name": "clean-expo-app",
+    "slug": "clean-expo-app",
+    "version": "1.0.0",
+    "jsEngine": "hermes",
+    "newArchEnabled": true,
+    "android": {
+      "targetSdkVersion": 36,
+      "compileSdkVersion": 36
+    },
+    "ios": {
+      "supportsTablet": true
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "broken-expo-app",
+  "version": "1.0.0",
+  "dependencies": {
+    "expo": "~50.0.0",
+    "react-native": "0.74.0",
+    "@react-native-firebase/auth": "^18.0.0"
+  }
+}

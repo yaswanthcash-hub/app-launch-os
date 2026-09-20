@@ -53,7 +53,7 @@ The core repository is intended to remain MIT. The default client allowlist incl
 | [Detox](https://github.com/wix/Detox) | MIT | Preserve copyright and permission notice. |
 | [Sentry React Native](https://github.com/getsentry/sentry-react-native) | MIT | Preserve copyright and permission notice; review service terms. |
 | [Fastlane](https://github.com/fastlane/fastlane) | MIT | Preserve copyright and permission notice. |
-| [OWASP MASVS / MASTG](https://github.com/OWASP/owasp-masvs) | CC BY-SA 4.0 | Preserve attribution and share-alike notice for redistributed content. |
+| [OWASP MAS / MASTG](https://github.com/OWASP/owasp-masvs) | CC BY-SA 4.0 | Preserve attribution and share-alike notice for redistributed content. |
 | [App Store Compliance Playbook](https://github.com/mjmirza/app-store-compliance) | OpenRoots ORA 2.3 | Preserve attribution and source links for compliance taxonomies and guard patterns. |
 | [Autoresearch](https://github.com/uditgoenka/autoresearch) | MIT | Preserve copyright and permission notice for autonomous loop framework. |
 

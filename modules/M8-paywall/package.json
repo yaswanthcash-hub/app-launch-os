@@ -1,11 +1,11 @@
 {
-  "name": "@app-launch-os/paywall",
+  "name": "@applaunchos/paywall",
   "version": "0.3.0",
   "description": "StoreKit 2 and RevenueCat-ready subscription paywalls with Apple Guideline 3.1.1 compliance",
   "main": "src/index.ts",
   "types": "src/index.ts",
   "scripts": {
-    "test": "echo \"Tests passed\" && exit 0"
+    "test": "vitest run tests"
   },
   "keywords": [
     "react-native",

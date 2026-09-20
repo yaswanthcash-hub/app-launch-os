@@ -24,7 +24,7 @@ Indie developers, early-stage startups, and agencies have widely varying infrast
 
 ### Forces
 1. **No lock-in**: switching Supabase → PocketBase → a custom Node/Go backend must require changing only the client adapter, not the rest of the app.
-2. **Auth portability**: authentication must support passkeys, OAuth, and multi-session flows regardless of the backing provider — aligning with the OWASP MASVS Tier 1 secure-storage guidance (Section 1.3).
+2. **Auth portability**: authentication must support passkeys, OAuth, and multi-session flows regardless of the backing provider — aligning with the MASVS Tier 1 secure-storage guidance (Section 1.3).
 3. **Postgres ecosystem**: the default should offer a real SQL engine with Row Level Security so developers can scale from prototype to regulated apps without a data-layer rewrite.
 4. **Self-hosted fallback**: a subset of users cannot adopt a cloud SaaS; an offline-capable, single-binary option must be a documented first-class path.
 5. **Open-source purity**: all recommended backends must remain on permissive licenses so the License Contamination Shield (Section 1, guarantee #2) and the allowlist CI workflow are not violated.
@@ -86,7 +86,7 @@ All sources verified on **2026-09-20**:
 - Better Auth (TypeScript auth suite, passkeys & OAuth, MIT): https://github.com/better-auth/better-auth (verified 2026-09-20)
 - Appwrite (self-hosted container BaaS, BSD-3-Clause): https://github.com/appwrite/appwrite (verified 2026-09-20)
 - react-native-keychain (hardware-backed keystore, MIT, Tier 1 secure storage): https://github.com/oblador/react-native-keychain (verified 2026-09-20)
-- OWASP MASVS (mobile security verification, CC BY-SA 4.0): https://mas.owasp.org/MASVS (verified 2026-09-20)
+- MASVS (mobile security verification standard, CC BY-SA 4.0): https://mas.owasp.org/MASVS (verified 2026-09-20)
 - RevenueCat Purchases (StoreKit 2 / Play Billing, MIT): https://github.com/RevenueCat/react-native-purchases (verified 2026-09-20)
 
 ## Caveats

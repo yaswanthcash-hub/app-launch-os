@@ -1,22 +1,27 @@
 #!/usr/bin/env node
 /**
  * App Launch OS CLI (`app-launch-os`)
- * Universal Mobile Pre-Flight Audit & Fix Tool (Expo / React Native / iOS / Android)
+ * Universal Mobile Pre-Flight Audit, Roast & Policy Radar Engine
  */
 
 const path = require('path');
 const { runAudit } = require('../src/cli/auditor');
 const { runFixer } = require('../src/cli/fixer');
+const { runRadar } = require('../src/cli/radar');
+const { renderSocialCard, renderRoastReport } = require('../src/cli/reporter');
 
 const repoRootDir = path.resolve(__dirname, '..');
 const targetDir = process.cwd();
 const command = process.argv[2] || 'audit';
 
 const usage = `
-🚀 App Launch OS CLI — Pre-Flight Store Readiness & Quality Engine
+🚀 App Launch OS CLI — Launch Readiness Score™ & Policy Radar
 
 Usage:
-  npx app-launch-os audit             Audit current mobile app for 2026 store compliance & UX
+  npx app-launch-os audit             Audit mobile app for Launch Readiness Score™ (0-100)
+  npx app-launch-os roast             Roast My App: brutally honest review rejection feedback
+  npx app-launch-os card              Generate the shareable ASCII Launch Score card
+  npx app-launch-os radar             View active Apple & Google Store Policy Radar shifts
   npx app-launch-os fix               Automatically scaffold missing manifests & haptic hooks
   npx app-launch-os --version         Show CLI version
   npx app-launch-os --help            Show this help message
@@ -45,11 +50,19 @@ try {
 
   if (command === 'audit') {
     runAudit(projectDir);
+  } else if (command === 'roast') {
+    const { scoreData } = runAudit(projectDir, { silent: true });
+    renderRoastReport(scoreData);
+  } else if (command === 'card') {
+    const { scoreData } = runAudit(projectDir, { silent: true });
+    console.log(renderSocialCard(scoreData));
+  } else if (command === 'radar') {
+    runRadar();
   } else if (command === 'fix') {
     const { ctx } = runAudit(projectDir);
     runFixer({ ...ctx, repoRootDir });
   } else {
-    // If unknown command, treat as audit if path or run audit
+    // Unknown command, default to audit
     runAudit(projectDir);
   }
 } catch (error) {

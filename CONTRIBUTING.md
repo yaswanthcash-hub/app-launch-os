@@ -66,15 +66,23 @@ App Launch OS is built **documentation-first**. This is not optional—it is bak
 
 | Contribution Type | Description | Where to Start |
 |-------------------|-------------|----------------|
+| **Policy Researcher** | Track breaking Apple/Google/Expo store changes (No code required!) | `.github/ISSUE_TEMPLATE/policy-change.md`, `RADAR.md` |
 | **Documentation** | Fix typos, clarify checklists, add research citations | `findings/`, `checklists/`, `policies/`, `docs/prd.md` |
 | **Research Digests** | Add new studies, update verification dates | `findings/*.md` |
 | **Policy Updates** | Track Apple/Google policy changes with dated sources | `policies/*.md` |
 | **Architecture Decisions** | Propose new ADRs or amend existing ones | `decisions/` + [RFC Process](#rfc--adr-process) |
-| **Tooling** | CI workflows, freshness linters, attribution CLI | `.github/workflows/`, `modules/M15-cli/` |
+| **Tooling** | CI workflows, freshness linters, attribution CLI | `.github/workflows/`, `modules/M15-cli/`, `src/cli/` |
 | **Templates** | Improve legal templates (with disclaimers) | `templates/*.md` |
 | **Starter Kits** | Extend `starters/expo-ts/` boilerplate | `starters/expo-ts/` |
 
-> If your change touches more than one module or introduces a new dependency, open an RFC first.
+### 📡 The Policy Researcher Role (No Code Required)
+
+You do **not** need to write TypeScript or configure native toolchains to make high-impact contributions to App Launch OS.
+
+Mobile platform guidelines (Apple App Store Review Guidelines, Google Play Developer Program Policies, and Expo SDK requirements) shift constantly. If you are a QA tester, product manager, founder, or engineer who spots a store policy update or encounters a new review rejection reason:
+1. Open a **Store Policy Change Report** via our [Policy Report Issue Template](.github/ISSUE_TEMPLATE/policy-change.md).
+2. Document the official URL, effective date, who is affected, and your recommended workaround.
+3. Your submission directly updates the weekly [RADAR.md](RADAR.md) and alerts thousands of mobile builders.
 
 ---
 

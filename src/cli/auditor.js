@@ -103,7 +103,9 @@ function runAudit(projectDir, options = {}) {
   ];
 
   const scoreData = computeScore(allResults);
-  renderReport(scoreData, options);
+  if (!options.silent) {
+    renderReport(scoreData, options);
+  }
 
   return {
     scoreData,

@@ -3,7 +3,7 @@
 # 🚀 App Launch OS
 
 **The Open-Source Operating System for Launching Top 1% Mobile Apps.**
-*Battle-tested submission playbooks, 2026 store compliance guards, world-class UI/UX design, growth experiments, and organic viral loops.*
+*The missing layer between "AI built my app" and "my app is ready to ship."*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
 [![GitHub Stars](https://img.shields.io/github/stars/yaswanthcash-hub/app-launch-os?style=flat-square&logo=github&color=gold)](https://github.com/yaswanthcash-hub/app-launch-os/stargazers)
@@ -11,19 +11,19 @@
 [![AI Agent Ready](https://img.shields.io/badge/AI%20Agents-Antigravity%20%7C%20Claude%20%7C%20Codex%20%7C%20Cursor-8A2BE2.svg?style=flat-square)](AGENTS.md)
 [![Audit Suite](https://img.shields.io/badge/Master%20Audits-500%2B%20Links%20Verified-brightgreen.svg?style=flat-square)](scripts/audit-all.js)
 [![Policy Freshness](https://img.shields.io/badge/Policy%20Freshness-%3C90%20Days-success.svg?style=flat-square)](scripts/check-freshness.js)
+[![Policy Radar](https://img.shields.io/badge/Store%20Radar-Weekly%20Tracking-purple.svg?style=flat-square)](RADAR.md)
 [![Apple Review](https://img.shields.io/badge/iOS%202026-StoreKit%202%20%2B%20PrivacyInfo-black.svg?style=flat-square&logo=apple)](policies/apple-review-essentials.md)
 [![Google Play](https://img.shields.io/badge/Google%20Play-API%2035%20%2B%2020--Tester%20Gate-34A853.svg?style=flat-square&logo=googleplay)](policies/play-policy-essentials.md)
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen.svg?style=flat-square)](CONTRIBUTING.md)
 
 <p align="center">
-  <a href="#quick-audit">⚡ 2-Sec CLI Audit</a> •
-  <a href="#ai-agents">🤖 AI Agents & Commands</a> •
-  <a href="#universal-store-compliance">🛡️ Store Compliance</a> •
-  <a href="#premium-design-system">🎨 UI/UX Design System</a> •
-  <a href="#growth-experiments">🧪 Growth Experiments</a> •
-  <a href="#growth-loops">📈 Growth Loops</a> •
-  <a href="#developer-cli">🛠️ Developer CLI</a> •
-  <a href="#repository-architecture">📂 Modules Directory</a>
+  <a href="#quick-audit">⚡ Launch Score™ CLI</a> •
+  <a href="#roast">🔥 Roast My App</a> •
+  <a href="#policy-radar">📡 Policy Radar</a> •
+  <a href="#roadmap">🗺️ Roadmap</a> •
+  <a href="#ai-agents">🤖 AI Agents</a> •
+  <a href="#universal-store-compliance">🛡️ Compliance</a> •
+  <a href="#repository-architecture">📂 Modules</a>
 </p>
 
 > ⭐️ **Found this helpful? Give App Launch OS a star on GitHub!** It helps indie builders and mobile teams avoid store rejections and launch top 1% native apps.
@@ -33,56 +33,134 @@
 </div>
 
 <a id="quick-audit"></a>
-## ⚡ Instant Pre-Flight Audit (Run in 2 Seconds)
+## ⚡ App Launch Score™ (Deterministic Launch Audit)
 
-Audit any Expo or React Native repository with **zero installation**:
+AI made creating mobile software dramatically faster. But AI also makes it easy to build an app that looks finished while missing the boring things that actually kill launches: **store reviewer demo traps, missing privacy manifests, in-app deletion, StoreKit 2 restore triggers, and Android 16 KB page alignment.**
+
+**App Launch OS is a deterministic audit engine. Zero hallucinated fluff.**
+
+Run it on any Expo or React Native app:
 
 ```bash
-# 1. Audit your app for 2026 store compliance, UX & performance:
+# 1. Audit your app for the deterministic Launch Readiness Score™ (0-100):
 npx app-launch-os audit
 
-# 2. Automatically scaffold missing privacy manifests & haptic hooks:
+# 2. Roast My App: brutally honest review rejection feedback:
+npx app-launch-os roast
+
+# 3. Automatically scaffold missing manifests & haptic hooks:
 npx app-launch-os fix
 ```
 
 ```text
-APP LAUNCH OS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+APP LAUNCH SCORE
+████████████████░░░░ 82/100
 
-Launch Readiness: 71/100
+  Store Compliance ......... 92
+  UX & Design .............. 88
+  Performance .............. 76
+  Security ................. 84
+  Accessibility ............ 71
+  Growth & Release ......... 94
 
-🔴 2 BLOCKERS
-🟠 5 WARNINGS
-🟢 11 PASSED
+Verdict: ⚠️ AT RISK (3 Store Blockers Found)
 
-APPLE
-  ✓ Reviewer demo account (no SMS 2FA trap)
-  ✓ Privacy manifest (PrivacyInfo.xcprivacy)
-  ✓ Account deletion flow present
-  ✓ StoreKit 2 subscription disclosure
-
-GOOGLE
-  ✗ Target SDK 35+ (Android 15 requirement)
-  ✗ 16 KB page alignment
-  ✓ Closed testing requirements
-  ✓ Data Safety permissions
-
-UX
-  ✗ Tactile haptics (expo-haptics)
-  ✓ Loading states (shimmer skeletons)
-  ✓ Dynamic Type support
-  ✗ Accessibility labels
-
-PERFORMANCE
-  ✓ Hermes JS engine enabled
-  ✓ New Architecture (Fabric)
-  ✗ UI-thread motion worklets
-  ✗ Crash telemetry (Sentry)
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-Run: npx app-launch-os fix
+🔴 3 BLOCKERS
+  ✗ Reviewer demo account (SMS OTP detected — Apple Guideline 2.1 reject)
+  ✗ Privacy manifest (PrivacyInfo.xcprivacy missing)
+  ✗ Android 16 KB page alignment not verified
 ```
+
+### 📋 Shareable Launch Card
+
+Every audit generates a shareable ASCII card you can copy-paste to X/Twitter and LinkedIn:
+
+```text
+┌─────────────────────────────────────────────────┐
+│                 APP LAUNCH OS                   │
+│             LAUNCH READINESS SCORE              │
+│                       82                        │
+│              ████████████████░░░░               │
+│                                                 │
+│    Store Compliance   92     Security     84    │
+│    UX & Design        88     Performance  76    │
+│                                                 │
+│    3 Blockers · 4 Warnings · 16 Passed          │
+│    Audit your app: npx app-launch-os audit      │
+└─────────────────────────────────────────────────┘
+```
+
+<a id="roast"></a>
+### 🔥 "Roast My App" (`npx app-launch-os roast`)
+
+Want brutally honest feedback before Apple or Google reviewers see your app?
+
+```bash
+npx app-launch-os roast
+```
+
+```text
+🔥 ROAST MY APP — App Launch OS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Your app scored: 54/100
+██████████░░░░░░░░░░
+
+We found 4 fatal blockers and 6 embarrassing warnings:
+
+🔴 SMS Auth Trap:
+   Apple reviewers cannot receive external SMS OTPs. They will reject your app within 4 minutes flat while drinking their espresso.
+
+🔴 Missing PrivacyInfo.xcprivacy:
+   Apple's automated binary scanner will auto-reject your upload before a human reviewer even sees it.
+
+🟠 Raw ActivityIndicator Spinners Everywhere:
+   Blank screens with generic spinning wheels make your app feel like a 2017 PhoneGap web wrapper.
+
+Don't let Apple or Google embarrass you. Run: npx app-launch-os fix
+```
+
+---
+
+<a id="policy-radar"></a>
+## 📡 App Store Policy Radar (`RADAR.md`)
+
+Store review rules shift every month. The **[Policy Radar](RADAR.md)** is our real-time intelligence briefing tracking breaking enforcement shifts across Apple, Google, and Expo:
+
+```bash
+npx app-launch-os radar
+```
+
+* **Apple App Store:** 🟡 Active Review Notices (Guideline 2.1 SMS OTP & `PrivacyInfo.xcprivacy`)
+* **Google Play Store:** 🔴 Breaking Enforcement (Android 15 Target SDK 35 & 16 KB memory page size)
+* **Expo / React Native:** 🟢 Stable (SDK 52 New Architecture default)
+
+> 🤝 **Become a Policy Researcher:** You don't need to write code to contribute! Spotted a new store policy change or rejection trap? Submit a report via our [Policy Report Template](.github/ISSUE_TEMPLATE/policy-change.md).
+
+---
+
+<a id="roadmap"></a>
+## 🗺️ Public Roadmap (App Launch OS 1.0)
+
+Track our real-time progress towards the 1.0 milestone:
+
+```text
+App Launch OS 1.0 Roadmap
+████████████████░░░░ 82%
+```
+
+- [x] **Apple 2026 Store Compliance:** Zero-SMS demo bypass, PrivacyInfo manifests, self-service account deletion.
+- [x] **Google Play 2026 Store Compliance:** Target SDK 35, 16 KB ELF page alignment, 20-tester closed testing gate.
+- [x] **Sensory UI/UX Architecture:** 5-state tactile haptic matrix, Golden Corner Concentricity, Moti skeletons.
+- [x] **Growth Experiments Engine:** Deterministic offline FNV-1a feature flags & Chi-Square SRM verification.
+- [x] **AI Agent Contract & Routing:** 16 standardized autonomous `/applaunchos:*` execution commands.
+- [x] **Deterministic Launch Score™ CLI:** Instant 2-second pre-flight audit (`npx app-launch-os audit`).
+- [x] **"Roast My App" Mode:** Brutally honest review rejection feedback (`npx app-launch-os roast`).
+- [x] **Weekly App Store Policy Radar:** Real-time store policy monitor ([RADAR.md](RADAR.md)).
+- [ ] **GitHub Action Pre-Flight PR Bot:** Automatic launch score commenting on mobile PRs.
+- [ ] **VS Code / Cursor Extension:** In-editor launch readiness linter.
+- [ ] **Expo Config Plugin:** 1-line `app.json` integration for all store compliance manifests.
+- [ ] **Web Audit Dashboard:** Web-based repository and URL launch analyzer.
 
 ---
 

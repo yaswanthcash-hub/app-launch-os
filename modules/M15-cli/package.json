@@ -1,0 +1,16 @@
+{
+  "name": "@applaunchos/cli",
+  "version": "0.2.0",
+  "description": "CLI tool for mobile app pre-flight checks, compliance auditing, and link verification.",
+  "bin": {
+    "launchos": "bin/launchos.js"
+  },
+  "license": "MIT",
+  "keywords": [
+    "cli",
+    "mobile",
+    "app-store",
+    "compliance",
+    "react-native"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "@app-launch-os/release",
+  "version": "0.4.0",
+  "description": "Production EAS Build configurations, Fastlane deployment lanes, and automated App Store changelog generators",
+  "scripts": {
+    "changelog": "node scripts/generate-changelog.js"
+  },
+  "keywords": [
+    "react-native",
+    "expo",
+    "eas-build",
+    "fastlane",
+    "app-store-connect",
+    "google-play-console",
+    "changelog"
+  ],
+  "author": "App Launch OS Contributors",
+  "license": "MIT"
+}

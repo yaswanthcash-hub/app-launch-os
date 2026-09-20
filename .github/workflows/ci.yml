@@ -1,0 +1,80 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**/*.md"
+      - ".github/workflows/ci.yml"
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  markdown:
+    name: Markdown lint & format validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Write markdownlint configuration
+        shell: bash
+        run: |
+          cat > .markdownlint-cli2.ci.jsonc <<'EOF'
+          /**
+           * App Launch OS markdown style.
+           * Relaxes line-length, duplicate-heading, and heading-punctuation
+           * rules that are noisy for documentation, while keeping structural
+           * format checks (headings, trailing whitespace, final newline,
+           * list consistency, code-fence info strings).
+           */
+          {
+            "default": true,
+            "MD013": false,
+            "MD024": false,
+            "MD025": false,
+            "MD026": false,
+            "MD033": false,
+            "MD041": false,
+            "MD012": [false, { "maximum": 2 }],
+            "MD007": [true, { "indent": 2, "start": 1, "start_indented": false }]
+          }
+          EOF
+
+      - name: Lint Markdown
+        run: npx --yes markdownlint-cli2 "**/*.md" --config .markdownlint-cli2.ci.jsonc --logLevel error --diagnostic-config
+
+      - name: Check trailing whitespace and final newline
+        run: |
+          status=0
+          files=$(git ls-files '*.md')
+          for f in $files; do
+            if grep -nP '[ \t]+$' "$f"; then
+              echo "::error file=$f::Trailing whitespace detected"
+              status=1
+            fi
+          done
+          for f in $files; do
+            if [ -s "$f" ] && [ -n "$(tail -c1 "$f" | od -An -c | tr -d ' ')" ]; then
+              echo "::error file=$f::Missing final newline"
+              status=1
+            fi
+          done
+          exit $status
+
+      - name: Fail with summary on error
+        if: failure()
+        run: |
+          echo "::error::Markdown lint/format validation failed. Fix the reported violations and re-run."
+          exit 1

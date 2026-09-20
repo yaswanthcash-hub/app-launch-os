@@ -1,0 +1,55 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "semantic": {
+    "light": {
+      "surface": {
+        "primary": { "$value": "{color.neutral.50}", "$type": "color" },
+        "elevated": { "$value": "#FFFFFF", "$type": "color" },
+        "subtle": { "$value": "{color.neutral.100}", "$type": "color" },
+        "overlay": { "$value": "rgba(15, 23, 42, 0.4)", "$type": "color" }
+      },
+      "text": {
+        "primary": { "$value": "{color.neutral.900}", "$type": "color" },
+        "secondary": { "$value": "{color.neutral.600}", "$type": "color" },
+        "muted": { "$value": "{color.neutral.400}", "$type": "color" },
+        "onBrand": { "$value": "#FFFFFF", "$type": "color" }
+      },
+      "border": {
+        "subtle": { "$value": "{color.neutral.200}", "$type": "color" },
+        "strong": { "$value": "{color.neutral.400}", "$type": "color" },
+        "focus": { "$value": "{color.brand.600}", "$type": "color" }
+      },
+      "action": {
+        "primary": { "$value": "{color.brand.600}", "$type": "color" },
+        "primaryHover": { "$value": "{color.brand.700}", "$type": "color" },
+        "secondary": { "$value": "{color.neutral.200}", "$type": "color" },
+        "danger": { "$value": "{color.feedback.error}", "$type": "color" }
+      }
+    },
+    "dark": {
+      "surface": {
+        "primary": { "$value": "{color.neutral.950}", "$type": "color" },
+        "elevated": { "$value": "{color.neutral.900}", "$type": "color" },
+        "subtle": { "$value": "{color.neutral.800}", "$type": "color" },
+        "overlay": { "$value": "rgba(0, 0, 0, 0.75)", "$type": "color" }
+      },
+      "text": {
+        "primary": { "$value": "{color.neutral.50}", "$type": "color" },
+        "secondary": { "$value": "{color.neutral.400}", "$type": "color" },
+        "muted": { "$value": "{color.neutral.600}", "$type": "color" },
+        "onBrand": { "$value": "#FFFFFF", "$type": "color" }
+      },
+      "border": {
+        "subtle": { "$value": "{color.neutral.800}", "$type": "color" },
+        "strong": { "$value": "{color.neutral.600}", "$type": "color" },
+        "focus": { "$value": "{color.brand.500}", "$type": "color" }
+      },
+      "action": {
+        "primary": { "$value": "{color.brand.500}", "$type": "color" },
+        "primaryHover": { "$value": "{color.brand.600}", "$type": "color" },
+        "secondary": { "$value": "{color.neutral.800}", "$type": "color" },
+        "danger": { "$value": "{color.feedback.error}", "$type": "color" }
+      }
+    }
+  }
+}

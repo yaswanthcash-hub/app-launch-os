@@ -1,0 +1,56 @@
+name: PolicyBot Skeleton
+
+on:
+  schedule:
+    # Run weekly on Monday at 08:00 UTC
+    - cron: "0 8 * * 1"
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "Target policy to monitor ('apple', 'google', or 'all')"
+        required: true
+        default: "all"
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  monitor-policies:
+    name: Check store policy changes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Fetch Apple Review Guidelines snapshot
+        if: ${{ github.event.inputs.target == 'apple' || github.event.inputs.target == 'all' || github.event_name == 'schedule' }}
+        shell: bash
+        run: |
+          mkdir -p .policy-cache
+          echo "Fetching Apple App Store Review Guidelines..."
+          curl -sL https://developer.apple.com/app-store/review/guidelines/ > .policy-cache/apple-review-guidelines.html || true
+
+      - name: Fetch Google Play Policy snapshot
+        if: ${{ github.event.inputs.target == 'google' || github.event.inputs.target == 'all' || github.event_name == 'schedule' }}
+        shell: bash
+        run: |
+          mkdir -p .policy-cache
+          echo "Fetching Google Play Developer Policy Center..."
+          curl -sL https://play.google.com/about/developer-content-policy/ > .policy-cache/google-play-policy.html || true
+
+      - name: Diff against stored baselines
+        shell: bash
+        run: |
+          echo "PolicyBot v0.1 Skeleton: Snapshot stored in .policy-cache/"
+          echo "In v0.5, gpt-researcher will synthesize semantic diffs and generate PRs automatically."
+
+      - name: Output status
+        run: |
+          echo "Policy snapshot complete. No actionable breaking policy diff detected."

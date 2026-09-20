@@ -1,0 +1,65 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "space": {
+    "1": { "$value": "2px", "$type": "dimension" },
+    "2": { "$value": "4px", "$type": "dimension" },
+    "3": { "$value": "8px", "$type": "dimension" },
+    "4": { "$value": "12px", "$type": "dimension" },
+    "5": { "$value": "16px", "$type": "dimension" },
+    "6": { "$value": "24px", "$type": "dimension" },
+    "7": { "$value": "32px", "$type": "dimension" },
+    "8": { "$value": "48px", "$type": "dimension" },
+    "9": { "$value": "64px", "$type": "dimension" }
+  },
+  "radius": {
+    "none": { "$value": "0px", "$type": "dimension" },
+    "sm": { "$value": "6px", "$type": "dimension" },
+    "md": { "$value": "10px", "$type": "dimension" },
+    "lg": { "$value": "14px", "$type": "dimension" },
+    "xl": { "$value": "18px", "$type": "dimension" },
+    "2xl": { "$value": "24px", "$type": "dimension" },
+    "3xl": { "$value": "32px", "$type": "dimension" },
+    "hardwareScreen": { "$value": "50px", "$type": "dimension", "$description": "Hardware bezel radius for modern iPhone/Galaxy screens" },
+    "full": { "$value": "9999px", "$type": "dimension" }
+  },
+  "typography": {
+    "size": {
+      "xs": { "$value": "11sp", "$type": "dimension" },
+      "sm": { "$value": "13sp", "$type": "dimension" },
+      "base": { "$value": "16sp", "$type": "dimension" },
+      "lg": { "$value": "18sp", "$type": "dimension" },
+      "xl": { "$value": "20sp", "$type": "dimension" },
+      "2xl": { "$value": "24sp", "$type": "dimension" },
+      "3xl": { "$value": "30sp", "$type": "dimension" },
+      "4xl": { "$value": "36sp", "$type": "dimension" }
+    }
+  },
+  "color": {
+    "neutral": {
+      "50": { "$value": "#F8FAFC", "$type": "color" },
+      "100": { "$value": "#F1F5F9", "$type": "color" },
+      "200": { "$value": "#E2E8F0", "$type": "color" },
+      "300": { "$value": "#CBD5E1", "$type": "color" },
+      "400": { "$value": "#94A3B8", "$type": "color" },
+      "500": { "$value": "#64748B", "$type": "color" },
+      "600": { "$value": "#475569", "$type": "color" },
+      "700": { "$value": "#334155", "$type": "color" },
+      "800": { "$value": "#1E293B", "$type": "color" },
+      "900": { "$value": "#0F172A", "$type": "color" },
+      "950": { "$value": "#020617", "$type": "color" }
+    },
+    "brand": {
+      "50": { "$value": "#EEF2FF", "$type": "color" },
+      "100": { "$value": "#E0E7FF", "$type": "color" },
+      "500": { "$value": "#6366F1", "$type": "color" },
+      "600": { "$value": "#4F46E5", "$type": "color" },
+      "700": { "$value": "#4338CA", "$type": "color" }
+    },
+    "feedback": {
+      "success": { "$value": "#10B981", "$type": "color" },
+      "warning": { "$value": "#F59E0B", "$type": "color" },
+      "error": { "$value": "#EF4444", "$type": "color" },
+      "info": { "$value": "#3B82F6", "$type": "color" }
+    }
+  }
+}

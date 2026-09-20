@@ -1,0 +1,123 @@
+name: Freshness lint
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**/*.md"
+      - ".github/workflows/freshness-lint.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "**/*.md"
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 1 * *"
+
+permissions:
+  contents: read
+  pull-requests: write
+
+env:
+  # Documentation claims must be re-verified within this many days.
+  FRESHNESS_DAYS: "90"
+  # Files that are configuration/templates and are intentionally not date-stamped.
+  EXCLUDE_PATHS: ".github/ISSUE_TEMPLATE,.github/PULL_REQUEST_TEMPLATE.md,.github/SECURITY.md,.kilo"
+
+jobs:
+  freshness:
+    name: Documentation freshness
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Scan markdown for verification/freshness dates
+        id: scan
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+          const { execSync } = require('child_process');
+
+          const MAX_DAYS = parseInt(process.env.FRESHNESS_DAYS || '90', 10);
+          const exclude = (process.env.EXCLUDE_PATHS || '').split(',').filter(Boolean);
+          const today = new Date();
+          today.setUTCHours(0, 0, 0, 0);
+
+          function inExcluded(p) {
+            return exclude.some(function (ex) {
+              if (!ex) return false;
+              var base = ex.replace(/\/$/, '');
+              return p === ex || p === base || p.startsWith(base + '/') || p.startsWith(ex);
+            });
+          }
+
+          // Matches a verification/freshness stamp and captures the ISO date.
+          var FRESHNESS_PATTERN = '(?:last\\s+updated|last\\s+verified|inventory\\s+date|verified|verification\\s+date|as\\s+of|updated:|updated\\s+on)\\s*:?\\s*(\\d{4}-\\d{2}-\\d{2})';
+
+          var files = [];
+          try {
+            files = execSync('git ls-files "*.md"', { encoding: 'utf8' }).split('\n').filter(Boolean);
+          } catch (e) {
+            files = execSync('find . -name "*.md" -not -path "./node_modules/*" -not -path "./.git/*"').toString().split('\n').filter(Boolean);
+          }
+
+          var problems = [];
+          var ok = [];
+
+          for (var i = 0; i < files.length; i++) {
+            var rel = files[i];
+            var abs = path.resolve(rel);
+            if (!fs.existsSync(abs)) continue;
+            if (inExcluded(rel)) continue;
+            var text = fs.readFileSync(abs, 'utf8').slice(0, 200000);
+            // Fresh regex per file avoids lastIndex statefulness bugs.
+            var re = new RegExp(FRESHNESS_PATTERN, 'i');
+            var m = re.exec(text);
+            if (!m) {
+              var isContent = /(policy|guideline|checklist|compliance|review|submission|research|finding|digest|aso|seo|onboarding|paywall|experiments|premium-ux|privacy|terms|licensing|architecture|adr)/i.test(rel)
+                || /verification|verified|as of|last updated|compliance|guideline/i.test(text.slice(0, 3000));
+              if (isContent) {
+                problems.push({ file: rel, reason: 'No dated verification stamp found. Add a "Last verified: YYYY-MM-DD" line.' });
+              } else {
+                ok.push(rel);
+              }
+              continue;
+            }
+            var stamp = m[1];
+            var d = new Date(stamp + 'T00:00:00Z');
+            if (isNaN(d.getTime())) {
+              problems.push({ file: rel, reason: 'Unparseable verification date "' + stamp + '".' });
+              continue;
+            }
+            var diffDays = Math.round((today - d) / 86400000);
+            if (diffDays < 0) {
+              problems.push({ file: rel, reason: 'Verification date ' + stamp + ' is in the future.' });
+            } else if (diffDays > MAX_DAYS) {
+              problems.push({ file: rel, reason: 'Verification date ' + stamp + ' is ' + diffDays + ' days old (> ' + MAX_DAYS + '-day freshness window).' });
+            } else {
+              ok.push(rel);
+            }
+          }
+
+          if (problems.length) {
+            console.error('::error::FAIL: documentation freshness check found ' + problems.length + ' stale/undated claim(s).');
+            for (var j = 0; j < problems.length; j++) {
+              console.error('  - ' + problems[j].file + ': ' + problems[j].reason);
+            }
+            console.error('\nRe-verify the affected claims and update the verification date to within the last ' + MAX_DAYS + ' days.');
+            process.exit(1);
+          }
+          console.log('PASS: ' + ok.length + ' dated markdown file(s) are within the ' + MAX_DAYS + '-day freshness window.');
+          process.exit(0);
+          NODE
+        env:
+          FRESHNESS_DAYS: ${{ env.FRESHNESS_DAYS }}
+          EXCLUDE_PATHS: ${{ env.EXCLUDE_PATHS }}

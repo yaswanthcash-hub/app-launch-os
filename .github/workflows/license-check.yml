@@ -1,0 +1,230 @@
+name: License check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "package.json"
+      - "package-lock.json"
+      - "yarn.lock"
+      - "pnpm-lock.yaml"
+      - "**/package.json"
+      - "LICENSES/**"
+      - ".github/workflows/license-check.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "package.json"
+      - "package-lock.json"
+      - "yarn.lock"
+      - "pnpm-lock.yaml"
+      - "**/package.json"
+      - "LICENSES/**"
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 1 * *"
+
+permissions:
+  contents: read
+
+env:
+  # Client / runtime allowlist per LICENSES/THIRD-PARTY-NOTICES.md and IMPLEMENTATION_PLAN.md ADR-001.
+  ALLOWLIST_SPDX: "MIT,Apache-2.0,ISC,BSD-2-Clause,BSD-3-Clause,0BSD,MIT-0,Unlicense,CC0-1.0,Python-2.0,OFL-1.1,WTFPL"
+  # Copyleft families that must NEVER ship in client bundles or starter code.
+  RESTRICTED_FAMILIES: "GPL-2.0,GPL-3.0,AGPL-3.0,LGPL-2.1,LGPL-3.0,MPL-2.0,EPL-1.0,EPL-2.0,SSPL-1.0,BSL-1.0,CDDL-1.0,CMU-UA,EUPL-1.0,EUPL-1.1,EUPL-1.2"
+  # Documented isolated CI tools allowed ONLY as devDependencies / standalone containers.
+  ISOLATED_TOOLS: "semgrep,Mobile-Security-Framework-MobSF,matomo,mobsf"
+
+jobs:
+  validate-inventory:
+    name: Validate license inventory
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify allowlist and isolated tools are documented
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const file = 'LICENSES/THIRD-PARTY-NOTICES.md';
+          if (!fs.existsSync(file)) {
+            console.error('::error::FAIL: ' + file + ' is missing. The license allowlist policy file is required.');
+            process.exit(1);
+          }
+          const text = fs.readFileSync(file, 'utf8');
+          const allow = process.env.ALLOWLIST_SPDX.split(',');
+          const tools = process.env.ISOLATED_TOOLS.split(',');
+          const missingAllow = allow.filter(l => !text.includes(l));
+          const missingTools = tools.filter(t => !new RegExp(t, 'i').test(text));
+          if (missingAllow.length) {
+            console.error('::error::FAIL: license inventory missing allowlist entries: ' + missingAllow.join(', '));
+            process.exit(1);
+          }
+          if (missingTools.length) {
+            console.error('::error::FAIL: license inventory missing isolated-tool entries: ' + missingTools.join(', '));
+            process.exit(1);
+          }
+          console.log('PASS: license inventory documents the client allowlist and isolated CI tools.');
+          NODE
+
+  scan-dependencies:
+    name: Scan runtime dependencies against allowlist
+    needs: validate-inventory
+    runs-on: ubuntu-latest
+    # Only run the dependency scan when a package manifest is present.
+    if: hashFiles('package.json') != ''
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies (offline, from lock file)
+        run: npm ci --no-audit --no-fund
+
+      - name: Resolve and check SPDX licenses
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+
+          const allow = new Set(process.env.ALLOWLIST_SPDX.split(',').map(s => s.trim()));
+          const restricted = new Set(process.env.RESTRICTED_FAMILIES.split(',').map(s => s.trim()));
+          const isolated = new Set(process.env.ISOLATED_TOOLS.split(',').map(s => s.trim().toLowerCase()));
+
+          function normalize(raw) {
+            // Accept { type: 'MIT' } or plain string
+            if (!raw) return 'UNKNOWN';
+            raw = typeof raw === 'string' ? raw : (raw.type || 'UNKNOWN');
+            return raw.trim();
+          }
+
+          function spdxParts(raw) {
+            // Handle "MIT OR Apache-2.0" / "(MIT OR Apache-2.0)"
+            const cleaned = raw.replace(/^[()]+/g, '').replace(/[()]+$/g, '').trim();
+            return cleaned.split(/\s+(?:OR|AND)\s+/).map(p => p.trim()).filter(Boolean);
+          }
+
+          function isAllowed(raw) {
+            const parts = spdxParts(raw);
+            if (parts.length === 0) return false;
+            return parts.every(p => allow.has(p));
+          }
+
+          function isCopyleft(raw) {
+            const parts = spdxParts(raw);
+            return parts.some(p => restricted.has(p) || /^[LM]GPL\b|^AGPL\b|^MPL\b|^EPL\b|^SSPL\b|^BSL\b|^CDDL\b|^EUPL\b/.test(p));
+          }
+
+          const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+          const runtimeDeps = Object.assign({}, pkg.dependencies || {}, pkg.peerDependencies || {});
+          const devDeps = Object.assign({}, pkg.devDependencies || {});
+
+          const violations = [];
+          const warnings = [];
+          let checked = 0;
+          const uninspected = [];
+
+          for (const name of Object.keys(runtimeDeps)) {
+            checked++;
+            const pkgJsonPath = path.join('node_modules', name, 'package.json');
+            if (!fs.existsSync(pkgJsonPath)) {
+              uninspected.push(name);
+              continue;
+            }
+            const dep = JSON.parse(fs.readFileSync(pkgJsonPath, 'utf8'));
+            const lic = normalize(dep.license);
+            const isIsolated = isolated.has(name.toLowerCase());
+
+            if (lic.includes('SEE LICENSE') || lic === 'UNLICENSED' || lic === 'UNKNOWN' || lic.startsWith('LicenseRef')) {
+              violations.push(name + '@' + (dep.version || '?') + ' -> "' + lic + '" (cannot auto-resolve to an SPDX allowlist license)');
+              continue;
+            }
+            if (isCopyleft(lic)) {
+              violations.push(name + '@' + (dep.version || '?') + ' -> ' + lic + ' (copyleft; cannot ship in client bundle)');
+              continue;
+            }
+            // Isolated tools are NEVER allowed in runtime/client deps.
+            if (isIsolated) {
+              violations.push(name + '@' + (dep.version || '?') + ' -> isolated tool "' + name + '" must not be a runtime dependency');
+              continue;
+            }
+            if (!isAllowed(lic)) {
+              violations.push(name + '@' + (dep.version || '?') + ' -> ' + lic + ' (not in client allowlist)');
+            }
+          }
+
+          // devDependencies: isolated CI tools are permitted with a warning; other copyleft is flagged.
+          for (const name of Object.keys(devDeps)) {
+            const pkgJsonPath = path.join('node_modules', name, 'package.json');
+            if (!fs.existsSync(pkgJsonPath)) continue;
+            const dep = JSON.parse(fs.readFileSync(pkgJsonPath, 'utf8'));
+            const lic = normalize(dep.license);
+            const isIsolated = isolated.has(name.toLowerCase());
+            if (isCopyleft(lic) && !isIsolated) {
+              warnings.push(name + '@' + (dep.version || '?') + ' -> ' + lic + ' (copyleft in devDependencies; confirm isolated CI use only)');
+            } else if (isIsolated) {
+              console.log('::notice::' + name + ' is an approved isolated CI tool (LGPL/GPL/AGPL) in devDependencies.');
+            }
+          }
+
+          if (warnings.length) {
+            console.log('::warning::' + warnings.join('\n'));
+          }
+          if (uninspected.length) {
+            console.log('::warning::Could not inspect (not installed): ' + uninspected.join(', '));
+          }
+
+          if (violations.length) {
+            console.error('::error::FAIL: disallowed licenses in runtime dependencies:');
+            console.error(violations.map(v => '  - ' + v).join('\n'));
+            console.error('Allowed client licenses: ' + [...allow].join(', ') + '.');
+            console.error('Copyleft families blocked: ' + [...restricted].join(', ') + '.');
+            process.exit(1);
+          }
+          console.log('PASS: ' + checked + ' runtime dependencies are within the client allowlist.');
+          NODE
+        env:
+          ALLOWLIST_SPDX: ${{ env.ALLOWLIST_SPDX }}
+          RESTRICTED_FAMILIES: ${{ env.RESTRICTED_FAMILIES }}
+          ISOLATED_TOOLS: ${{ env.ISOLATED_TOOLS }}
+
+  scan-lockfile:
+    name: Scan lockfile for GPL/AGPL
+    needs: validate-inventory
+    runs-on: ubuntu-latest
+    # Runs even without a package.json so policy is always enforced on lock changes.
+    if: always() && (hashFiles('package-lock.json') != '' || hashFiles('yarn.lock') != '' || hashFiles('pnpm-lock.yaml') != '')
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Reject GPL/AGPL in lockfile
+        shell: bash
+        run: |
+          lockfile=$(ls package-lock.json yarn.lock pnpm-lock.yaml 2>/dev/null | head -n1)
+          if [ -z "$lockfile" ]; then
+            echo "::notice::No lockfile present; skipping lockfile scan."
+            exit 0
+          fi
+          echo "Scanning $lockfile for GPL/AGPL/LGPL-licensed entries..."
+          # Match license strings such as "GPL-3.0", "AGPL-3.0-only", "LGPL-2.1-or-later".
+          if grep -nE '"license"\s*:\s*"[^"]*(GPL|AGPL|LGPL)' "$lockfile" || \
+             grep -nEi 'gpl|agpl|lgpl' "$lockfile" | grep -iE 'license'; then
+            echo "::error::FAIL: GPL/AGPL/LGPL-licensed package detected in $lockfile. Review LICENSES/THIRD-PARTY-NOTICES.md before bundling."
+            echo "::error::Copyleft packages may only be isolated CI tools. See .github/workflows/license-check.yml."
+            exit 1
+          fi
+          echo "PASS: no GPL/AGPL/LGPL license strings found in $lockfile."

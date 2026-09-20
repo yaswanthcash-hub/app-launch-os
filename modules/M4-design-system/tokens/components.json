@@ -1,0 +1,27 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "component": {
+    "card": {
+      "outerRadius": { "$value": "{radius.2xl}", "$type": "dimension" },
+      "padding": { "$value": "{space.5}", "$type": "dimension" },
+      "innerRadius": {
+        "$value": "calc({radius.2xl} - {space.5})",
+        "$type": "dimension",
+        "$description": "Enforces corner concentricity rule: R_inner = R_outer - Padding"
+      }
+    },
+    "button": {
+      "radius": { "$value": "{radius.lg}", "$type": "dimension" },
+      "minHeight": { "$value": "48px", "$type": "dimension", "$description": "WCAG 2.2 AA touch target" },
+      "paddingX": { "$value": "{space.5}", "$type": "dimension" }
+    },
+    "sheet": {
+      "outerRadius": { "$value": "{radius.hardwareScreen}", "$type": "dimension" },
+      "maxHeight": { "$value": "90%", "$type": "dimension" }
+    },
+    "paywall": {
+      "cardBorder": { "$value": "2px", "$type": "dimension" },
+      "highlightBadgeRadius": { "$value": "{radius.full}", "$type": "dimension" }
+    }
+  }
+}

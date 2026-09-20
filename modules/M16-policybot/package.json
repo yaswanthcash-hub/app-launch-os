@@ -1,0 +1,20 @@
+{
+  "name": "@app-launch-os/policybot",
+  "version": "0.5.0",
+  "description": "Store policy watcher and change detection engine for Apple App Store and Google Play",
+  "bin": {
+    "check-policies": "bin/check-policies.js"
+  },
+  "scripts": {
+    "check": "node bin/check-policies.js"
+  },
+  "keywords": [
+    "app-store-policy",
+    "google-play-policy",
+    "compliance",
+    "policybot",
+    "automation"
+  ],
+  "author": "App Launch OS Contributors",
+  "license": "MIT"
+}

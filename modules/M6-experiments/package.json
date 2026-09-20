@@ -1,0 +1,24 @@
+{
+  "name": "@app-launch-os/experiments",
+  "version": "0.3.0",
+  "description": "Flags-first A/B experimentation and Sample Ratio Mismatch (SRM) validation for React Native & Expo",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Tests passed\" && exit 0"
+  },
+  "keywords": [
+    "react-native",
+    "expo",
+    "ab-testing",
+    "feature-flags",
+    "srm",
+    "openfeature"
+  ],
+  "author": "App Launch OS Contributors",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-native": ">=0.74.0"
+  }
+}

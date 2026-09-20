@@ -1,0 +1,22 @@
+{
+  "name": "@app-launch-os/aso",
+  "version": "0.4.0",
+  "description": "App Store Optimization (ASO) metadata validator and keyword density analyzer",
+  "bin": {
+    "aso-check": "bin/aso-check.js"
+  },
+  "main": "src/keywordDensity.js",
+  "scripts": {
+    "check": "node bin/aso-check.js"
+  },
+  "keywords": [
+    "aso",
+    "app-store-optimization",
+    "app-store-connect",
+    "google-play-console",
+    "keywords",
+    "metadata"
+  ],
+  "author": "App Launch OS Contributors",
+  "license": "MIT"
+}

@@ -1,0 +1,30 @@
+{
+  "name": "app-launch-os",
+  "version": "0.1.0",
+  "description": "The open-source operating system for launching premium mobile apps.",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "test": "node scripts/audit-all.js",
+    "test:all": "node scripts/audit-all.js",
+    "audit:links": "node scripts/audit-links.js",
+    "audit:freshness": "node scripts/check-freshness.js",
+    "audit:integrity": "node scripts/audit-integrity.js",
+    "compliance:apple": "node scripts/compliance-check.js apple",
+    "compliance:google": "node scripts/compliance-check.js google",
+    "compliance:all": "node scripts/compliance-check.js all",
+    "aso:check": "node modules/M11-aso/bin/aso-check.js",
+    "context:pack": "node modules/M13-ai-kit/bin/pack-context.js",
+    "deeplinks:validate": "node modules/M12-seo/scripts/validate-deeplinks.js",
+    "policy:check": "node modules/M16-policybot/bin/check-policies.js",
+    "changelog:generate": "node modules/M10-release/scripts/generate-changelog.js",
+    "lint": "markdownlint-cli2 \"**/*.md\" --config .markdownlint-cli2.ci.jsonc",
+    "test:lint": "markdownlint-cli2 \"**/*.md\" --config .markdownlint-cli2.ci.jsonc"
+  },
+  "devDependencies": {
+    "markdownlint-cli2": "^0.13.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

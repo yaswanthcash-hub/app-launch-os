@@ -1,0 +1,18 @@
+{
+  "name": "@app-launch-os/seo",
+  "version": "0.5.0",
+  "description": "Universal Links, Android App Links, and deep linking validation schemas for mobile web discovery",
+  "scripts": {
+    "validate": "node scripts/validate-deeplinks.js"
+  },
+  "keywords": [
+    "deep-linking",
+    "universal-links",
+    "assetlinks",
+    "app-links",
+    "seo",
+    "open-graph"
+  ],
+  "author": "App Launch OS Contributors",
+  "license": "MIT"
+}

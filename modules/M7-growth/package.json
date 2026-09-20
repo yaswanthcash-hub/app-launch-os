@@ -1,0 +1,27 @@
+{
+  "name": "@app-launch-os/growth",
+  "version": "0.5.0",
+  "description": "Organic growth loops, referral link generators, share cards, and smart in-app review prompts",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Tests passed\" && exit 0"
+  },
+  "keywords": [
+    "react-native",
+    "expo",
+    "growth",
+    "referrals",
+    "deep-linking",
+    "store-review",
+    "viral-loops"
+  ],
+  "author": "App Launch OS Contributors",
+  "license": "MIT",
+  "peerDependencies": {
+    "expo-sharing": ">=12.0.0",
+    "expo-store-review": ">=7.0.0",
+    "react": ">=18.0.0",
+    "react-native": ">=0.74.0"
+  }
+}

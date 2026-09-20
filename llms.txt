@@ -1,0 +1,34 @@
+# App Launch OS
+
+> The open-source operating system for launching premium mobile apps.
+> Designed for human engineers and AI coding agents (Google Antigravity, Claude Code, OpenAI Codex, Cursor, Windsurf).
+
+## Core Documentation
+- [README.md](README.md): Master orientation and complete system manual.
+- [AGENTS.md](AGENTS.md): AI agent operational contract, prompt templates, and routing guide.
+- [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md): 35KB master execution blueprint.
+- [awesome.md](awesome.md): 90+ verified mobile open-source libraries with licenses and tiers.
+
+## Store Submission & Policy Checklists
+- [checklists/appstore-submission.md](checklists/appstore-submission.md): Apple App Review Guideline verification (Guideline 2.1, 5.1.1, 3.1.1).
+- [checklists/playstore-submission.md](checklists/playstore-submission.md): Google Play 20-tester rule, API 35, Data Safety form.
+- [policies/apple-review-essentials.md](policies/apple-review-essentials.md): Deep-dive Apple App Review guidance (<90d verified).
+- [policies/play-policy-essentials.md](policies/play-policy-essentials.md): Deep-dive Google Play policy guidance (<90d verified).
+- [policies/privacy-compliance.md](policies/privacy-compliance.md): Apple Privacy Manifests, GDPR, CCPA, and SDK symbol matching.
+
+## Design Engineering & Premium UX
+- [decisions/007-design-system.md](decisions/007-design-system.md): 3-layer DTCG design token architecture (NativeWind v4).
+- [decisions/008-motion-system.md](decisions/008-motion-system.md): 60/120 FPS Reanimated 3 UI thread motion specifications.
+- [decisions/009-premium-ux.md](decisions/009-premium-ux.md): expo-haptics matrix, Moti skeletons, and frosted glass.
+- [checklists/premium-ux.md](checklists/premium-ux.md): 100+ point premium mobile UX verification checklist.
+
+## Growth, Paywalls & Research
+- [findings/paywall.md](findings/paywall.md): StoreKit 2 paywall wireframe and conversion anatomy.
+- [findings/aso.md](findings/aso.md): App Store Optimization keyword indexing and icon masks.
+- [findings/onboarding.md](findings/onboarding.md): Mobile onboarding and permission priming psychology.
+- [templates/event-taxonomy.md](templates/event-taxonomy.md): Standardized mobile analytics event tracking sheet.
+
+## Legal & Compliance Templates
+- [templates/privacy-policy.md](templates/privacy-policy.md): Store-compliant mobile privacy policy template.
+- [templates/terms-of-service.md](templates/terms-of-service.md): Mobile SaaS & subscription terms of service template.
+- [templates/threat-model.md](templates/threat-model.md): Mobile STRIDE threat model template.

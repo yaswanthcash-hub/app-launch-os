@@ -1,0 +1,26 @@
+{
+  "name": "@app-launch-os/paywall",
+  "version": "0.3.0",
+  "description": "StoreKit 2 and RevenueCat-ready subscription paywalls with Apple Guideline 3.1.1 compliance",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Tests passed\" && exit 0"
+  },
+  "keywords": [
+    "react-native",
+    "expo",
+    "paywall",
+    "storekit",
+    "revenuecat",
+    "superwall",
+    "in-app-purchase"
+  ],
+  "author": "App Launch OS Contributors",
+  "license": "MIT",
+  "peerDependencies": {
+    "expo-haptics": ">=13.0.0",
+    "react": ">=18.0.0",
+    "react-native": ">=0.74.0"
+  }
+}

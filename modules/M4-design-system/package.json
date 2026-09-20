@@ -1,0 +1,14 @@
+{
+  "name": "@applaunchos/design-system",
+  "version": "0.2.0",
+  "description": "Three-layer DTCG design token engine and NativeWind v4 preset for premium mobile apps.",
+  "main": "src/preset.js",
+  "license": "MIT",
+  "keywords": [
+    "react-native",
+    "expo",
+    "design-tokens",
+    "nativewind",
+    "dtcg"
+  ]
+}

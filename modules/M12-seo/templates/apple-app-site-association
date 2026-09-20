@@ -1,0 +1,37 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": [
+          "TEAM123456.com.example.applaunchos"
+        ],
+        "components": [
+          {
+            "/": "/join",
+            "?": { "ref": "*" },
+            "comment": "Matches user referral deep links"
+          },
+          {
+            "/": "/paywall",
+            "comment": "Matches web-to-app paywall links"
+          },
+          {
+            "/": "/settings/*",
+            "comment": "Matches nested settings and account screens"
+          },
+          {
+            "/": "*",
+            "exclude": true,
+            "comment": "Exclude unhandled web routes"
+          }
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "TEAM123456.com.example.applaunchos"
+    ]
+  }
+}

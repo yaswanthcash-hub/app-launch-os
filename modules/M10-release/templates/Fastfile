@@ -1,0 +1,51 @@
+# Fastlane Automation for App Launch OS
+# Deploy seamlessly to TestFlight and Google Play Internal/Closed tracks
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Push a new beta build to Apple TestFlight"
+  lane :beta do
+    setup_ci if ENV['CI']
+    
+    # 1. Match code signing
+    match(type: "appstore", readonly: true)
+
+    # 2. Increment build number
+    increment_build_number(
+      build_number: latest_testflight_build_number + 1
+    )
+
+    # 3. Build native iOS application
+    build_app(
+      scheme: "AppLaunchOS",
+      workspace: "ios/AppLaunchOS.xcworkspace",
+      export_method: "app-store"
+    )
+
+    # 4. Upload to TestFlight with changelog
+    upload_to_testflight(
+      skip_waiting_for_build_processing: true,
+      changelog: File.read("../release-notes.txt")
+    )
+  end
+end
+
+platform :android do
+  desc "Push a new build to Google Play Closed Testing track"
+  lane :beta do
+    # 1. Build Android App Bundle (.aab) with 16KB alignment
+    gradle(
+      task: "bundle",
+      build_type: "Release",
+      project_dir: "android/"
+    )
+
+    # 2. Upload to Google Play Console
+    upload_to_play_store(
+      track: "internal",
+      release_status: "completed",
+      aab: "android/app/build/outputs/bundle/release/app-release.aab"
+    )
+  end
+end

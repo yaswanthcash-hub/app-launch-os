@@ -1,6 +1,6 @@
 # M5: Onboarding & Permission Priming Kit
 
-> **Production permission priming and interactive value walkthroughs for React Native & Expo.**  
+> **Production permission priming and interactive value walkthroughs for React Native & Expo.**
 > Part of [App Launch OS](../../README.md).
 
 ---

@@ -11,7 +11,7 @@
 | **Target platforms** | iOS, iPadOS (current stable release) |
 | **Primary owner** | Product / Release Engineer |
 | **Evidence** | App Store Connect pre-submission report, on-device test log |
-| **Gate** | [ ] Draft &nbsp;|&nbsp; [ ] In Review &nbsp;|&nbsp; [x] Verified |
+| **Gate** | [ ] Draft &nbsp;/&nbsp; [ ] In Review &nbsp;/&nbsp; [x] Verified |
 
 > **Educational note:** The App Store Review Guidelines are a living document updated by Apple at any time. Completing this checklist does not guarantee acceptance. Always cross-reference the canonical guidelines and App Store Connect Help immediately before submission.
 

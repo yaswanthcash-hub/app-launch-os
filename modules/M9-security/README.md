@@ -1,6 +1,6 @@
 # M9: Mobile Security Baseline Kit
 
-> **OWASP MASVS baseline security helpers, hardware biometric authentication, and Keychain storage.**  
+> **OWASP MASVS baseline security helpers, hardware biometric authentication, and Keychain storage.**
 > Part of [App Launch OS](../../README.md).
 
 ---

@@ -2,8 +2,8 @@
 
 > This notice is a starting inventory for App Launch OS documentation and planned integrations. It is not a substitute for reviewing the exact license text, package version, transitive dependencies, or distribution obligations.
 
-**Last verified:** 2026-09-20  
-**Repository license:** MIT  
+**Last verified:** 2026-09-20
+**Repository license:** MIT
 **Owner:** App Launch OS maintainers
 
 ## Notice policy
@@ -17,7 +17,7 @@ For every shipped release, record:
 - whether the item is runtime, build-time, test-only, documentation-only, or isolated tooling;
 - required copyright, attribution, source-offer, modification, patent, or trademark notices.
 
-The core repository is intended to remain MIT. The default client allowlist is MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause, and ISC. GPL, AGPL, LGPL, MPL, EPL, SSPL, BSL, and custom licenses require review; copyleft scanners may run only as isolated tools when their licenses and architecture permit it.
+The core repository is intended to remain MIT. The default client allowlist includes permissive SPDX licenses: MIT, Apache-2.0, ISC, BSD-2-Clause, BSD-3-Clause, 0BSD, MIT-0, Unlicense, CC0-1.0, Python-2.0, OFL-1.1, and WTFPL. GPL, AGPL, LGPL, MPL, EPL, SSPL, BSL, and custom licenses require review; copyleft scanners (such as Semgrep, MobSF, Matomo) may run only as isolated tools when their licenses and architecture permit it.
 
 ## Core and recommended dependencies
 

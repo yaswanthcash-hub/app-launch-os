@@ -1,6 +1,6 @@
 # M16: PolicyBot Store Policy Change Monitor
 
-> **Store policy watcher and change detection engine for Apple App Store and Google Play.**  
+> **Store policy watcher and change detection engine for Apple App Store and Google Play.**
 > Part of [App Launch OS](../../README.md).
 
 ---

@@ -1,6 +1,6 @@
 # AGENTS.md — AI Agent & LLM Execution Contract
 
-> **For AI Coding Agents:** Google Antigravity, Claude Code, OpenAI Codex, Cursor, Windsurf, Devin, and GitHub Copilot.  
+> **For AI Coding Agents:** Google Antigravity, Claude Code, OpenAI Codex, Cursor, Windsurf, Devin, and GitHub Copilot.
 > **Last verified:** 2026-09-20 · **License:** MIT
 
 ---

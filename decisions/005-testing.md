@@ -116,7 +116,7 @@ Adopt a **three-layer testing pyramid** with **Maestro as the primary E2E engine
 
 ## Verification
 
-**Date:** 2026-09-20  
+**Date:** 2026-09-20
 **Criteria:**
 - [ ] Jest unit tests pass on every PR with ≥80% coverage on module/starter source
 - [ ] Storybook visual regression detects token/theme changes and blocks merge on diff

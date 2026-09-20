@@ -11,7 +11,7 @@
 | **Target platforms** | Android phone & tablet (current stable + min SDK supported) |
 | **Primary owner** | Product / Android Lead |
 | **Evidence** | Play Console pre-launch report, internal test track pass |
-| **Gate** | [ ] Draft &nbsp;|&nbsp; [ ] In Review &nbsp;|&nbsp; [x] Verified |
+| **Gate** | [ ] Draft &nbsp;/&nbsp; [ ] In Review &nbsp;/&nbsp; [x] Verified |
 
 > **Educational note:** Google Play policy and the target API level timeline change over time. Completing this checklist does not guarantee approval or listing. Always consult the Developer Policy Center and Play Console requirements immediately before submitting.
 

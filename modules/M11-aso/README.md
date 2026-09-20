@@ -1,6 +1,6 @@
 # M11: App Store Optimization (ASO) Kit
 
-> **App Store Optimization (ASO) metadata validator and keyword density analyzer.**  
+> **App Store Optimization (ASO) metadata validator and keyword density analyzer.**
 > Part of [App Launch OS](../../README.md).
 
 ---

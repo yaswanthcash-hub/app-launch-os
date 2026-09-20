@@ -1,6 +1,6 @@
 # M12: Deep Linking & Mobile SEO Kit
 
-> **Universal Links, Android App Links, and deep linking validation schemas for mobile web discovery.**  
+> **Universal Links, Android App Links, and deep linking validation schemas for mobile web discovery.**
 > Part of [App Launch OS](../../README.md).
 
 ---

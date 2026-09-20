@@ -1,6 +1,6 @@
 # M10: Cloud Builds & Store Release Automation Kit
 
-> **Production EAS Build configurations, Fastlane deployment lanes, and automated App Store changelog generators.**  
+> **Production EAS Build configurations, Fastlane deployment lanes, and automated App Store changelog generators.**
 > Part of [App Launch OS](../../README.md).
 
 ---

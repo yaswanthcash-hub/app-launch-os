@@ -1,6 +1,6 @@
 # M13: AI Agent Tooling & Context Kit
 
-> **Codebase context packing tool and agent prompt generators for AI coding assistants.**  
+> **Codebase context packing tool and agent prompt generators for AI coding assistants.**
 > Part of [App Launch OS](../../README.md).
 
 ---

@@ -1,6 +1,6 @@
 # M6: Experiments & Feature Flags Kit
 
-> **Flags-first A/B experimentation and Sample Ratio Mismatch (SRM) validation for React Native & Expo.**  
+> **Flags-first A/B experimentation and Sample Ratio Mismatch (SRM) validation for React Native & Expo.**
 > Part of [App Launch OS](../../README.md).
 
 ---

@@ -11,7 +11,7 @@
 | **Target platforms** | iOS, iPadOS, Android (phone & tablet) |
 | **Primary owner** | Design Engineering / UX Lead |
 | **Evidence** | Token source audit, frame profiler trace, accessibility inspector, paywall A/B report |
-| **Gate** | [ ] Draft &nbsp;|&nbsp; [ ] In Review &nbsp;|&nbsp; [x] Verified |
+| **Gate** | [ ] Draft &nbsp;/&nbsp; [ ] In Review &nbsp;/&nbsp; [x] Verified |
 
 > **Educational note:** UX quality is subjective and device-dependent. Completing this checklist improves consistency and perceived performance but does not guarantee App Store / Play Store approval or user satisfaction. Re-validate against the latest platform HIG before release.
 

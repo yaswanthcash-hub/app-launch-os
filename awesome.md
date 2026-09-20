@@ -2,7 +2,7 @@
 
 > Curated open-source resources for building, testing, securing, launching, and growing premium mobile applications.
 
-**Inventory date:** 2026-09-20  
+**Inventory date:** 2026-09-20
 **Scope:** Mobile runtimes, UI foundations, motion, data, experimentation, monetization, testing, security, release automation, ASO, documentation, and developer tooling.
 
 ## Verification policy

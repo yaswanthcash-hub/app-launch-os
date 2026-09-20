@@ -11,7 +11,7 @@
 | **Scope** | iOS (App Store Connect) and Android (Google Play Console) launch + staged rollout |
 | **Primary owner** | Release Engineer / Product Lead (per phase below) |
 | **Evidence** | Pre-launch report, EAS Build/Submit logs, Play Console rollout dashboard, Sentry/GlitchTip dashboard, GrowthBook SRM report |
-| **Gate** | [ ] Draft &nbsp;|&nbsp; [ ] In Review &nbsp;|&nbsp; [x] Verified |
+| **Gate** | [ ] Draft &nbsp;/&nbsp; [ ] In Review &nbsp;/&nbsp; [x] Verified |
 
 > **Educational note:** This runbook provides structured launch-day practices; it does not guarantee app store approval, zero downtime, or any specific outcome. Store policies, platform tooling, and infrastructure behavior change continuously. Verify every item against current platform documentation immediately before execution. No statement here constitutes legal, financial, or operational assurance.
 

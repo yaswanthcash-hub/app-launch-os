@@ -1,6 +1,6 @@
 # M8: High-Converting Paywall & Subscriptions Kit
 
-> **StoreKit 2 and RevenueCat-ready subscription paywalls with Apple Guideline 3.1.1 compliance.**  
+> **StoreKit 2 and RevenueCat-ready subscription paywalls with Apple Guideline 3.1.1 compliance.**
 > Part of [App Launch OS](../../README.md).
 
 ---

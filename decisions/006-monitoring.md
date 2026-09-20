@@ -114,7 +114,7 @@ Standardize on **Sentry React Native SDK** as the default observability backend,
 
 ## Verification
 
-**Date:** 2026-09-20  
+**Date:** 2026-09-20
 **Criteria:**
 - [ ] Sentry SDK initializes in starter app with DSN from `EXPO_PUBLIC_SENTRY_DSN`
 - [ ] EAS Build uploads dSYM (iOS) and mapping.txt (Android) automatically on build

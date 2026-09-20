@@ -1,6 +1,6 @@
 # M7: Growth Loops & Viral Referrals Kit
 
-> **Organic growth loops, referral link generators, share cards, and smart in-app review prompts.**  
+> **Organic growth loops, referral link generators, share cards, and smart in-app review prompts.**
 > Part of [App Launch OS](../../README.md).
 
 ---

@@ -270,7 +270,7 @@ Store policies and mobile ecosystems change rapidly. All claims must carry verif
 ### Date-Stamp Format
 
 ```markdown
-*Verified: 2026-09-20*  
+*Verified: 2026-09-20*
 *Source: [Official Name](https://example.com)*
 ```
 

@@ -15,7 +15,7 @@
 3. [Problems & Pain Points](#3-problems--pain-points)
 4. [Goals & Non-Goals](#4-goals--non-goals)
 5. [Product Scope — v0.1 through v1.0](#5-product-scope--v01-through-v10)
-6. [Module Contracts (M0–M17)](#6-module-contracts-m0--m17)
+6. [Module Contracts (M0–M17)](#module-contracts)
 7. [User Journeys](#7-user-journeys)
 8. [Quality, Security & Compliance Requirements](#8-quality-security--compliance-requirements)
 9. [Success Metrics](#9-success-metrics)
@@ -215,6 +215,7 @@ App Launch OS delivers value in six sequential phases, each building on the last
 
 ---
 
+<a id="module-contracts"></a>
 ## 6. Module Contracts (M0–M17)
 
 Each module is a self-contained, composable package with a defined contract: inputs, outputs, dependencies, tier classification (Core / Recommended / Alternative / Advanced / Utility / Standard), and the v0.x phase in which it first ships.

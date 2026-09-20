@@ -16,6 +16,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen.svg?style=flat-square)](CONTRIBUTING.md)
 
 <p align="center">
+  <a href="#quick-audit">⚡ 2-Sec CLI Audit</a> •
   <a href="#ai-agents">🤖 AI Agents & Commands</a> •
   <a href="#universal-store-compliance">🛡️ Store Compliance</a> •
   <a href="#premium-design-system">🎨 UI/UX Design System</a> •
@@ -30,6 +31,60 @@
 ---
 
 </div>
+
+<a id="quick-audit"></a>
+## ⚡ Instant Pre-Flight Audit (Run in 2 Seconds)
+
+Audit any Expo or React Native repository with **zero installation**:
+
+```bash
+# 1. Audit your app for 2026 store compliance, UX & performance:
+npx app-launch-os audit
+
+# 2. Automatically scaffold missing privacy manifests & haptic hooks:
+npx app-launch-os fix
+```
+
+```text
+APP LAUNCH OS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Launch Readiness: 71/100
+
+🔴 2 BLOCKERS
+🟠 5 WARNINGS
+🟢 11 PASSED
+
+APPLE
+  ✓ Reviewer demo account (no SMS 2FA trap)
+  ✓ Privacy manifest (PrivacyInfo.xcprivacy)
+  ✓ Account deletion flow present
+  ✓ StoreKit 2 subscription disclosure
+
+GOOGLE
+  ✗ Target SDK 35+ (Android 15 requirement)
+  ✗ 16 KB page alignment
+  ✓ Closed testing requirements
+  ✓ Data Safety permissions
+
+UX
+  ✗ Tactile haptics (expo-haptics)
+  ✓ Loading states (shimmer skeletons)
+  ✓ Dynamic Type support
+  ✗ Accessibility labels
+
+PERFORMANCE
+  ✓ Hermes JS engine enabled
+  ✓ New Architecture (Fabric)
+  ✗ UI-thread motion worklets
+  ✗ Crash telemetry (Sentry)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Run: npx app-launch-os fix
+```
+
+---
 
 ## 📌 Why App Launch OS?
 

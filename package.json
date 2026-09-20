@@ -12,11 +12,17 @@
     "url": "https://github.com/yaswanthcash-hub/app-launch-os/issues"
   },
   "homepage": "https://github.com/yaswanthcash-hub/app-launch-os#readme",
+  "bin": {
+    "app-launch-os": "bin/cli.js"
+  },
   "workspaces": [
     "modules/*",
     "starters/*"
   ],
   "scripts": {
+    "launchos": "node bin/cli.js",
+    "launchos:audit": "node bin/cli.js audit",
+    "launchos:fix": "node bin/cli.js fix",
     "test": "node scripts/audit-all.js",
     "test:all": "node scripts/audit-all.js",
     "audit:links": "node scripts/audit-links.js",

@@ -58,6 +58,31 @@ When a user asks you to perform a task, refer directly to the corresponding auth
 
 ---
 
+## ⚡ Autonomous Agent Commands Matrix
+
+When a user triggers one of the following commands or intents, execute the corresponding autonomous workflow:
+
+| Command | What It Does (Autonomous Execution Pipeline) | Mode / Gate | Authoritative File |
+| :--- | :--- | :--- | :--- |
+| **`/launch:plan`** | Conducts interactive interview on stack, auth, monetization, and writes tailored `implementation_plan.md` | One-shot gate | [AGENTS.md](AGENTS.md) |
+| **`/launch:audit`** | Master pre-flight test runner: audits 500+ links, 90-day freshness, hollow stubs, and compliance matrices | One-shot (`npm test`) | [scripts/audit-all.js](scripts/audit-all.js) |
+| **`/launch:compliance`** | Side-by-side store compliance check: Apple Guideline 2.1/5.1.1/3.1.1 & Google Play 20-tester/SDK 35 | Verification gate | [scripts/compliance-check.js](scripts/compliance-check.js) |
+| **`/launch:tokens`** | Scaffolds 3-tier DTCG tokens (`primitives.json`, `semantics.json`, `components.json`) + NativeWind v4 preset | Deterministic code | [modules/M4-design-system](modules/M4-design-system/README.md) |
+| **`/launch:concentricity`**| Audits nested UI containers and refactors inner radii using $R_{\text{inner}} = \max(0, R_{\text{outer}} - P)$ | 10 layout passes | [modules/M17-premium-ux](modules/M17-premium-ux/README.md) |
+| **`/launch:haptics`** | Injects calibrated 5-state tactile feedback (`selection`, `light`, `medium`, `success`, `error`) into touch targets | Component pass | [modules/M17-premium-ux](modules/M17-premium-ux/README.md) |
+| **`/launch:skeletons`** | Replaces generic spinners with geometric Moti skeleton placeholders matching exact layout bounds | Layout pass | [modules/M17-premium-ux](modules/M17-premium-ux/README.md) |
+| **`/launch:paywall`** | Scaffolds StoreKit 2 / RevenueCat paywall with restore trigger, terms links, and annual savings toggle | Component pass | [modules/M8-paywall](modules/M8-paywall/README.md) |
+| **`/launch:onboarding`** | Builds 2-step soft permission priming modal (Push/ATT/Camera) and gesture-driven Reanimated carousel | Component pass | [modules/M5-onboarding](modules/M5-onboarding/README.md) |
+| **`/launch:experiments`**| Configures OpenFeature A/B testing provider with deterministic hashing and Chi-Square SRM validator | Statistical gate | [modules/M6-experiments](modules/M6-experiments/README.md) |
+| **`/launch:growth`** | Scaffolds referral code engine, universal deep links (`AASA`/`assetlinks`), and smart review prompt | Viral loop flow | [modules/M7-growth](modules/M7-growth/README.md) |
+| **`/launch:security`** | OWASP MASVS L1 audit, biometric auth hook, and migrates insecure `AsyncStorage` to hardware Keychain | Security audit | [modules/M9-security](modules/M9-security/README.md) |
+| **`/launch:aso`** | Validates store metadata against character boundaries (30/30/170/80/4000) and scores keyword density | Analysis loop | [modules/M11-aso](modules/M11-aso/README.md) |
+| **`/launch:pack`** | Compresses repository architecture, ADRs, and active guidelines into an LLM prompt context file | One-shot (`pack-context`) | [modules/M13-ai-kit](modules/M13-ai-kit/README.md) |
+| **`/launch:policybot`**| Monitors Apple Developer News and Google Play policy changelogs for breaking store rule changes | Scraper check | [modules/M16-policybot](modules/M16-policybot/README.md) |
+| **`/launch:ship`** | Executes 8-phase launch readiness gate: lint → freshness → compliance → tests → EAS build → changelog → submit | Linear 8-phase gate | [checklists/launch-day.md](checklists/launch-day.md) |
+
+---
+
 ## 📋 Copy-Paste Prompt Recipes for Users
 
 Users can prompt their AI agents using the recipes below:

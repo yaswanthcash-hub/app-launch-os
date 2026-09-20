@@ -6,6 +6,8 @@
 *Battle-tested submission playbooks, 2026 store compliance guards, precision design engineering, A/B testing engines, and organic growth loops.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/yaswanthcash-hub/app-launch-os?style=flat-square&logo=github&color=gold)](https://github.com/yaswanthcash-hub/app-launch-os/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/yaswanthcash-hub/app-launch-os?style=flat-square&logo=github&color=blue)](https://github.com/yaswanthcash-hub/app-launch-os/network/members)
 [![AI Agent Ready](https://img.shields.io/badge/AI%20Agents-Antigravity%20%7C%20Claude%20%7C%20Codex%20%7C%20Cursor-8A2BE2.svg?style=flat-square)](AGENTS.md)
 [![Audit Suite](https://img.shields.io/badge/Master%20Audits-500%2B%20Links%20Verified-brightgreen.svg?style=flat-square)](scripts/audit-all.js)
 [![Policy Freshness](https://img.shields.io/badge/Policy%20Freshness-%3C90%20Days-success.svg?style=flat-square)](scripts/check-freshness.js)
@@ -22,6 +24,8 @@
   <a href="#developer-cli">🛠️ Developer CLI</a> •
   <a href="#repository-architecture">📂 Modules Directory</a>
 </p>
+
+> ⭐️ **If you find App Launch OS useful, please star this repository!** It helps indie hackers and mobile teams avoid fatal store rejections and build top 1% native apps.
 
 ---
 
@@ -452,6 +456,12 @@ Follow this chronological execution plan to navigate from development to release
 
 * **Operational Aid, Not Legal Counsel:** The policies, privacy templates, terms of service, and submission checklists provided in App Launch OS are educational starting points based on public industry standards. They do not constitute formal legal counsel. Always have a qualified attorney review agreements for your specific corporate jurisdiction and user data profile.
 * **Living Platforms:** Apple App Store Review Guidelines and Google Play Developer Program Policies change frequently. App Launch OS enforces a strict 90-day freshness review protocol, but developers must always review live developer portals prior to submission.
+
+---
+
+## ⭐️ Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=yaswanthcash-hub/app-launch-os&type=Date)](https://star-history.com/#yaswanthcash-hub/app-launch-os&Date)
 
 ---
 

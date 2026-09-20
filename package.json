@@ -4,6 +4,10 @@
   "description": "The open-source operating system for launching premium mobile apps.",
   "private": true,
   "license": "MIT",
+  "workspaces": [
+    "modules/*",
+    "starters/*"
+  ],
   "scripts": {
     "test": "node scripts/audit-all.js",
     "test:all": "node scripts/audit-all.js",

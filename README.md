@@ -66,6 +66,8 @@ The CLI performs static Abstract Syntax Tree (AST) analysis via `@babel/parser` 
 - **Android 16 Target SDK 36:** Ensures Android configurations meet Google Play's required API level.
 - **16 KB Memory Page Size:** Checks React Native binary compatibility for Android 15+.
 
+![App Launch OS Roast Demo](assets/roast-demo.gif)
+
 ---
 
 ### 2. Sensory UI/UX & Native Motion (`modules/M17-premium-ux`)
@@ -82,6 +84,9 @@ Give your app the polish of an Apple Design Award winner with drop-in TypeScript
   ```text
   R_inner = Math.max(0, R_outer - padding)
   ```
+
+![Golden Corner Concentricity Law](assets/concentricity-demo.gif)
+
 - **60/120 FPS UI-Thread Motion:** Fluid gestures powered by Reanimated 3 worklets running directly on the native UI thread ([ADR-008](decisions/008-motion-system.md)).
 - **Moti Shimmer Skeletons:** Geometric skeleton loaders that cut perceived loading wait times by 40% compared to generic spinning wheels.
 - **Hardware-Accelerated Glassmorphism:** Translucent sheets using `expo-blur` on iOS with smooth Android fallbacks.
@@ -94,6 +99,8 @@ Ship features safely without risking regressions. Documented in [decisions/004-e
 
 - **Deterministic Offline Hashing:** FNV-1a hashing on `experimentKey + userId`. Users are bucketed instantly on cold start with zero network requests and zero layout flicker.
 - **Sample Ratio Mismatch (SRM) Detection:** Automated Chi-Square goodness-of-fit test ($p < 0.01$) using exact Lanczos gamma mathematics to flag traffic sample bias or dropped events.
+
+![Sample Ratio Mismatch Detection Demo](assets/experiments-srm.gif)
 
 ```tsx
 import { ExperimentProvider, useExperiment } from '@applaunchos/experiments';

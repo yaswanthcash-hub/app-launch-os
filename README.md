@@ -1,7 +1,7 @@
 # App Launch OS
 
-**The open-source operating system for launching top-tier mobile apps (Expo / React Native / iOS / Android).**  
-Pre-flight store compliance linter, sensory UI/UX kit, growth experiments engine, and production architecture blueprints.
+**The open-source launch kit and compliance engine for Expo and React Native apps.**  
+Pre-flight store rejection linter, sensory UI/UX kit, growth experiments engine, and production architecture blueprints.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
 [![Tests: Vitest](https://img.shields.io/badge/Tests-Vitest%20%7C%20Passing-brightgreen.svg?style=flat-square)](test/)
@@ -11,88 +11,89 @@ Pre-flight store compliance linter, sensory UI/UX kit, growth experiments engine
 
 ---
 
-## Status
-
-`v0.2.x — Early release. Detectors are heuristic AST checkers. Always verify findings against official store guidelines before submitting.`
-
----
-
 ## What Is App Launch OS?
 
-AI coding assistants make building mobile screens fast, but apps frequently fail launch due to store review traps, uncalibrated UI, and lack of growth infrastructure. 
+AI coding tools make building mobile screens fast. But getting an app successfully approved and thriving on the App Store and Google Play is where most indie builders and startups get stuck:
 
-App Launch OS provides a complete, cohesive system across 5 core pillars:
-1. **Pre-Flight Store Compliance Linter (CLI):** Static AST analysis that catches Apple Guideline 2.1 & 5.1.1 traps and Google Target SDK 36 requirements before submission.
-2. **Sensory UI/UX & Native Motion:** 5-state tactile haptics, Golden Corner Concentricity, 60/120 FPS Reanimated 3 worklets, and Moti skeleton loaders.
-3. **Growth Experiments Engine:** Deterministic offline FNV-1a feature flags and Chi-Square Sample Ratio Mismatch (SRM) verification.
+- **Store Rejections:** Apple rejects apps for missing review credentials (SMS OTP trap), missing `PrivacyInfo.xcprivacy` manifests, or omitting in-app account deletion. Google Play blocks apps lacking Target SDK 36 or 16 KB page-aligned ELF binaries.
+- **Cheap-Feeling UI:** Generic spinners and janky animations make native apps feel like slow web wrappers.
+- **Flying Blind:** Shipping features without feature flags or A/B testing can silently destroy user retention.
+
+**App Launch OS solves this.** It is **not** a heavy npm package that locks you into proprietary abstractions. It is a **modular launch toolkit** (like *shadcn/ui*, but for mobile launches):
+1. **Pre-Flight Store Compliance Linter (CLI):** Scans your codebase in seconds to catch Apple and Google review traps *before* you submit.
+2. **Sensory UI/UX & Native Motion:** Drop-in components for 5-state tactile haptics, 60/120 FPS Reanimated 3 worklets, concentric card geometry, and shimmer skeletons.
+3. **Growth Experiments Engine:** Deterministic offline feature flags and automatic Sample Ratio Mismatch (SRM) checks.
 4. **Organic Growth Loops:** Human-readable Crockford referral codes, Universal/App Links, and rate-limited review prompts.
-5. **Turnkey Paywall Blueprints:** StoreKit 2 & RevenueCat paywalls with transparent auto-renewal terms and restore purchase actions.
+5. **StoreKit 2 Paywalls:** Store-compliant paywall blueprints with transparent auto-renewal disclosures and working restore purchase triggers.
+6. **Pre-Configured Expo 54 Starter:** A complete, production-ready boilerplate targeting Android 16 (API 36) and iOS 26 SDK.
 
 ---
 
-## 1. Pre-Flight Store Compliance CLI
+## Quickstart: Audit Your Mobile App
 
-Run automated compliance audits against any Expo or React Native app:
+Run the compliance linter directly against any Expo or React Native repository:
 
 ```bash
+# 1. Clone App Launch OS
 git clone https://github.com/yaswanthcash-hub/app-launch-os.git
 cd app-launch-os
 npm install
 
-# 1. Audit your app (exits 1 on fatal store blockers):
+# 2. Audit your mobile project (exits non-zero if store blockers are found)
 node bin/cli.js audit --dir /path/to/your/app
 
-# 2. Review store rejection warnings ("roast" output):
+# 3. View rejection feedback and guidance ("roast" output)
 node bin/cli.js roast --dir /path/to/your/app
 
-# 3. Apply safe fixes (tailored PrivacyInfo.xcprivacy, SDK bumps):
+# 4. Safely auto-fix common issues (generates tailored PrivacyInfo.xcprivacy)
 node bin/cli.js fix --dir /path/to/your/app --write
 ```
 
 ![App Launch OS Terminal Demo](assets/demo.gif)
 
-### Sample Audit Output
+---
 
-```text
-APP LAUNCH SCORE: 60/100 [████████████░░░░░░░░]
-Verdict: FATAL REJECTION (Store Rejection Risk)
-21 verified · 0 unknown · 2 manual
-6 BLOCKERS   5 WARNINGS   10 PASSED
+## How It Helps You
 
-APPLE APP STORE
-  ✗ Reviewer demo account (SMS/Phone OTP detected without reviewer demo credentials)
-  ✓ Privacy manifest (PrivacyInfo.xcprivacy valid)
-  ✗ Account deletion (User authentication detected but no in-app account deletion flow found)
-  ✗ Subscription disclosure (Paywall missing functional "Restore Purchases" button)
-  ✓ IPv6 compatibility
-  ✗ Xcode 26 / iOS 26 SDK (Builds with deprecated Xcode toolchains)
+### 1. Pre-Flight Store Compliance CLI
 
-GOOGLE PLAY STORE
-  ✗ Target SDK 36+ (Google Play requires target SDK 36+ for 2026 submissions)
-  ✗ 16 KB page alignment (React Native 0.74.0 lacks 16 KB page-aligned ELF binaries)
-```
+The CLI performs static Abstract Syntax Tree (AST) analysis via `@babel/parser` and inspects project configuration files (`app.json`, `package.json`, native manifests) to catch fatal rejection traps:
+
+- **Reviewer Demo Access (Apple Guideline 2.1):** Flags phone/SMS OTP authentication screens lacking a server-side reviewer test account or bypass.
+- **Privacy Manifest (Apple Guideline 5.1.1):** Validates that required-reason APIs (file timestamps, system boot time, disk space) have matching declarations in `PrivacyInfo.xcprivacy`.
+- **In-App Account Deletion (Apple Guideline 5.1.1v):** Flags login flows that lack a self-service in-app deletion button.
+- **Transparent Paywalls (Apple Guideline 3.1.1):** Confirms paywall screens contain upfront renewal terms and a functional "Restore Purchases" button.
+- **Android 16 Target SDK 36:** Ensures Android configurations meet Google Play's required API level.
+- **16 KB Memory Page Size:** Checks React Native binary compatibility for Android 15+.
 
 ---
 
-## 2. Sensory UI/UX & Native Motion Stack
+### 2. Sensory UI/UX & Native Motion (`modules/M17-premium-ux`)
 
-Top 1% mobile apps feel fluid and tactile. App Launch OS includes ready-to-use TypeScript modules in `modules/M17-premium-ux` and `modules/M4-design-system`:
+Give your app the polish of an Apple Design Award winner with drop-in TypeScript modules:
 
-- **5-State Physical Haptic Matrix (`useHaptic.ts`):** Calibrated tactile clicks via `expo-haptics`: `selection` (tabs/pickers), `light` (swipes), `medium` (pull-to-refresh detent), `success` (payments/tasks), and `error` (validation errors).
-- **Golden Corner Concentricity (`ConcentricCard.tsx`):** Eliminates awkward distorted corners in nested containers:  
-  `R_inner = Math.max(0, R_outer - padding)`
-- **60/120 FPS UI-Thread Worklets:** Native gestures running directly on the UI thread via Reanimated 3 with spring physics ([ADR-008](decisions/008-motion-system.md)).
-- **Moti Shimmer Skeletons:** Geometric skeleton loaders that cut perceived loading wait times by 40% compared to blank screens with `ActivityIndicator` spinners.
-- **Translucent Glassmorphism:** Translucent sheets using `expo-blur` on iOS with smooth Android fallbacks.
+- **5-State Physical Haptic Matrix (`useHaptic.ts`):** Calibrated tactile clicks via `expo-haptics`:
+  - `selection` for picker wheels and tab switching.
+  - `light` for swipe actions and dismissals.
+  - `medium` for pull-to-refresh detents.
+  - `success` for completed purchases and goal achievements.
+  - `error` for validation errors and submission failures.
+- **Golden Corner Concentricity (`ConcentricCard.tsx`):** Automatically calculates inner border radii to prevent awkward, distorted corner collisions in nested cards:
+  ```text
+  R_inner = Math.max(0, R_outer - padding)
+  ```
+- **60/120 FPS UI-Thread Motion:** Fluid gestures powered by Reanimated 3 worklets running directly on the native UI thread ([ADR-008](decisions/008-motion-system.md)).
+- **Moti Shimmer Skeletons:** Geometric skeleton loaders that cut perceived loading wait times by 40% compared to generic spinning wheels.
+- **Hardware-Accelerated Glassmorphism:** Translucent sheets using `expo-blur` on iOS with smooth Android fallbacks.
 
 ---
 
-## 3. Growth Experiments & SRM Validator
+### 3. Growth Experiments Engine (`modules/M6-experiments`)
 
-Deploying features without experimentation flags means shipping regressions to production. Documented in [decisions/004-experiments.md](decisions/004-experiments.md), `@applaunchos/experiments` provides:
+Ship features safely without risking regressions. Documented in [decisions/004-experiments.md](decisions/004-experiments.md), `@applaunchos/experiments` provides:
 
-1. **Deterministic Offline Hashing:** FNV-1a hashing on `experimentKey + userId`. Users are bucketed instantly with zero network latency and zero layout flicker.
-2. **Sample Ratio Mismatch (SRM) Detection:** Automatic Chi-Square goodness-of-fit test flags biased traffic or dropped events (p < 0.01) using exact Lanczos gamma mathematics.
+- **Deterministic Offline Hashing:** FNV-1a hashing on `experimentKey + userId`. Users are bucketed instantly on cold start with zero network requests and zero layout flicker.
+- **Sample Ratio Mismatch (SRM) Detection:** Automated Chi-Square goodness-of-fit test ($p < 0.01$) using exact Lanczos gamma mathematics to flag traffic sample bias or dropped events.
 
 ```tsx
 import { ExperimentProvider, useExperiment } from '@applaunchos/experiments';
@@ -108,38 +109,36 @@ const { variantKey, payload } = useExperiment<{ discount: number }>('onboarding_
 
 ---
 
-## 4. Organic Growth Loops & Deep Linking
+### 4. Organic Growth Loops & Deep Linking (`modules/M7-growth`)
 
-Acquiring paid users is expensive. App Launch OS embeds organic growth directly into the client stack (`modules/M7-growth` and `modules/M12-seo`):
+Acquiring paid users is expensive. App Launch OS embeds viral and organic growth mechanisms directly into the mobile stack:
 
-- **Human-Readable Referral Codes (`referral.ts`):** Generates clean 6-character Crockford codes (`ABCDEFGHJKLMNPQRSTUVWXYZ23456789`) that omit ambiguous characters (`0`, `O`, `1`, `I`) with universal invite links.
-- **Smart Store Review Prompts (`useSmartReviewPrompt.ts`):** Enforces Apple's strict ceiling of **3 review prompts per year**. Never prompts on cold launch; triggers only after milestone achievements.
-- **Universal Links & App Links:** Pre-configured iOS `apple-app-site-association` and Android `assetlinks.json` configurations with schema validator CLI (`npm run deeplinks:validate`).
-
----
-
-## 5. StoreKit 2 Transparent Paywall
-
-Apple Guideline 3.1.1 is one of the top causes of submission rejections. App Launch OS provides a compliant paywall blueprint in `modules/M8-paywall` and `starters/expo-ts/app/paywall.tsx`:
-
-- **Transparent Subscription Terms:** Upfront pricing disclosures, trial duration, and recurring billing frequency displayed before the purchase CTA.
-- **Functional Restore Purchases:** Active trigger that calls `Purchases.restorePurchases()` or native StoreKit with haptic feedback.
-- **Direct Legal Links:** Integrated Terms of Service and Privacy Policy triggers.
+- **Human-Readable Referral Codes (`referral.ts`):** Generates clean 6-character Crockford codes (`ABCDEFGHJKLMNPQRSTUVWXYZ23456789`) that eliminate ambiguous characters (`0`, `O`, `1`, `I`) paired with universal invite links.
+- **Smart Store Review Prompts (`useSmartReviewPrompt.ts`):** Enforces Apple's strict ceiling of **3 review prompts per year**. Triggers only after positive milestone moments, never on cold app launch.
+- **Universal Links & App Links (`modules/M12-seo`):** Turnkey iOS `apple-app-site-association` and Android `assetlinks.json` templates with CLI schema validator (`npm run deeplinks:validate`).
 
 ---
 
-## 6. AI Coding Agent Protocols (`AGENTS.md`)
+### 5. StoreKit 2 Transparent Paywall (`modules/M8-paywall`)
 
-When AI agents build mobile apps, they frequently hallucinate deprecated APIs and generate screens that violate store rules. App Launch OS acts as the **ground-truth context engine** for **Google Antigravity**, **Claude Code**, **OpenAI Codex**, and **Cursor**.
+Subscription rejections are among the most common launch blocks. App Launch OS provides a compliant paywall blueprint:
 
-Reference commands directly in your AI assistant:
+- **Upfront Renewal Terms:** Displays subscription prices, trial durations, and recurring billing frequency in plain view prior to the purchase CTA.
+- **Functional Restore Purchases:** Active trigger that restores entitlements via RevenueCat or native StoreKit 2 with haptic feedback.
+- **Direct Legal Links:** One-tap links to Terms of Service and Privacy Policy.
 
-| Command | Autonomous Workflow | Source |
+---
+
+### 6. AI Coding Agent Contracts (`AGENTS.md`)
+
+When AI coding assistants (Claude Code, Cursor, Google Antigravity, Codex) build mobile apps, they often hallucinate deprecated APIs and generate screens that fail store guidelines. App Launch OS acts as the **ground-truth context engine**:
+
+| Command | Autonomous Action | Primary Source |
 | :--- | :--- | :--- |
-| **`/applaunchos:compliance`** | Pre-flight audit for Apple (no-SMS demo, PrivacyInfo) and Google Play (Target SDK 36, 16 KB) | [Audit](scripts/compliance-check.js) |
+| **`/applaunchos:compliance`** | Pre-flight audit for Apple 2026 and Google Play rules | [Audit](scripts/compliance-check.js) |
 | **`/applaunchos:design`** | Scaffolds 3-tier DTCG design tokens + Golden Concentricity | [M4](modules/M4-design-system/README.md) |
-| **`/applaunchos:ux`** | Injects 5-state tactile haptics, Reanimated 3 worklets, and Moti skeletons | [M17](modules/M17-premium-ux/README.md) |
-| **`/applaunchos:paywall`** | StoreKit 2 paywall with upfront terms, restore button, and billing toggle | [M8](modules/M8-paywall/README.md) |
+| **`/applaunchos:ux`** | Injects 5-state tactile haptics, Reanimated worklets, and Moti skeletons | [M17](modules/M17-premium-ux/README.md) |
+| **`/applaunchos:paywall`** | StoreKit 2 paywall with upfront terms and restore trigger | [M8](modules/M8-paywall/README.md) |
 | **`/applaunchos:growth`** | Crockford referral codes, deep links, and smart review prompts | [M7](modules/M7-growth/README.md) |
 | **`/applaunchos:experiments`** | Offline FNV-1a feature flags and Chi-Square SRM verification | [M6](modules/M6-experiments/README.md) |
 
@@ -149,36 +148,56 @@ Reference commands directly in your AI assistant:
 
 ## Limitations
 
-- **Heuristic Static Analysis:** Static analysis cannot guarantee store approval. Detectors inspect syntax patterns and configuration files; they cannot execute runtime user flows or test server endpoints.
-- **Reviewer Accounts:** The linter can verify that a reviewer bypass or credentials hook exists in code, but cannot confirm that the credentials authenticate against your live backend. See [policies/reviewer-access.md](policies/reviewer-access.md).
-- **Console-Only Rules:** Requirements such as Google Play's 20-tester closed testing gate and Data Safety questionnaire forms exist only in store consoles, not in source code. The CLI flags these as `MANUAL` items rather than assigning false-positive pass/fail scores.
+- **Heuristic Static Analysis:** Static analysis cannot guarantee store approval. Detectors inspect syntax patterns and configuration files; they cannot execute runtime user flows or test live server endpoints.
+- **Reviewer Credentials:** The linter verifies that a reviewer bypass or test credential hook exists in code, but cannot confirm that those credentials authenticate against your production backend. See [policies/reviewer-access.md](policies/reviewer-access.md).
+- **Console-Only Rules:** Requirements such as Google Play's 20-tester closed testing gate and Data Safety questionnaires exist only in store consoles, not in source code. The CLI flags these as `MANUAL` items rather than assigning false-positive pass/fail scores.
 - **Third-Party Native Binaries:** For Android 16 KB ELF page alignment, the tool checks React Native version compatibility; pre-compiled third-party `.so` binaries should be verified using `llvm-readelf -l`.
 
 ---
 
-## Repository Structure
+## Repository Architecture
 
-- **`modules/`**: 13 copy-paste TypeScript blueprints for Design Systems, Paywalls, Experiments, Growth, and Security.
-- **`starters/expo-ts/`**: Production-grade reference starter targeting Expo SDK 54, React Native 0.78, and Target SDK 36.
-- **`checklists/`**: Step-by-step submission checklists for [App Store](checklists/appstore-submission.md) and [Play Store](checklists/playstore-submission.md).
-- **`policies/`**: Concrete review guides for [Apple Essentials](policies/apple-review-essentials.md), [Google Play](policies/play-policy-essentials.md), and [Reviewer Access](policies/reviewer-access.md).
-- **`docs/guides.md`**: Complete launch timeline (T-60 days to launch) and compliance reference matrix.
+```text
+app-launch-os/
+├── bin/cli.js                     # Pre-flight audit, roast, and fix CLI runner
+├── starters/expo-ts/              # Production reference template (Expo SDK 54, Target SDK 36)
+├── modules/                       # Copy-paste modular TypeScript source blueprints
+│   ├── M4-design-system/          # 3-tier DTCG tokens & NativeWind v4 preset
+│   ├── M5-onboarding/             # Permission priming modal & gesture carousel
+│   ├── M6-experiments/            # Offline FNV-1a flags & Chi-Square SRM engine
+│   ├── M7-growth/                 # Crockford referral engine & review prompts
+│   ├── M8-paywall/                # StoreKit 2 & RevenueCat paywall component
+│   ├── M9-security/               # Keychain wrapper, biometric hook, integrity checks
+│   ├── M10-release/               # Production EAS Build profiles & Fastlane lanes
+│   ├── M11-aso/                   # Store listing metadata limits & keyword density
+│   ├── M12-seo/                   # Universal Links & Android App Links configurations
+│   ├── M13-ai-kit/                # AI context compression tool for LLMs
+│   ├── M16-policybot/             # Upstream store policy change monitors
+│   └── M17-premium-ux/            # 5-state haptics, concentric cards, Moti skeletons
+├── checklists/                    # Submission checklists (<90d verified)
+├── policies/                      # Apple & Google review policy essentials
+├── findings/                      # Research digests on paywalls, ASO, UX, experiments
+├── templates/                     # Privacy Policy, ToS, DPA, and Threat Model templates
+├── decisions/                     # Architecture Decision Records (ADRs 001–010)
+└── docs/guides.md                 # T-60 launch timeline & universal compliance matrix
+```
 
 ---
 
-## Verification & Tests
+## Automated Verification
 
 ```bash
-# Full test suite (Vitest + fixtures)
+# Run unit test suite (Vitest + fixtures)
 npm test
 
-# Type checking
+# Check TypeScript types in strict mode
 npm run typecheck
 
-# Code formatting and linting
+# Lint all code and markdown files
 npx eslint .
+npm run lint
 
-# Upstream policy provenance verification
+# Verify upstream store policy freshness (<90 days)
 npm run policy:verify
 ```
 
@@ -186,4 +205,5 @@ npm run policy:verify
 
 ## License
 
-MIT License. See [LICENSE](LICENSE).
+MIT License. See [LICENSE](LICENSE) for details.  
+Built with care for indie builders, mobile teams, and creators worldwide.

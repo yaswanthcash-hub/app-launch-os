@@ -71,28 +71,38 @@ When AI agents build mobile apps, they often hallucinate deprecated APIs and gen
 
 ---
 
-### ⚡ Autonomous Agent Commands Matrix (`/applaunchos:*`)
+### ⚡ Autonomous Agent Commands (`/applaunchos:*`)
 
-Type or reference these commands directly in your AI coding assistant:
+Type any command into **Google Antigravity**, **Claude Code**, **Cursor**, or **Codex** to run autonomous workflows:
 
-| Command | Purpose & Autonomous Pipeline | Mode | Authoritative Source |
-| :--- | :--- | :--- | :--- |
-| **`/applaunchos`** | **Autonomous Iteration Engine**: Loops `modify → verify → keep/discard` across performance, bundle size, and contrast metrics until all goals pass. | 25 passes / goal | [AGENTS.md](AGENTS.md) |
-| **`/applaunchos:plan`** | **Architecture & Launch Interview**: Interviews on stack, auth, monetization, and target stores; generates `implementation_plan.md`. | One-shot gate | [AGENTS.md](AGENTS.md) |
-| **`/applaunchos:design`** | **UI/UX Design Tokens & Concentricity**: Generates 3-tier UI/UX tokens + NativeWind preset; applies $R_{\text{inner}} = \max(0, R_{\text{outer}} - P)$ to cards. | 10 layout passes | [modules/M4-design-system](modules/M4-design-system/README.md) & [modules/M17-premium-ux](modules/M17-premium-ux/README.md) |
-| **`/applaunchos:ux`** | **Sensory Polish & Native Motion**: Injects 5-state tactile haptics, Reanimated 3 worklets (60/120 FPS), Moti skeletons, and frosted glass. | Component pass | [modules/M17-premium-ux](modules/M17-premium-ux/README.md) |
-| **`/applaunchos:experiments`** | **Growth Experiments & SRM Gate**: Sets up offline FNV-1a feature flags and runs Chi-Square tests ($\chi^2$) to block skewed traffic ($p < 0.01$). | Statistical gate | [modules/M6-experiments](modules/M6-experiments/README.md) |
-| **`/applaunchos:paywall`** | **Compliant Paywall**: Builds StoreKit 2 / RevenueCat paywall with upfront terms, restore button, and annual/monthly billing toggle. | Compliance pass | [modules/M8-paywall](modules/M8-paywall/README.md) & [findings/paywall.md](findings/paywall.md) |
-| **`/applaunchos:onboarding`** | **Soft Permission Priming**: Implements 2-step permission priming (Push/ATT) before native dialogs, plus animated walkthrough carousel. | Component pass | [modules/M5-onboarding](modules/M5-onboarding/README.md) & [findings/onboarding.md](findings/onboarding.md) |
-| **`/applaunchos:growth`** | **Organic Loops & Referrals**: Generates Crockford base32 codes, deep links (`apple-app-site-association`, `assetlinks.json`), and smart review prompts. | Viral loop pass | [modules/M7-growth](modules/M7-growth/README.md) |
-| **`/applaunchos:compliance`** | **Dual Store Pre-Flight Audit**: Verifies Apple 2026 rules (no-SMS demo, PrivacyInfo, account deletion) and Google Play rules (20 testers, API 35). | Verification gate | [scripts/compliance-check.js](scripts/compliance-check.js) & [policies/apple-review-essentials.md](policies/apple-review-essentials.md) |
-| **`/applaunchos:security`** | **OWASP MASVS L1 Security**: Audits mobile attack surface, implements biometric authentication (`useBiometrics`), and locks secrets into Keychain. | 15 iterations | [modules/M9-security](modules/M9-security/README.md) & [checklists/security-baseline.md](checklists/security-baseline.md) |
-| **`/applaunchos:aso`** | **ASO Keyword & Metadata Engine**: Validates metadata character boundaries (30/30/100/80/4000) and scores keyword density against store spam penalties. | Analysis pass | [modules/M11-aso](modules/M11-aso/README.md) & [findings/aso.md](findings/aso.md) |
-| **`/applaunchos:audit`** | **Master Pre-Flight Verification**: Automated runner executing 560+ link checks, freshness (<90d), and store compliance checks (`npm test`). | One-shot (`npm test`) | [scripts/audit-all.js](scripts/audit-all.js) |
-| **`/applaunchos:ship`** | **8-Phase Launch Readiness Gate**: Linear pipeline: Lint $\to$ Policy Freshness $\to$ Store Compliance $\to$ Tests $\to$ EAS Build $\to$ Release Notes $\to$ Submission. | Linear gate | [checklists/launch-day.md](checklists/launch-day.md) & [modules/M10-release](modules/M10-release/README.md) |
-| **`/applaunchos:pack`** | **AI Prompt Context Compression**: Compresses repository specifications, ADRs, and checklists into a single token-efficient LLM prompt. | One-shot | [modules/M13-ai-kit](modules/M13-ai-kit/README.md) |
-| **`/applaunchos:policybot`** | **Store Policy Monitor**: Scrapes Apple Developer News and Google Play changelogs to alert you to breaking policy updates. | Scraper check | [modules/M16-policybot](modules/M16-policybot/README.md) |
-| **`/applaunchos:regression`** | **Stability & Performance Loop**: Checks cold start latency, memory leaks, and dropped frames between builds; outputs STABLE/UNSTABLE. | 15 iterations | [checklists/qa-prelaunch.md](checklists/qa-prelaunch.md) |
+| Core Command | What It Does |
+| :--- | :--- |
+| **`/applaunchos`** | **Autonomous Loop:** Iterates `modify → verify → keep/discard` until speed & polish goals pass. |
+| **`/applaunchos:plan`** | **Launch Interview:** Scaffolds tailored `implementation_plan.md` before touching code. |
+| **`/applaunchos:compliance`** | **Store Audit:** Audits Apple 2026 rules (no-SMS demo, PrivacyInfo) & Google 20-tester gate. |
+| **`/applaunchos:design`** | **UI/UX System:** Generates 3-tier tokens & applies concentric radii $R_{\text{inner}} = \max(0, R_{\text{outer}} - P)$. |
+| **`/applaunchos:paywall`** | **Compliant Paywall:** StoreKit 2 paywall with upfront terms & functional restore trigger. |
+| **`/applaunchos:ship`** | **Readiness Gate:** 8-phase automated pipeline from linting to store submission. |
+
+<details>
+<summary><b>🔍 View all 16 autonomous commands (/applaunchos:ux, :growth, :security, :aso, etc.)</b></summary>
+
+| Extended Command | What It Does | Module |
+| :--- | :--- | :--- |
+| **`/applaunchos:ux`** | Injects 5-state tactile haptics, Reanimated 3 worklets, and Moti skeletons. | [M17](modules/M17-premium-ux/README.md) |
+| **`/applaunchos:experiments`** | Configures offline feature flags and Chi-Square Sample Ratio Mismatch tests. | [M6](modules/M6-experiments/README.md) |
+| **`/applaunchos:onboarding`** | Soft permission priming (Push/ATT) and animated walkthrough carousel. | [M5](modules/M5-onboarding/README.md) |
+| **`/applaunchos:growth`** | Crockford referral codes, deep links, and milestone-based rating prompts. | [M7](modules/M7-growth/README.md) |
+| **`/applaunchos:security`** | OWASP MASVS L1 audit, biometric auth hook, and hardware Keychain storage. | [M9](modules/M9-security/README.md) |
+| **`/applaunchos:aso`** | Validates metadata character limits (30/30/100/80) and keyword density. | [M11](modules/M11-aso/README.md) |
+| **`/applaunchos:audit`** | Pre-flight master verification suite: links, freshness, and compliance (`npm test`). | [scripts/audit-all.js](scripts/audit-all.js) |
+| **`/applaunchos:pack`** | Compresses repository specs and ADRs into a single token-efficient prompt. | [M13](modules/M13-ai-kit/README.md) |
+| **`/applaunchos:policybot`** | Scrapes Apple & Google policy changelogs to alert breaking store shifts. | [M16](modules/M16-policybot/README.md) |
+| **`/applaunchos:regression`** | Benchmarks cold start latency, memory leaks, and dropped frames between builds. | [QA Checklist](checklists/qa-prelaunch.md) |
+
+*(See [AGENTS.md](AGENTS.md) for full execution contracts and routing.)*
+
+</details>
 
 ---
 

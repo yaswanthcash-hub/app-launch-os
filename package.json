@@ -36,8 +36,8 @@
     "deeplinks:validate": "node modules/M12-seo/scripts/validate-deeplinks.js",
     "policy:check": "node modules/M16-policybot/bin/check-policies.js",
     "changelog:generate": "node modules/M10-release/scripts/generate-changelog.js",
-    "lint": "markdownlint-cli2 \"**/*.md\" --config .markdownlint-cli2.ci.jsonc",
-    "test:lint": "markdownlint-cli2 \"**/*.md\" --config .markdownlint-cli2.ci.jsonc"
+    "lint": "markdownlint-cli2 \"**/*.md\" --config .markdownlint-cli2.jsonc",
+    "test:lint": "markdownlint-cli2 \"**/*.md\" --config .markdownlint-cli2.jsonc"
   },
   "devDependencies": {
     "markdownlint-cli2": "^0.13.0"

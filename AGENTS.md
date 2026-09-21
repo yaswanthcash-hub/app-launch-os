@@ -22,6 +22,7 @@ When a user asks you to perform a task, refer directly to the corresponding auth
 | **Prepare / Audit for Apple App Store** | [checklists/appstore-submission.md](checklists/appstore-submission.md) & [policies/apple-review-essentials.md](policies/apple-review-essentials.md) |
 | **Prepare / Audit for Google Play Store** | [checklists/playstore-submission.md](checklists/playstore-submission.md) & [policies/play-policy-essentials.md](policies/play-policy-essentials.md) |
 | **Design System & DTCG Tokens** | [decisions/007-design-system.md](decisions/007-design-system.md) |
+| **Cognitive Ergonomics & HCI Laws** | [findings/cognitive-ergonomics.md](findings/cognitive-ergonomics.md) & [findings/premium-ux.md](findings/premium-ux.md) |
 | **Native Motion & 60/120 FPS Worklets** | [decisions/008-motion-system.md](decisions/008-motion-system.md) |
 | **Haptics, Skeletons, Glassmorphism** | [decisions/009-premium-ux.md](decisions/009-premium-ux.md) & [checklists/premium-ux.md](checklists/premium-ux.md) |
 | **Paywall & In-App Purchase Architecture** | [findings/paywall.md](findings/paywall.md) |
@@ -68,7 +69,7 @@ When a user or developer triggers one of the following commands or intents, exec
 | **`/applaunchos:plan`** | Interactive interview & `implementation_plan.md` generation before modifying code ([AGENTS.md](AGENTS.md)). |
 | **`/applaunchos:compliance`** | Pre-flight audit for Apple 2026 (no-SMS demo, PrivacyInfo) and Google Play (20 testers, API 36) ([Audit](scripts/compliance-check.js)). |
 | **`/applaunchos:design`** | Scaffolds 3-tier UI/UX tokens + Golden Concentricity: `R_inner = Math.max(0, R_outer - padding)` ([M4](modules/M4-design-system/README.md)). |
-| **`/applaunchos:ux`** | Injects 5-state tactile haptics, Reanimated 3 worklets (60/120 FPS), and Moti skeletons ([M17](modules/M17-premium-ux/README.md)). |
+| **`/applaunchos:ux`** | Injects 5-state tactile haptics, Reanimated 3 worklets (60/120 FPS), Moti skeletons, and 12 HCI cognitive laws ([M17](modules/M17-premium-ux/README.md) & [HCI](findings/cognitive-ergonomics.md)). |
 | **`/applaunchos:paywall`** | StoreKit 2 paywall with upfront terms, restore button, and billing toggle ([M8](modules/M8-paywall/README.md) & [Paywall](findings/paywall.md)). |
 | **`/applaunchos:onboarding`** | Soft permission priming (Push/ATT) before native dialogs + gesture carousel ([M5](modules/M5-onboarding/README.md)). |
 | **`/applaunchos:growth`** | Crockford referral codes, deep links (AASA/AssetLinks), and smart rating prompts ([M7](modules/M7-growth/README.md)). |

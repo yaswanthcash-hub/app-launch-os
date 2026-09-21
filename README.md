@@ -70,9 +70,9 @@ The CLI performs static Abstract Syntax Tree (AST) analysis via `@babel/parser` 
 
 ---
 
-### 2. Sensory UI/UX & Native Motion (`modules/M17-premium-ux`)
+### 2. Sensory UI/UX, Native Motion & Cognitive Ergonomics (`modules/M17-premium-ux`)
 
-Give your app the polish of an Apple Design Award winner with drop-in TypeScript modules:
+Give your app the polish of an Apple Design Award winner with drop-in TypeScript modules grounded in cognitive psychology:
 
 - **5-State Physical Haptic Matrix (`useHaptic.ts`):** Calibrated tactile clicks via `expo-haptics`:
   - `selection` for picker wheels and tab switching.
@@ -90,6 +90,14 @@ Give your app the polish of an Apple Design Award winner with drop-in TypeScript
 - **60/120 FPS UI-Thread Motion:** Fluid gestures powered by Reanimated 3 worklets running directly on the native UI thread ([ADR-008](decisions/008-motion-system.md)).
 - **Moti Shimmer Skeletons:** Geometric skeleton loaders that cut perceived loading wait times by 40% compared to generic spinning wheels.
 - **Hardware-Accelerated Glassmorphism:** Translucent sheets using `expo-blur` on iOS with smooth Android fallbacks.
+- **12 World-Class HCI Laws & Cognitive Ergonomics ([findings/cognitive-ergonomics.md](findings/cognitive-ergonomics.md)):**
+  - **Jakob's Law:** Users spend most time on other apps; preserve native bottom tabs, predictive swipe back, and standard sheets.
+  - **Fitts's Law:** Target acquisition $T = a + b \log_2(1 + D/W)$; sticky bottom-zone CTAs, minimum $44\times 44\text{pt}$ / $48\times 48\text{dp}$ hitboxes.
+  - **Hick-Hyman Law:** $T = b \log_2(n + 1)$; $\le 3$ paywall tiers with pre-selected default, 1 question per onboarding card.
+  - **Doherty Threshold:** $<400\text{ms}$ conversational flow; $\le 100\text{ms}$ visual scale & tactile feedback on touch down, zero blank white load screens.
+  - **Tesler's Law:** System absorbs geometric and compliance complexity so users encounter zero friction.
+  - **Miller's Law & Chunking:** Auto-formatted credit card, phone, and 6-cell OTP inputs; $\le 5$-item settings groups.
+  - **Peak-End Rule:** Multi-sensory celebration on major milestones; dark-pattern-free cancellation flows.
 
 ---
 
@@ -144,7 +152,7 @@ When AI coding assistants (Claude Code, Cursor, Google Antigravity, Codex) build
 | :--- | :--- | :--- |
 | **`/applaunchos:compliance`** | Pre-flight audit for Apple 2026 and Google Play rules | [Audit](scripts/compliance-check.js) |
 | **`/applaunchos:design`** | Scaffolds 3-tier DTCG design tokens + Golden Concentricity | [M4](modules/M4-design-system/README.md) |
-| **`/applaunchos:ux`** | Injects 5-state tactile haptics, Reanimated worklets, and Moti skeletons | [M17](modules/M17-premium-ux/README.md) |
+| **`/applaunchos:ux`** | Injects 5-state tactile haptics, Reanimated 3 worklets, and 12 HCI cognitive laws | [M17](modules/M17-premium-ux/README.md) & [HCI](findings/cognitive-ergonomics.md) |
 | **`/applaunchos:paywall`** | StoreKit 2 paywall with upfront terms and restore trigger | [M8](modules/M8-paywall/README.md) |
 | **`/applaunchos:growth`** | Crockford referral codes, deep links, and smart review prompts | [M7](modules/M7-growth/README.md) |
 | **`/applaunchos:experiments`** | Offline FNV-1a feature flags and Chi-Square SRM verification | [M6](modules/M6-experiments/README.md) |
@@ -183,7 +191,7 @@ app-launch-os/
 │   └── M17-premium-ux/            # 5-state haptics, concentric cards, Moti skeletons
 ├── checklists/                    # Submission checklists (<90d verified)
 ├── policies/                      # Apple & Google review policy essentials
-├── findings/                      # Research digests on paywalls, ASO, UX, experiments
+├── findings/                      # Research digests on cognitive ergonomics, paywalls, ASO, UX, experiments
 ├── templates/                     # Privacy Policy, ToS, DPA, and Threat Model templates
 ├── decisions/                     # Architecture Decision Records (ADRs 001–010)
 └── docs/guides.md                 # T-60 launch timeline & universal compliance matrix

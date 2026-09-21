@@ -5,11 +5,16 @@
 
 ## Overview
 
-This digest covers premium mobile UX patterns: haptic psychology, 60/120 FPS motion budgets, glassmorphism, perceived performance, and the design token hierarchy described in IMPLEMENTATION_PLAN.md section 4.
+This digest covers premium mobile UX patterns: cognitive ergonomics, haptic psychology, 60/120 FPS motion budgets, glassmorphism, perceived performance, and the design token hierarchy described in IMPLEMENTATION_PLAN.md section 4. For comprehensive mathematical models and cognitive science derivations (Jakob's Law, Fitts's Law, Hick-Hyman Law, Doherty Threshold, Tesler's Law), see the authoritative [Cognitive Ergonomics & HCI Laws Digest](cognitive-ergonomics.md).
 
 ## Methodology
 
 Sources were checked on 2026-09-20 against official documentation (Apple Human Interface Guidelines, Google Material Design, W3C Design Tokens Community Group) and published UX research. Claims tied to a specific platform's published guidance are labeled **[Platform Verified]**. General design best practices are labeled **[Verified]**. Actionable guidance is labeled **[Recommendation]**.
+
+## 0. Cognitive Ergonomics & HCI Foundations
+
+- **[Verified]** Physical ergonomics and cognitive bandwidth dictate mobile user perception. Interfaces must adhere to established laws of human perception: **Jakob's Law** (respecting platform navigation conventions), **Fitts's Law** (thumb-zone reachability and hit target sizing), **Hick's Law** (minimizing choice overload), **Doherty Threshold** (instant $\le 100\text{ms}$ sensory feedback), and **Tesler's Law** (system absorption of complexity).
+- **[Recommendation]** Treat HCI laws not as aesthetic guidelines, but as hard mechanical constraints. Full mathematical formulas and implementation rules are documented in [findings/cognitive-ergonomics.md](cognitive-ergonomics.md).
 
 ## 1. Haptic Psychology
 

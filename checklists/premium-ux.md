@@ -29,12 +29,27 @@
 - React Native Reanimated — https://docs.swmansion.com/react-native-reanimated/
 - Apple Review Guideline 3.1.2 — https://developer.apple.com/app-store/review/guidelines/#in-app-purchase
 - RevenueCat State of Subscription Apps (2026) — https://www.revenuecat.com/state-of-subscription-apps
+- Cognitive Ergonomics & HCI Laws Digest — [findings/cognitive-ergonomics.md](../findings/cognitive-ergonomics.md)
 
 ---
 
 ## §4 Premium UX, Interaction & Motion System
 
-*Mapped from IMPLEMENTATION_PLAN.md §4 — design tokens, motion budgets, haptics, and perceived performance.*
+*Mapped from IMPLEMENTATION_PLAN.md §4 — design tokens, motion budgets, haptics, cognitive ergonomics, and perceived performance.*
+
+### §4.0 Cognitive Ergonomics & HCI Heuristics Audit
+
+*Empirical Human-Computer Interaction benchmarks derived from [findings/cognitive-ergonomics.md](../findings/cognitive-ergonomics.md).*
+
+- [ ] **Jakob's Law (Platform Conventions):** App uses standard iOS bottom tab navigation ($\le 5$ items) or Android system bars; native interactive swipe-to-go-back (`react-native-screens`) and drag-to-dismiss modal sheets are preserved; no custom non-standard navigation gestures. — Owner: UX Lead · Evidence: gesture review
+- [ ] **Fitts's Law (Thumb Zone & Target Hitboxes):** Primary action CTAs (e.g. "Continue", "Subscribe") are anchored in the bottom 30% natural thumb zone; touch targets satisfy $\ge 44\times 44\text{ pt}$ (iOS) / $\ge 48\times 48\text{ dp}$ (Android); compact icons use `hitSlop` expansion; adjacent touchables maintain $\ge 8\text{pt}$ separation. — Owner: Eng · Evidence: layout hitbox audit
+- [ ] **Hick-Hyman Law (Choice Architecture):** Paywall choices are restricted to $\le 3$ tiers with a pre-selected default ("Annual - Save 50%"); onboarding flows use progressive disclosure (single question per screen) rather than exhaustive multi-field forms. — Owner: Growth / Product · Evidence: paywall layout trace
+- [ ] **Miller's Law (Cognitive Chunking):** Phone numbers, credit cards, and OTP codes are auto-formatted into discrete visual chunks (`4-4-4-4` or 6 individual cells); menu and settings lists are segmented into groups of $\le 5$ items with section headers. — Owner: Eng · Evidence: input audit
+- [ ] **Doherty Threshold (Sub-400ms Feedback Loop):** Button presses provide visual scale (`scale: 0.97`) and haptic feedback on `onPressIn` ($\le 100\text{ms}$); unloaded network screens immediately render Moti geometric skeletons within $<400\text{ms}$; no blank white screens. — Owner: Eng · Evidence: profiler trace
+- [ ] **Zeigarnik & Goal-Gradient Effects:** Multi-step onboarding sequences display segmented progress bars with endowed initial progress (starting at Step 1 of 4, ~20–25%) to incentivize completion. — Owner: UX Design · Evidence: onboarding audit
+- [ ] **Peak-End Rule (Delight & Dignity):** Major milestone completions (onboarding end, purchase unlock) trigger multi-sensory haptic celebration; account cancellation and in-app deletion flows are frictionless and free of dark patterns. — Owner: Product · Evidence: offboarding flow audit
+- [ ] **Von Restorff Effect (Visual Salience):** The recommended paywall tier and primary conversion CTAs are visually isolated from secondary options through contrasting borders, badges, and elevated surface depth. — Owner: Design · Evidence: UI inspection
+- [ ] **Tesler's Law (System Complexity Absorption):** System absorbs concentric geometry ($R_{\text{inner}} = \max(0, R_{\text{outer}} - P)$) and receipt reconciliation automatically, exposing zero mathematical or architectural friction to the end-user. — Owner: Design Systems · Evidence: component audit
 
 ### §4.1 Three-Layer Design Token Foundation
 

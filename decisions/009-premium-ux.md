@@ -15,7 +15,15 @@ This ADR implements [IMPLEMENTATION_PLAN.md §4](../IMPLEMENTATION_PLAN.md#4-pre
 
 ## Decision
 
-Treat premium UX as a product contract spanning perceived performance, accessible interaction, and monetization. Reuse the design tokens and motion system from ADR-007 and ADR-008, including reduced-motion fallbacks, restrained haptics, Dynamic Type support, touch-target and contrast checks, and native perceived-performance patterns.
+Treat premium UX as a product contract spanning cognitive ergonomics, perceived performance, accessible interaction, and monetization. Ground interface and conversion mechanics in foundational Human-Computer Interaction (HCI) laws ([findings/cognitive-ergonomics.md](../findings/cognitive-ergonomics.md)):
+
+1. **Jakob's Law:** Strictly respect platform-native interaction paradigms—standard iOS bottom tabs, system predictive back gestures, and standard drag-down sheet dismissal—preventing extraneous cognitive load.
+2. **Fitts's Law:** Anchor primary conversion actions into the natural bottom thumb zone with touch hit targets $\ge 44\times 44\text{pt}$ (iOS) / $\ge 48\times 48\text{dp}$ (Android) and $\ge 8\text{pt}$ inter-target separation.
+3. **Hick-Hyman Law:** Limit paywall options to at most 2–3 tiers, designating a pre-selected default tier ("Annual") to reduce decision latency $T = b \log_2(n+1)$.
+4. **Doherty Threshold:** Deliver immediate visual scale ($\le 100\text{ms}$) and tactile haptic feedback on `onPressIn`, backed by Reanimated 3 UI-thread worklets and Moti geometric skeletons to preserve conversational flow ($<400\text{ms}$).
+5. **Tesler's Law:** Ensure software absorbs geometric and store compliance complexity (such as automatic corner concentricity and RevenueCat receipt reconciliation) so users encounter zero friction.
+
+Reuse the design tokens and motion system from ADR-007 and ADR-008, including reduced-motion fallbacks, restrained haptics, Dynamic Type support, touch-target and contrast checks, and native perceived-performance patterns.
 
 Use **RevenueCat Purchases** as the default source of truth for entitlement, subscription, trial, and purchase state. Use **Superwall** for remote paywall presentation and experimentation when dynamic layouts, copy, or pricing tests are required without an app release. RevenueCat Paywalls are an approved alternative when a RevenueCat-only integration is preferable. Keep the paywall adapter boundary explicit so the presentation layer can change without coupling business logic to a vendor.
 
@@ -94,6 +102,7 @@ The decision was verified against the canonical implementation plan on **2026-09
 
 ## Sources
 
+- [Cognitive Ergonomics & HCI Laws Research Digest](../findings/cognitive-ergonomics.md)
 - [App Launch OS implementation plan — Premium UX, Interaction and Motion System](../IMPLEMENTATION_PLAN.md#4-premium-ux-interaction--motion-system)
 - [App Launch OS implementation plan — Monetization, Trial Models and High-Converting Paywalls](../IMPLEMENTATION_PLAN.md#5-monetization-trial-models--high-converting-paywalls)
 - [RevenueCat React Native Purchases](https://github.com/RevenueCat/react-native-purchases)

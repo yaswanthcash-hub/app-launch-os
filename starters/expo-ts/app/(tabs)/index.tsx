@@ -46,7 +46,12 @@ export default function HomeScreen() {
 
       {/* Paywall Modal Trigger */}
       <Link href="/paywall" asChild>
-        <Pressable style={styles.ctaButton} onPress={triggerImpact}>
+        <Pressable
+          style={styles.ctaButton}
+          onPress={triggerImpact}
+          accessibilityLabel="View StoreKit 2 Paywall"
+          accessibilityRole="button"
+        >
           <Text style={styles.ctaText}>View StoreKit 2 Paywall</Text>
           <ArrowRight color="#FFFFFF" size={18} />
         </Pressable>

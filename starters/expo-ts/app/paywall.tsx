@@ -32,7 +32,12 @@ export default function PaywallScreen() {
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
       {/* Close button */}
-      <Pressable style={styles.closeBtn} onPress={() => router.back()}>
+      <Pressable
+        style={styles.closeBtn}
+        onPress={() => router.back()}
+        accessibilityLabel="Close Paywall"
+        accessibilityRole="button"
+      >
         <X color="#94A3B8" size={24} />
       </Pressable>
 
@@ -67,6 +72,9 @@ export default function PaywallScreen() {
             billingPeriod === 'annual' && styles.planCardActive,
           ]}
           onPress={() => selectPeriod('annual')}
+          accessibilityLabel="Annual Pro Plan, $49.99 per year, save 50%"
+          accessibilityRole="radio"
+          accessibilityState={{ selected: billingPeriod === 'annual' }}
         >
           <View style={styles.saveBadge}>
             <Text style={styles.saveBadgeText}>SAVE 50%</Text>
@@ -83,6 +91,9 @@ export default function PaywallScreen() {
             billingPeriod === 'monthly' && styles.planCardActive,
           ]}
           onPress={() => selectPeriod('monthly')}
+          accessibilityLabel="Monthly Pro Plan, $9.99 per month"
+          accessibilityRole="radio"
+          accessibilityState={{ selected: billingPeriod === 'monthly' }}
         >
           <Text style={styles.planName}>Monthly Pro</Text>
           <Text style={styles.planPrice}>$9.99 / month</Text>
@@ -91,7 +102,12 @@ export default function PaywallScreen() {
       </View>
 
       {/* Primary CTA */}
-      <Pressable style={styles.subscribeBtn} onPress={handleSubscribe}>
+      <Pressable
+        style={styles.subscribeBtn}
+        onPress={handleSubscribe}
+        accessibilityLabel="Start 7-Day Free Trial"
+        accessibilityRole="button"
+      >
         <Text style={styles.subscribeText}>
           Start 7-Day Free Trial
         </Text>

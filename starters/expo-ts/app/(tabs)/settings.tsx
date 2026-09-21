@@ -52,6 +52,8 @@ export default function SettingsScreen() {
           style={styles.deleteButton}
           onPress={confirmDeleteAccount}
           disabled={deleting}
+          accessibilityLabel="Delete Account & Purge Data"
+          accessibilityRole="button"
         >
           <Trash2 color="#EF4444" size={18} />
           <Text style={styles.deleteText}>

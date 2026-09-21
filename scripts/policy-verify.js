@@ -21,6 +21,7 @@ async function fetchWithTimeout(url, timeoutMs = 8000) {
       headers: {
         'User-Agent': 'Mozilla/5.0 (AppLaunchOS PolicyBot/1.0; +https://github.com/yaswanthcash-hub/app-launch-os)',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.9',
       },
     });
     clearTimeout(id);
@@ -32,6 +33,35 @@ async function fetchWithTimeout(url, timeoutMs = 8000) {
     clearTimeout(id);
     throw err;
   }
+}
+
+function extractTargetContent(html, selector) {
+  if (selector) {
+    if (selector === 'article') {
+      const m = html.match(/<article[\s\S]*?<\/article>/i);
+      if (m) return m[0];
+    } else if (selector === 'main') {
+      const m = html.match(/<main[\s\S]*?<\/main>/i);
+      if (m) return m[0];
+    } else if (selector.startsWith('#')) {
+      const id = selector.slice(1);
+      const re = new RegExp(`<[^>]+id=["']${id}["'][\\s\\S]*?`, 'i');
+      const m = html.match(re);
+      if (m) return m[0].slice(0, 10000);
+    }
+  }
+  return html;
+}
+
+function canonicalizeText(html, selector) {
+  const targeted = extractTargetContent(html, selector);
+  // Strip scripts, styles, and HTML tags to evaluate pure policy text content
+  return targeted
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+    .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 function computeSha256(content) {
@@ -58,11 +88,11 @@ async function verifyPolicies() {
 
     try {
       const html = await fetchWithTimeout(entry.source);
-      // Canonicalize content: normalize newlines and whitespace
-      const canonical = html.replace(/\r\n/g, '\n').trim();
+      const canonical = canonicalizeText(html, entry.selector);
       const actualHash = computeSha256(canonical);
 
-      if (entry.sha256 && actualHash !== entry.sha256) {
+      const shouldUpdate = process.argv.includes('--update');
+      if (entry.sha256 && actualHash !== entry.sha256 && !shouldUpdate) {
         console.log(`\x1b[31m[POLICY DRIFT DETECTED]\x1b[0m`);
         console.log(`  Expected SHA-256: ${entry.sha256}`);
         console.log(`  Actual SHA-256:   ${actualHash}`);
@@ -72,9 +102,7 @@ async function verifyPolicies() {
       } else {
         console.log(`\x1b[32m[VERIFIED]\x1b[0m`);
         entry.verified = today;
-        if (!entry.sha256) {
-          entry.sha256 = actualHash;
-        }
+        entry.sha256 = actualHash;
         verifiedCount++;
       }
     } catch (err) {

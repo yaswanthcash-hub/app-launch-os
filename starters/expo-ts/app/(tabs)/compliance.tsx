@@ -54,6 +54,8 @@ export default function ComplianceScreen() {
               key={rule.id}
               style={[styles.item, isDone && styles.itemDone]}
               onPress={() => toggleCheck(rule.id)}
+              accessibilityLabel={`${rule.title}, ${isDone ? 'checked' : 'not checked'}`}
+              accessibilityRole="checkbox"
             >
               <View style={styles.iconCol}>
                 {isDone ? (

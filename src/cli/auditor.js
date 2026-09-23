@@ -13,7 +13,32 @@ const { auditSecurity } = require('./detectors/security');
 const { computeScore } = require('./scorer');
 const { renderReport } = require('./reporter');
 
-function getAllFiles(dir, fileList = [], maxFiles = 300) {
+const IGNORED_DIRS = new Set([
+  'node_modules',
+  '.git',
+  '.expo',
+  '.kilo',
+  '.next',
+  '.turbo',
+  'scratch',
+  'dist',
+  'build',
+  '.system_generated',
+  '.agents',
+  'coverage',
+  'Pods',
+  'DerivedData',
+  '.gradle'
+]);
+
+const IGNORED_BINARY_EXTS = new Set([
+  '.png', '.jpg', '.jpeg', '.gif', '.webp', '.ico', '.svg',
+  '.ttf', '.woff', '.woff2', '.eot',
+  '.mp3', '.mp4', '.wav', '.mov',
+  '.zip', '.tar', '.gz', '.pdf', '.bin'
+]);
+
+function getAllFiles(dir, fileList = [], maxFiles = 600) {
   if (fileList.length >= maxFiles) return fileList;
   if (!fs.existsSync(dir)) return fileList;
 
@@ -23,23 +48,17 @@ function getAllFiles(dir, fileList = [], maxFiles = 300) {
       if (fileList.length >= maxFiles) break;
       const fullPath = path.join(dir, entry.name);
 
-      if (
-        entry.name === 'node_modules' ||
-        entry.name === '.git' ||
-        entry.name === '.expo' ||
-        entry.name === 'dist' ||
-        entry.name === 'build' ||
-        entry.name === '.system_generated' ||
-        entry.name === '.agents' ||
-        entry.name === 'coverage'
-      ) {
+      if (IGNORED_DIRS.has(entry.name)) {
         continue;
       }
 
       if (entry.isDirectory()) {
         getAllFiles(fullPath, fileList, maxFiles);
       } else {
-        fileList.push(fullPath);
+        const ext = path.extname(entry.name).toLowerCase();
+        if (!IGNORED_BINARY_EXTS.has(ext)) {
+          fileList.push(fullPath);
+        }
       }
     }
   } catch (_e) {
@@ -73,11 +92,12 @@ function runAudit(projectDir, options = {}) {
   // Phase 1.6: Project-type guard
   const hasExpoDep = Boolean(pkg.dependencies?.expo || pkg.devDependencies?.expo);
   const hasRnDep = Boolean(pkg.dependencies?.['react-native'] || pkg.devDependencies?.['react-native']);
+  const hasCapacitorDep = Boolean(pkg.dependencies?.['@capacitor/core'] || pkg.devDependencies?.['@capacitor/core']);
   const hasAppJson = fs.existsSync(appJsonPath);
   const hasAndroidDir = fs.existsSync(path.join(projectDir, 'android'));
   const hasIosDir = fs.existsSync(path.join(projectDir, 'ios'));
 
-  if (!hasExpoDep && !hasRnDep && !hasAppJson && !hasAndroidDir && !hasIosDir) {
+  if (!hasExpoDep && !hasRnDep && !hasCapacitorDep && !hasAppJson && !hasAndroidDir && !hasIosDir) {
     throw new Error(
       `No mobile project detected in "${projectDir}".\n` +
       `Project must contain an Expo/React Native dependency, an app.json configuration, or an android/ios directory.\n` +
@@ -85,7 +105,7 @@ function runAudit(projectDir, options = {}) {
     );
   }
 
-  const allFiles = getAllFiles(projectDir, [], 350);
+  const allFiles = getAllFiles(projectDir, [], 600);
   const relativeFiles = allFiles.map(f => path.relative(projectDir, f).replace(/\\/g, '/'));
 
   const fileCache = new Map();

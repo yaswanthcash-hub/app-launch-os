@@ -292,8 +292,18 @@ function auditApple({ pkg, files, readFile }) {
       sdkPassed = false;
       sdkDetails = `React Native ${rawVer} requires upgrading to 0.77+ for Xcode 26 compatibility.`;
     }
+  } else if (deps['@capacitor/ios']) {
+    const rawVer = String(deps['@capacitor/ios']).replace(/[^0-9.]/g, '');
+    const major = parseInt(rawVer.split('.')[0], 10);
+    if (major >= 6) {
+      sdkPassed = true;
+      sdkDetails = `Capacitor iOS ${deps['@capacitor/ios']} conforms to Apple modern Xcode build toolchain requirements.`;
+    } else {
+      sdkPassed = false;
+      sdkDetails = `Capacitor iOS ${deps['@capacitor/ios']} requires upgrading to 6+ for modern Xcode compatibility.`;
+    }
   } else {
-    // If neither Expo nor React Native found in dependencies, cannot determine
+    // If neither Expo nor React Native nor Capacitor found in dependencies, cannot determine
     sdkPassed = false;
     sdkDetails = 'Could not determine Xcode SDK baseline from package dependencies.';
   }

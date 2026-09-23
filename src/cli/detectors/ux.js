@@ -12,8 +12,8 @@ function auditUx({ pkg, files, readFile }) {
   const jsFiles = files.filter(f => /\.(tsx|jsx|ts|js)$/.test(f));
 
   // 1. Physical Haptics (match imports + calls)
-  const hasHapticsDep = 'expo-haptics' in deps || 'react-native-haptic-feedback' in deps;
-  let hapticsImported = hasHapticsDep;
+  const hasHapticsDep = 'expo-haptics' in deps || 'react-native-haptic-feedback' in deps || '@capacitor/haptics' in deps;
+  let hapticsImported = hasHapticsDep || files.some(f => /useHaptic/i.test(f));
   let hapticsCalled = false;
 
   const hapticCallNames = [
@@ -24,6 +24,7 @@ function auditUx({ pkg, files, readFile }) {
     'lightImpact',
     'mediumImpact',
     'trigger',
+    'vibrate'
   ];
 
   for (const file of jsFiles.slice(0, 50)) {

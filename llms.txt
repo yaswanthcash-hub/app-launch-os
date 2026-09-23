@@ -6,6 +6,7 @@
 ## Core Documentation
 - [README.md](README.md): Master orientation and complete system manual.
 - [AGENTS.md](AGENTS.md): AI agent operational contract, prompt templates, and routing guide.
+- [skills/README.md](skills/README.md): Portable Agent Skills (productivity & mobile workflows).
 - [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md): 35KB master execution blueprint.
 - [awesome.md](awesome.md): 90+ verified mobile open-source libraries with licenses and tiers.
 

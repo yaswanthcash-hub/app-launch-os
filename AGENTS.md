@@ -31,6 +31,7 @@ When a user asks you to perform a task, refer directly to the corresponding auth
 | **Mobile Security & Threat Modeling** | [checklists/security-baseline.md](checklists/security-baseline.md) & [templates/threat-model.md](templates/threat-model.md) |
 | **Pre-Launch QA & Verification** | [checklists/qa-prelaunch.md](checklists/qa-prelaunch.md) & [checklists/launch-day.md](checklists/launch-day.md) |
 | **Mobile Open-Source Libraries Directory**| [awesome.md](awesome.md) |
+| **Agent Skills & Productivity Directory** | [skills/README.md](skills/README.md) & [skills/productivity/README.md](skills/productivity/README.md) |
 
 ---
 
@@ -38,7 +39,7 @@ When a user asks you to perform a task, refer directly to the corresponding auth
 
 1. **Mandatory Planning-First & Approval Gate (Never Auto-Implement):**
    - **Never blindly auto-implement changes** into a user's existing codebase.
-   - When asked to adopt or implement App Launch OS, first **interview the user** to understand their requirements:
+   - When asked to adopt or implement App Launch OS, first **interview the user** (or invoke [`grill-me`](skills/productivity/grill-me/SKILL.md) / [`grilling`](skills/productivity/grilling/SKILL.md)) to understand their requirements across the decision frontier:
      * *Target platforms:* iOS only, Android only, or universal Expo?
      * *Auth & Account model:* Guest mode, email/password, social OAuth?
      * *Monetization model:* Free, RevenueCat/Superwall subscriptions, one-time IAP, ads?
@@ -59,6 +60,32 @@ When a user asks you to perform a task, refer directly to the corresponding auth
 
 ---
 
+## 🧰 Agent Skills & Slash Commands (`skills/`)
+
+App Launch OS provides standardized **Agent Skills** (compatible with Google Antigravity, Claude Code, Cursor, Windsurf, Copilot) inspired by the open agent skills ecosystem:
+
+### 1. General Productivity Skills (`skills/productivity/`)
+- [**`grill-me`**](skills/productivity/grill-me/SKILL.md) / [**`grilling`**](skills/productivity/grilling/SKILL.md) (`/grill-me`): Relentlessly interview the user about a plan or architecture until every branch of the design tree is resolved before touching code.
+- [**`handoff`**](skills/productivity/handoff/SKILL.md) (`/handoff`): Compact the current conversation into a handoff document for a fresh agent session.
+- [**`teach`**](skills/productivity/teach/SKILL.md) (`/teach`): Multi-session stateful teaching workspace with `MISSION.md`, `RESOURCES.md`, `learning-records/`, and `lessons/`.
+- [**`to-questionnaire`**](skills/productivity/to-questionnaire/SKILL.md) (`/to-questionnaire`): Convert an unresolved decision into an async markdown questionnaire for stakeholders.
+- [**`wait-what`**](skills/productivity/wait-what/SKILL.md) (`/wait-what`): Stop and re-pitch an unclear explanation in Simplified Technical English using domain vocabulary.
+- [**`writing-for-agents`**](skills/productivity/writing-for-agents/SKILL.md): Master reference on writing skills, `AGENTS.md`, context pointers, and progressive disclosure.
+- [**`ponytail`**](skills/productivity/ponytail/SKILL.md) (`/ponytail`): Minimalist coding persona enforcing the 7-rung ladder (YAGNI, stdlib, one-liner).
+- [**`ponytail-audit`**](skills/productivity/ponytail-audit/SKILL.md) (`/ponytail-audit`): Scans for bloat, over-engineering, and heavy packages.
+- [**`ponytail-debt`**](skills/productivity/ponytail-debt/SKILL.md) (`/ponytail-debt`): Manages intentional shortcuts (`ponytail:` markers).
+- [**`ponytail-review`**](skills/productivity/ponytail-review/SKILL.md) (`/ponytail-review`): Code review focusing on diff minimization.
+
+### 2. Mobile App Launch OS Skills (`skills/mobile/`)
+- [**`applaunchos-plan`**](skills/mobile/applaunchos-plan/SKILL.md) (`/applaunchos:plan`): Mobile discovery interview & milestone planning.
+- [**`applaunchos-compliance`**](skills/mobile/applaunchos-compliance/SKILL.md) (`/applaunchos:compliance`): Apple 2026 & Google Play 2026 pre-submission compliance audit.
+- [**`applaunchos-design`**](skills/mobile/applaunchos-design/SKILL.md) (`/applaunchos:design`): 3-tier DTCG design tokens and corner concentricity formulas.
+- [**`applaunchos-ux`**](skills/mobile/applaunchos-ux/SKILL.md) (`/applaunchos:ux`): 5-state tactile haptics, Reanimated 3 UI worklets (60/120 FPS), and 12 HCI laws.
+- [**`applaunchos-paywall`**](skills/mobile/applaunchos-paywall/SKILL.md) (`/applaunchos:paywall`): StoreKit 2 paywalls with transparent billing terms and restore purchase triggers.
+- [**`applaunchos-security`**](skills/mobile/applaunchos-security/SKILL.md) (`/applaunchos:security`): Biometrics hook, Keychain/Keystore hardware storage, and threat modeling.
+
+---
+
 ## ⚡ Autonomous Agent Commands Matrix (`/applaunchos:*`)
 
 When a user or developer triggers one of the following commands or intents, execute the corresponding autonomous workflow:
@@ -66,15 +93,16 @@ When a user or developer triggers one of the following commands or intents, exec
 | Command | What It Does (Autonomous Execution Pipeline) & Authoritative Source |
 | :--- | :--- |
 | **`/applaunchos`** | Loops `modify → verify → keep/discard` across latency (<= 1200ms), bundle size (<= 15MB), and contrast ([AGENTS.md](AGENTS.md)). |
-| **`/applaunchos:plan`** | Interactive interview & `implementation_plan.md` generation before modifying code ([AGENTS.md](AGENTS.md)). |
-| **`/applaunchos:compliance`** | Pre-flight audit for Apple 2026 (no-SMS demo, PrivacyInfo) and Google Play (20 testers, API 36) ([Audit](scripts/compliance-check.js)). |
-| **`/applaunchos:design`** | Scaffolds 3-tier UI/UX tokens + Golden Concentricity: `R_inner = Math.max(0, R_outer - padding)` ([M4](modules/M4-design-system/README.md)). |
-| **`/applaunchos:ux`** | Injects 5-state tactile haptics, Reanimated 3 worklets (60/120 FPS), Moti skeletons, and 12 HCI cognitive laws ([M17](modules/M17-premium-ux/README.md) & [HCI](findings/cognitive-ergonomics.md)). |
-| **`/applaunchos:paywall`** | StoreKit 2 paywall with upfront terms, restore button, and billing toggle ([M8](modules/M8-paywall/README.md) & [Paywall](findings/paywall.md)). |
+| **`/ponytail`** | Enforces ruthless minimalism and bundle size reduction using the 7-rung ladder ([skills/productivity/ponytail/SKILL.md](skills/productivity/ponytail/SKILL.md)). |
+| **`/applaunchos:plan`** | Interactive interview & `implementation_plan.md` generation before modifying code ([skills/mobile/applaunchos-plan/SKILL.md](skills/mobile/applaunchos-plan/SKILL.md)). |
+| **`/applaunchos:compliance`** | Pre-flight audit for Apple 2026 (no-SMS demo, PrivacyInfo) and Google Play (20 testers, API 36) ([skills/mobile/applaunchos-compliance/SKILL.md](skills/mobile/applaunchos-compliance/SKILL.md)). |
+| **`/applaunchos:design`** | Scaffolds 3-tier UI/UX tokens + Golden Concentricity: `R_inner = Math.max(0, R_outer - padding)` ([skills/mobile/applaunchos-design/SKILL.md](skills/mobile/applaunchos-design/SKILL.md)). |
+| **`/applaunchos:ux`** | Injects 5-state tactile haptics, Reanimated 3 worklets (60/120 FPS), Moti skeletons, and 12 HCI cognitive laws ([skills/mobile/applaunchos-ux/SKILL.md](skills/mobile/applaunchos-ux/SKILL.md)). |
+| **`/applaunchos:paywall`** | StoreKit 2 paywall with upfront terms, restore button, and billing toggle ([skills/mobile/applaunchos-paywall/SKILL.md](skills/mobile/applaunchos-paywall/SKILL.md)). |
 | **`/applaunchos:onboarding`** | Soft permission priming (Push/ATT) before native dialogs + gesture carousel ([M5](modules/M5-onboarding/README.md)). |
 | **`/applaunchos:growth`** | Crockford referral codes, deep links (AASA/AssetLinks), and smart rating prompts ([M7](modules/M7-growth/README.md)). |
 | **`/applaunchos:experiments`** | Offline FNV-1a feature flags and Chi-Square Sample Ratio Mismatch check (p < 0.01) ([M6](modules/M6-experiments/README.md)). |
-| **`/applaunchos:security`** | Mobile security audit baseline, biometric auth hook, and hardware Keychain storage ([M9](modules/M9-security/README.md)). |
+| **`/applaunchos:security`** | Mobile security audit baseline, biometric auth hook, and hardware Keychain storage ([skills/mobile/applaunchos-security/SKILL.md](skills/mobile/applaunchos-security/SKILL.md)). |
 | **`/applaunchos:aso`** | Validates store metadata character limits (30/30/100/80) and scores keyword density ([M11](modules/M11-aso/README.md)). |
 | **`/applaunchos:audit`** | Master pre-flight runner: link checks, freshness (<90d), and store compliance (`npm run audit:all`). |
 | **`/applaunchos:ship`** | 8-phase launch readiness gate: Lint -> Compliance -> Tests -> EAS Build -> Submission ([M10](modules/M10-release/README.md)). |

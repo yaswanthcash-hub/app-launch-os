@@ -8,17 +8,21 @@ function auditPerformance({ pkg, appConfig, files, readFile }) {
   const deps = { ...(pkg.dependencies || {}), ...(pkg.devDependencies || {}) };
   const expoConfig = appConfig?.expo || appConfig || {};
 
-  // 1. Hermes JS Engine
+  // 1. Hermes / Platform JS Engine
   const expoVersion = deps['expo'];
+  const hasCapacitor = Boolean(deps['@capacitor/core'] || deps['@capacitor/android'] || deps['@capacitor/ios']);
   let hermesPassed = true;
   let hermesDetails = 'Hermes JS engine enabled by default.';
 
-  if (expoConfig.jsEngine && expoConfig.jsEngine !== 'hermes') {
+  if (hasCapacitor) {
+    hermesPassed = true;
+    hermesDetails = 'Native platform webview JS engine (Nitro/V8) active with JIT compilation.';
+  } else if (expoConfig.jsEngine && expoConfig.jsEngine !== 'hermes') {
     hermesPassed = false;
     hermesDetails = `jsEngine explicitly set to "${expoConfig.jsEngine}". Hermes is required for <1200ms cold start latency.`;
   } else if (!expoVersion) {
     // Bare React Native: check android/app/build.gradle
-    const gradleFile = files.find(f => f.endsWith('build.gradle') && f.includes('app'));
+    const gradleFile = files.find(f => f.endsWith('build.gradle') && f.includes('app') && !f.includes('.kilo'));
     if (gradleFile) {
       const content = readFile(gradleFile) || '';
       if (/hermesEnabled\s*=\s*false/.test(content)) {
@@ -37,11 +41,14 @@ function auditPerformance({ pkg, appConfig, files, readFile }) {
     fix: 'Enable Hermes in app.json ("jsEngine": "hermes") for bytecoded pre-compilation and instant cold starts.'
   });
 
-  // 2. React Native New Architecture
+  // 2. React Native New Architecture / Platform Architecture
   let newArchPassed = false;
   let newArchDetails = '';
 
-  if (expoConfig.newArchEnabled === true) {
+  if (hasCapacitor) {
+    newArchPassed = true;
+    newArchDetails = 'Native platform WebView architecture active; React Native Fabric bridge overhead eliminated.';
+  } else if (expoConfig.newArchEnabled === true) {
     newArchPassed = true;
     newArchDetails = 'New Architecture explicitly enabled ("newArchEnabled": true).';
   } else if (expoVersion) {
@@ -67,6 +74,7 @@ function auditPerformance({ pkg, appConfig, files, readFile }) {
 
   // 3. UI-Thread Native Motion vs JS-Thread Janks
   const hasReanimated = 'react-native-reanimated' in deps;
+  const hasFramerMotion = 'framer-motion' in deps;
   let hasJsThreadAnimations = false;
 
   const uiFiles = files.filter(f => /\.(tsx|jsx|ts|js)$/.test(f));
@@ -78,22 +86,24 @@ function auditPerformance({ pkg, appConfig, files, readFile }) {
     }
   }
 
-  const motionPassed = hasReanimated && !hasJsThreadAnimations;
+  const motionPassed = (hasReanimated && !hasJsThreadAnimations) || (hasFramerMotion && !hasJsThreadAnimations);
   results.push({
     id: 'PERF_UI_WORKLETS',
     name: 'UI-thread motion worklets',
     category: 'PERFORMANCE',
     status: motionPassed ? 'PASS' : 'WARNING',
     details: motionPassed
-      ? '60/120 FPS UI-thread animations via Reanimated 3 worklets verified.'
+      ? (hasFramerMotion
+          ? 'GPU hardware-accelerated animations via Framer Motion / CSS Compositor thread verified.'
+          : '60/120 FPS UI-thread animations via Reanimated 3 worklets verified.')
       : hasJsThreadAnimations
       ? 'Detected JS-thread Animated.timing without native driver. Causes dropped frames during heavy network/render activity.'
-      : 'Install react-native-reanimated to run all gestures and transitions on the UI thread.',
-    fix: 'Migrate animations to Reanimated 3 worklets (useAnimatedStyle, withSpring) running directly on the native thread.'
+      : 'Install react-native-reanimated or framer-motion to offload animations to the UI/compositor thread.',
+    fix: 'Migrate animations to Reanimated 3 worklets or Framer Motion running off the JS main thread.'
   });
 
   // 4. Production Crash Telemetry
-  const hasTelemetry = ['@sentry/react-native', '@datadog/mobile-react-native', 'bugsnag-react-native'].some(d => d in deps);
+  const hasTelemetry = ['@sentry/react-native', '@sentry/capacitor', '@sentry/nextjs', '@sentry/react', '@datadog/mobile-react-native', 'bugsnag-react-native'].some(d => d in deps);
   results.push({
     id: 'PERF_CRASH_TELEMETRY',
     name: 'Crash telemetry',

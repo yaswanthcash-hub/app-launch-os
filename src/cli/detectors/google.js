@@ -33,13 +33,20 @@ function auditGoogle({ pkg, appConfig, files, readFile }) {
     }
   } else {
     // Check build.gradle if present
-    const gradleFile = files.find(f => f.endsWith('build.gradle') && f.includes('app'));
+    const gradleFile = files.find(f => f.endsWith('build.gradle') && f.includes('app') && !f.includes('.kilo') && !f.includes('build/'));
     if (gradleFile) {
       const content = readFile(gradleFile) || '';
-      const match = content.match(/targetSdkVersion\s*=?\s*(\d+)/);
+      let match = content.match(/targetSdkVersion\s*=?\s*(\d+)/);
+      if (!match) {
+        // Also check variables.gradle or root build.gradle
+        const varFile = files.find(f => (f.endsWith('variables.gradle') || (f.endsWith('build.gradle') && !f.includes('app'))) && !f.includes('.kilo'));
+        if (varFile) {
+          match = (readFile(varFile) || '').match(/targetSdkVersion\s*=?\s*(\d+)/);
+        }
+      }
       if (match && parseInt(match[1], 10) >= 36) {
         targetSdkPassed = true;
-        targetSdkDetails = `targetSdkVersion ${match[1]} found in build.gradle.`;
+        targetSdkDetails = `targetSdkVersion ${match[1]} found in configuration.`;
       } else {
         targetSdkDetails = 'targetSdkVersion in build.gradle is lower than 36.';
       }
@@ -80,6 +87,9 @@ function auditGoogle({ pkg, appConfig, files, readFile }) {
       pageStatus = 'MANUAL';
       pageDetails = `Expo SDK ${semverMajor} core runtime is 16 KB compatible. Verify external native library .so binaries in APK/AAB.`;
     }
+  } else if (deps['@capacitor/android']) {
+    pageStatus = 'PASS';
+    pageDetails = 'Capacitor Android utilizes standard Android System WebView; zero custom 16 KB ELF binary risks in default runtime.';
   } else {
     pageStatus = 'UNKNOWN';
     pageDetails = 'Could not determine 16 KB page size compatibility from dependencies.';

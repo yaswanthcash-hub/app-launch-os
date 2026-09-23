@@ -150,6 +150,9 @@ When AI coding assistants (Claude Code, Cursor, Google Antigravity, Codex) build
 
 | Command | Autonomous Action | Primary Source |
 | :--- | :--- | :--- |
+| **`/grill-me`** | Relentlessly interviews user to sharpen plan/architecture before touching code | [skills/productivity/grill-me](skills/productivity/grill-me/SKILL.md) |
+| **`/handoff`** | Compacts session into a structured handoff document for the next agent | [skills/productivity/handoff](skills/productivity/handoff/SKILL.md) |
+| **`/teach`** | Multi-session stateful teaching workspace (`MISSION.md`, `RESOURCES.md`, lessons) | [skills/productivity/teach](skills/productivity/teach/SKILL.md) |
 | **`/applaunchos:compliance`** | Pre-flight audit for Apple 2026 and Google Play rules | [Audit](scripts/compliance-check.js) |
 | **`/applaunchos:design`** | Scaffolds 3-tier DTCG design tokens + Golden Concentricity | [M4](modules/M4-design-system/README.md) |
 | **`/applaunchos:ux`** | Injects 5-state tactile haptics, Reanimated 3 worklets, and 12 HCI cognitive laws | [M17](modules/M17-premium-ux/README.md) & [HCI](findings/cognitive-ergonomics.md) |
@@ -157,7 +160,7 @@ When AI coding assistants (Claude Code, Cursor, Google Antigravity, Codex) build
 | **`/applaunchos:growth`** | Crockford referral codes, deep links, and smart review prompts | [M7](modules/M7-growth/README.md) |
 | **`/applaunchos:experiments`** | Offline FNV-1a feature flags and Chi-Square SRM verification | [M6](modules/M6-experiments/README.md) |
 
-*(See [AGENTS.md](AGENTS.md) for the complete command matrix and copy-paste prompt recipes.)*
+*(See [skills/README.md](skills/README.md) and [AGENTS.md](AGENTS.md) for the complete skills catalog and copy-paste prompt recipes.)*
 
 ---
 
@@ -176,6 +179,9 @@ When AI coding assistants (Claude Code, Cursor, Google Antigravity, Codex) build
 app-launch-os/
 ├── bin/cli.js                     # Pre-flight audit, roast, and fix CLI runner
 ├── starters/expo-ts/              # Production reference template (Expo SDK 54, Target SDK 36)
+├── skills/                        # Portable Agent Skills (Matt Pocock inspired + mobile)
+│   ├── productivity/              # grill-me, handoff, teach, to-questionnaire, wait-what
+│   └── mobile/                    # applaunchos-plan, compliance, design, ux, paywall, security
 ├── modules/                       # Copy-paste modular TypeScript source blueprints
 │   ├── M4-design-system/          # 3-tier DTCG tokens & NativeWind v4 preset
 │   ├── M5-onboarding/             # Permission priming modal & gesture carousel

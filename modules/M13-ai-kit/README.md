@@ -22,11 +22,23 @@ AI coding agents (Google Antigravity, Claude Code, OpenAI Codex, Cursor, Windsur
 node modules/M13-ai-kit/bin/pack-context.js --output ai-context.md
 ```
 
-Then provide `ai-context.md` or `@AGENTS.md` directly to your AI agent.
+Then provide `ai-context.md`, `@AGENTS.md`, or the portable Agent Skills (`skills/`) directly to your AI agent.
+
+---
+
+## 🧰 Agent Skills Suite
+
+App Launch OS includes portable Agent Skills adhering to the Agent Skills standard:
+- **Productivity:** `grill-me`, `grilling`, `handoff`, `teach`, `to-questionnaire`, `wait-what`, `writing-for-agents`.
+- **Mobile Engineering:** `applaunchos-plan`, `applaunchos-compliance`, `applaunchos-design`, `applaunchos-ux`, `applaunchos-paywall`, `applaunchos-security`.
+
+See [skills/README.md](../../skills/README.md) for complete documentation.
 
 ---
 
 ## 🔗 Related Resources
 
+- [Agent Skills Directory (skills/)](../../skills/README.md)
 - [AI Agent Execution Contract (AGENTS.md)](../../AGENTS.md)
 - [Machine-Readable Documentation (llms.txt)](../../llms.txt)
+
